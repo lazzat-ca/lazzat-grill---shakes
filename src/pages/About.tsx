@@ -12,7 +12,7 @@ const About = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative pt-16 pb-8 md:pt-28 md:pb-16 bg-background">
+      <section className="relative pt-28 pb-8 md:pt-40 md:pb-16 bg-background">
         <div className="container-luxury px-4">
           <div className="text-center max-w-4xl mx-auto">
             <div className="gold-divider w-12 md:w-16 mx-auto mb-4 md:mb-6" />

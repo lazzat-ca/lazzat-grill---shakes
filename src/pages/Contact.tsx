@@ -112,7 +112,7 @@ const Contact = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="pt-20 pb-8 sm:pt-24 sm:pb-12 md:pt-32 md:pb-16 bg-background">
+      <section className="pt-32 pb-8 sm:pt-36 sm:pb-12 md:pt-44 md:pb-16 bg-background">
         <div className="container-luxury px-2 sm:px-4">
           <div className="text-center">
             <div className="gold-divider w-16 mx-auto mb-6" />

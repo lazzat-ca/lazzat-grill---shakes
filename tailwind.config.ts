@@ -102,6 +102,23 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "slide-down": {
+          from: { opacity: "0", transform: "translateY(-100%)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "pulse-glow": {
+          "0%": { boxShadow: "0 0 0 0 rgba(var(--primary), 0.7)" },
+          "70%": { boxShadow: "0 0 0 10px rgba(var(--primary), 0)" },
+          "100%": { boxShadow: "0 0 0 0 rgba(var(--primary), 0)" },
+        },
+        "bounce-subtle": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-2px)" },
+        },
+        "fade-out": {
+          from: { opacity: "1" },
+          to: { opacity: "0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -111,6 +128,10 @@ export default {
         "zoom-in": "zoom-in 0.5s ease-out forwards",
         "slide-up": "slide-up 0.6s ease-out forwards",
         shimmer: "shimmer 2s infinite linear",
+        "slide-down": "slide-down 0.6s ease-out forwards",
+        "pulse-glow": "pulse-glow 2s infinite",
+        "bounce-subtle": "bounce-subtle 2s infinite",
+        "fade-out": "fade-out 0.6s ease-out forwards",
       },
       backgroundImage: {
         "gradient-gold": "linear-gradient(135deg, hsl(var(--gold)), hsl(var(--gold-light)))",

@@ -441,7 +441,7 @@ export default function MenuPage() {
                     </div>
                   </div>
                 )}
-          <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-background" aria-labelledby="menu-hero-title">
+          <section className="pt-36 pb-12 md:pt-44 md:pb-16 bg-background" aria-labelledby="menu-hero-title">
             <div className="container-luxury px-4 text-center">
               <div className="gold-divider w-16 mx-auto mb-6" />
               <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground mb-3">

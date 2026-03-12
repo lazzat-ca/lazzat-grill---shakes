@@ -3,7 +3,6 @@ import { Layout } from "@/components/layout/Layout";
 import { RouteLoader } from "@/components/shared/RouteLoader";
 import { HeroSlider } from "@/components/home/HeroSlider";
 import { AboutSection } from "@/components/home/AboutSection";
-import { OurSignatureFlavours } from "@/components/home/OurSignatureFlavours";
 
 import { HowItWorks } from "@/components/home/HowItWorks";
 import CustomerFavourite from "@/components/home/CustomerFavourite";
@@ -34,10 +33,16 @@ const Index = () => {
     <Layout>
       <HeroSlider />
 
+      <Suspense
+        fallback={
+          <RouteLoader />
+        }
+      >
+        <FeaturedItems />
+      </Suspense>
+
       <AboutSection />
 
-
-      <OurSignatureFlavours />
       <HowItWorks />
       <CustomerFavourite />
 
@@ -46,8 +51,6 @@ const Index = () => {
           <RouteLoader />
         }
       >
-        <FeaturedItems />
-
         <HealthyPromise />
         <CustomerReviews />
         <FinalCTA />

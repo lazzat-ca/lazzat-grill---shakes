@@ -15,8 +15,17 @@ const navLinks = [
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showAnnouncement, setShowAnnouncement] = useState(true);
   const [, startTransition] = useTransition();
   const location = useLocation();
+
+  useEffect(() => {
+    const announcementTimer = setTimeout(() => {
+      setShowAnnouncement(false);
+    }, 25000);
+
+    return () => clearTimeout(announcementTimer);
+  }, []);
 
   useEffect(() => {
     if (isMobileMenuOpen) return;
@@ -52,6 +61,18 @@ export const Header = () => {
 
   return (
     <>
+      {/* ANNOUNCEMENT BAR */}
+      <div
+        className={cn(
+          "fixed top-0 left-0 right-0 z-[51] bg-gradient-to-r from-primary via-primary/90 to-primary/75 text-primary-foreground py-2 md:py-2.5 px-4 text-center animate-slide-down shadow-xl",
+          !showAnnouncement && "animate-fade-out pointer-events-none"
+        )}
+      >
+        <p className="text-sm md:text-base font-semibold tracking-widest animate-bounce-subtle">
+            Lazzat Plus New Location Coming Soon!
+        </p>
+      </div>
+
       {/* BLUR OVERLAY (stays when menu opens anywhere) */}
       {isMobileMenuOpen && (
         <div
@@ -62,7 +83,7 @@ export const Header = () => {
 
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+          "fixed top-12 left-0 right-0 z-50 transition-all duration-500",
           isScrolled || isMobileMenuOpen
             ? "bg-background/60 backdrop-blur-xl border-b border-primary/20"
             : "bg-transparent"
