@@ -69,7 +69,7 @@ export const Header = () => {
         )}
       >
         <p className="text-sm md:text-base font-semibold tracking-widest animate-bounce-subtle">
-            Lazzat Plus New Location Coming Soon!
+            Lazzat Plus New Location Opening Soon!
         </p>
       </div>
 
