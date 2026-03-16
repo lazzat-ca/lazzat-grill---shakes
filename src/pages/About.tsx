@@ -93,9 +93,21 @@ const About = () => {
             </div>
             <div className="order-2 lg:order-2">
               <div className="space-y-3 md:space-y-5 text-muted-foreground font-sans text-sm md:text-base leading-relaxed">
-                <h2 className="font-serif text-2xl md:text-4xl text-foreground mb-4 md:mb-6 text-left">Why <span className="text-primary">Lazzat?</span></h2>
+                <h2 className="font-serif text-2xl md:text-4xl text-foreground mb-4 md:mb-6 text-left">What is <span className="text-primary">Lazzat?</span></h2>
                 <p className="text-left">
-                  Because you shouldn’t have to choose between speed, health and flavor. At Lazzat, you get all three - in every bite. Our name means “taste”. “Delight” and “richness” across Arabic, Urdu, Hindi, Persian, and Turkish reflect our inclusive, multicultural vision. Like Canada itself, Lazzat belongs to everyone.
+                  It all started with a simple question: why does fresh, flavorful food take so long, and fast food often tastes bland?
+                </p>
+                <p className="text-left">
+                  After years of running kitchens across Canada, we saw the same problem everywhere. Quick food lacked depth, and flavorful dishes were often greasy or slow.
+                </p>
+                <p className="text-left">
+                  That vision gave birth to <span className="text-primary">Lazzat</span> (a name also spelled 'Lezzat' in some countries), a restaurant designed not just to serve food but to celebrate culture, community, and connection. Inspired by global traditions, it brings people and flavors together under one roof.
+                </p>
+                <p className="text-left">
+                  Our goal is to create a space where diversity is celebrated, connections are made, and experiences are shared.
+                </p>
+                <p className="text-left">
+                  At <span className="text-primary">Lazzat</span>, we make sure every meal is fresh, flavourful, and served fast. Order in seconds, enjoy freshly cooked dishes, and savor signature sauces and spices inspired by cuisines from around the world.
                 </p>
               </div>
             </div>
@@ -111,7 +123,13 @@ const About = () => {
               <div className="space-y-3 md:space-y-5 text-muted-foreground font-sans text-sm md:text-base leading-relaxed">
                 <h2 className="font-serif text-2xl md:text-4xl text-foreground mb-4 md:mb-6 text-left">Built by <span className="text-primary">Experience</span>, Not Guesswork</h2>
                 <p className="text-left">
-                  Our founders are seasoned pro chefs and restaurant operators, with over a decade each in kitchens across Canada. We’d managed every role and witnessed what worked and what didn’t. That’s why Lazzat is grounded in real experience, not guesswork.
+                  We designed <span className="text-primary">Lazzat</span> to deliver quality and flavor in every bite, using the <span className="text-primary">freshest, healthiest ingredients.</span> Our dishes are cooked over <span className="text-primary">open flames without oil,</span> and our professional chefs have crafted a menu inspired by <span className="text-primary">global cuisines.</span>
+                </p>
+                <p className="text-left">
+                  <span className="text-primary">Lazzat</span> brings global flavors together while keeping every meal <span className="text-primary">wholesome, fresh, and authentic.</span>
+                </p>
+                <p className="text-left">
+                  Every ingredient is carefully selected, every recipe tested, and every dish prepared with precision and care. From sourcing to serving, quality is never compromised.
                 </p>
               </div>
             </div>
@@ -134,9 +152,27 @@ const About = () => {
           <div className="story-ambient grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 gap-y-10 items-center">
             <div className="order-2 lg:order-2">
               <div className="space-y-3 md:space-y-5 text-muted-foreground font-sans text-sm md:text-base leading-relaxed">
-                <h2 className="font-serif text-2xl md:text-4xl text-foreground mb-4 md:mb-6 text-left">Not Just Cuisine, But Commitment</h2>
+                <h2 className="font-serif text-2xl md:text-4xl text-foreground mb-4 md:mb-6 text-left">Not Just Cuisine, But <span className="text-primary">Commitment</span></h2>
                 <p className="text-left">
-                  We don’t replicate. We elevate. We’re not a single cuisine, but a collection: real spices, diverse sauces, clean proteins - all assembled for the flavor-hungry, health-conscious, and culturally curious.
+                  At <span className="text-primary">Lazzat</span>, we bring flavors from across the globe to your plate. <span className="text-primary">One world, different cultures.</span>
+                </p>
+                <p className="text-left">
+                  While most restaurants focus on a few items, we <span className="text-primary">celebrate variety.</span>
+                </p>
+                <p className="text-left">
+                  Every dish is thoughtfully prepared to respect diverse dietary traditions, offering <span className="text-primary">inclusive options</span> without compromising on taste or experience.
+                </p>
+                <p className="text-left pt-2">
+                  Because you shouldn't have to choose between:
+                </p>
+                <p className="text-left">
+                  <span className="text-primary">• Speed</span> and <span className="text-primary">Flavor</span>
+                </p>
+                <p className="text-left">
+                  <span className="text-primary">• Healthy</span> and <span className="text-primary">Hearty</span>
+                </p>
+                <p className="text-left">
+                  <span className="text-primary">• Traditional Spices</span> and <span className="text-primary">Modern Balance</span>
                 </p>
               </div>
             </div>

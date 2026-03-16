@@ -19,15 +19,14 @@ export const HowItWorks = () => (
           </div>
         </div>
         <div className="flex-1 flex flex-col justify-center items-center md:items-start">
-          <p className="text-base md:text-lg text-muted-foreground mb-4 text-center md:text-left">
-            We designed Lazzat for today’s pace - without sacrificing flavor.<br />
-            <span className="text-primary">Speed Through Design. Freshness First. Balanced & Clean</span>
-          </p>
-          <ol className="list-decimal list-inside space-y-3 text-white text-left font-sans">
-            <li>Order in Seconds - Online or In-Store</li>
-            <li>Cooked Fresh, Served Fast - No pre-made shortcuts.</li>
-            <li>Enjoy Real Flavor - Spices and sauces from around the world</li>
-          </ol>
+          <div className="space-y-4 text-base md:text-lg text-muted-foreground text-center md:text-left">
+            <p>
+              We designed <span className="text-primary">Lazzat</span> to deliver quality and flavor in every bite, using the <span className="text-primary">freshest, healthiest ingredients.</span> Our dishes are cooked over <span className="text-primary">open flames without oil,</span> and our professional chefs have crafted a menu inspired by <span className="text-primary">global cuisines.</span>
+            </p>
+            <p>
+              <span className="text-primary">Lazzat</span> brings global flavors together while keeping every meal <span className="text-primary">wholesome, fresh, and authentic.</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
