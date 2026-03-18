@@ -1,5 +1,4 @@
 import { Layout } from "@/components/layout/Layout";
-import { Link } from "react-router-dom";
 import { Clock, ArrowRight } from "lucide-react";
 import { blogPosts } from "@/lib/blog-data";
 
@@ -64,16 +63,16 @@ const Blog = () => {
                   {/* Date and CTA */}
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-muted-foreground">{post.date}</span>
-                    <Link
-                      to={`/blog/${post.id}`}
-                      className="inline-flex items-center gap-1 text-primary hover:text-primary/80 transition-colors text-sm font-sans group/link"
+                    <button
+                      disabled
+                      className="inline-flex items-center gap-1 text-muted-foreground cursor-not-allowed text-sm font-sans group/link"
                     >
                       Read More
                       <ArrowRight
                         size={16}
                         className="group-hover/link:translate-x-1 transition-transform"
                       />
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </article>
