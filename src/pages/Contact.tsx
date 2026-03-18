@@ -117,7 +117,7 @@ const Contact = () => {
           <div className="text-center">
             <div className="gold-divider w-16 mx-auto mb-6" />
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground mb-4">
-              Let’s Talk <span className="text-primary">- Lazzat is Listening</span>
+              Let's Talk <span className="text-primary">Lazzat is Listening</span>
             </h1>
             <p className="font-sans text-muted-foreground max-w-2xl mx-auto">
              Have a question, an idea or want to explore opportunities? Whether it’s feedback, inquiries or franchise interest, our team would love to hear from you.
