@@ -9,7 +9,7 @@ const promises = [
   {
     icon: Flame,
     title: "Charcoal Grilled",
-    description: "Authentic flame-cooking for unmatched smoky flavors",
+    description: "Authentic flame cooking for unmatched smoky flavors",
   },
   {
     icon: Droplets,

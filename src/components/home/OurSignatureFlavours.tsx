@@ -12,7 +12,7 @@ import { menuItemsFlat } from "@/lib/menu-data";
 
 const signatureFlavors = [
   {
-    title: "Peri-Peri & Creamy Garlic Sauces",
+    title: "Peri Peri & Creamy Garlic Sauces",
     subtitle: "bold meets smooth",
     images: [periPeriSauce, creamyGarlicSauce],
   },

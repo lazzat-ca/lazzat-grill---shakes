@@ -61,7 +61,7 @@ const About = () => {
               </h2>
               <div className="space-y-3 md:space-y-5 text-muted-foreground font-sans text-sm md:text-base leading-relaxed">
                 <p>
-                  This wasn’t an overnight idea - it was four years of testing, failing, refining and rebuilding. We reverse-engineered customer behavior, built streamlined processes and crafted a menu where signature peri-peri meets creamy garlic, South Asian richness meets Mediterranean balance and every dish is cooked fresh and served fast.
+                  This wasn't an overnight idea - it was four years of testing, failing, refining and rebuilding. We reverse-engineered customer behavior, built streamlined processes and crafted a menu where signature peri peri meets creamy garlic, South Asian richness meets Mediterranean balance and every dish is cooked fresh and served fast.
                 </p>
               </div>
             </div>
