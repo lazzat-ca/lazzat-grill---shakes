@@ -1,15 +1,15 @@
-import { Heart, Leaf, Wine } from "lucide-react";
+import { Shield, AlertCircle, Leaf, Ban } from "lucide-react";
 
 const culturalValues = [
   {
-    icon: Heart,
+    icon: Shield,
     title: "No Pork",
     description: "Respecting beliefs where pork is not consumed",
   },
   {
-    icon: Heart,
+    icon: AlertCircle,
     title: "No Beef",
-    description: "Honoring Hindu and other traditions that avoid beef",
+    description: "Respecting beliefs and traditions that avoid beef",
   },
   {
     icon: Leaf,
@@ -17,7 +17,7 @@ const culturalValues = [
     description: "Plant-based options for all dietary preferences and beliefs",
   },
   {
-    icon: Wine,
+    icon: Ban,
     title: "Alcohol-Free",
     description: "All sauces and preparations are alcohol-free",
   },
