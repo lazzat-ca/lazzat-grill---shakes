@@ -53,7 +53,7 @@ export const CulturalRespect = () => {
                 <h3 className="font-serif text-base md:text-lg text-foreground mb-2">
                   {value.title}
                 </h3>
-                <p className="text-xs md:text-sm font-sans text-muted-foreground leading-relaxed">
+                <p className="text-xs md:text-sm font-sans text-primary leading-relaxed">
                   {value.description}
                 </p>
               </div>
