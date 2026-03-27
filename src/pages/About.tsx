@@ -211,7 +211,7 @@ const About = () => {
             href="/menu"
             className="inline-block px-6 py-3 rounded-lg bg-primary text-white font-semibold shadow-md hover:bg-primary/90 transition-colors duration-200"
           >
-            View Our Menu
+            View Full Menu
           </a>
         </div>
       </section>
