@@ -8,7 +8,7 @@ export const sajjiItems: Record<string, MenuItem[]> = {
       name: "Chicken Sajji",
       description:
         "Traditionally slow-roasted whole chicken, marinated only with salt and green papaya for exceptional tenderness. Finished to a golden, lightly crisped perfection and served with aromatic sajji rice infused with meat drippings, raisins, and delicate dry fruits. Pure, authentic Balochi flavor with a refined luxury touch.",
-      price: 21.99,
+      price: 22.99,
       image: imgSajji,
       category: "Sajji",
       subCategory: "Classic",

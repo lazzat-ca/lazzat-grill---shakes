@@ -45,7 +45,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       name: "Garlic Bread",
       description:
         "Soft, buttery bread with a garlic infusion, perfect for dipping.",
-      price: 4.49,
+      price: 4.50,
       image: imgGarlicBread,
       category: "Sides",
       subCategory: "Classic",
@@ -83,7 +83,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       name: "Coleslaw",
       description:
         "Crunchy, tangy coleslaw with shredded cabbage, carrots, and a hint of vinegar.",
-      price: 3.49,
+      price: 3.50,
       image: imgColeslaw,
       category: "Sides",
       subCategory: "Classic",
@@ -102,7 +102,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       name: "Corn on the Cob",
       description:
         "Grilled corn with paprika and a bright finishing touch.",
-      price: 4.49,
+      price: 4.50,
       image: imgCornOnTheCob,
       category: "Sides",
       subCategory: "Classic",
@@ -179,7 +179,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       name: "Garlic & Herb Naan",
       description:
         "Freshly baked naan topped with minced garlic and aromatic herbs. Savory, flavorful, and irresistibly fragrant.",
-      price: 3.49,
+      price: 3.99,
       image: imgGarlicHerbNaan,
       category: "Sides",
       subCategory: "Naan",
@@ -235,7 +235,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       name: "Sweet Potato Fries",
       description:
         "A slightly sweet contrast to the smoky, savory BBQ flavors.",
-      price: 4.49,
+      price: 4.50,
       image: imgSweetPotatoFries,
       category: "Sides",
       subCategory: "Classic",
