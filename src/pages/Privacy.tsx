@@ -40,7 +40,7 @@ const Privacy = () => {
                 <p className="text-sm md:text-base text-black/80 leading-relaxed">
                   Contact details such as name, email, and phone number when you
                   submit a form. We may also collect technical data like browser
-                  type, device, and pages visited.
+                  type, device, and pages visited and location data.
                 </p>
               </div>
 
@@ -63,7 +63,7 @@ const Privacy = () => {
               <div>
                 <h2 className="font-serif text-2xl text-black mb-3">Contact</h2>
                 <p className="text-sm md:text-base text-black/80 leading-relaxed">
-                  For privacy questions, please email hello@lazzat.ca
+                  For privacy questions, please email info@lazzat.ca
                 </p>
               </div>
             </div>

@@ -43,7 +43,7 @@ export const FinalCTA = () => {
             className="btn-outline-white w-full pulse-gold sm:w-auto text-center"
             style={{ animationDelay: "1.2s" }}
           >
-            Find a Location
+            Nearest Location
           </Link>
         </div>
       </div>

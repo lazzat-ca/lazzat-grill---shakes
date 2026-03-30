@@ -14,7 +14,7 @@ const Order = () => {
               Order Now<span className="text-primary">– Restaurant`s Open Now in Brampton</span>
             </h1>
             <p className="font-sans text-muted-foreground max-w-2xl mx-auto">
-             Hungry and short on time? We’re one of the restaurants open now in Brampton, offering easy online ordering for pickup or delivery.
+             Hungry and short on time? We are one of the restaurants open now in Brampton, offering easy online ordering for pickup or delivery.
 
             </p>
           </div>
