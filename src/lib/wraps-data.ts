@@ -29,7 +29,7 @@ export const wrapsItems: Record<string, MenuItem[]> = {
       name: "BBQ Veggie Wrap",
       description:
         "A colorful mix of grilled vegetables wrapped with fresh greens and coated in smoky BBQ sauce. Light, flavorful, and perfectly balanced in a warm toasted wrap.",
-      price: 10.99,
+      price: 11.99,
       image: imgBBQVeggieWrap,
       category: "Wraps",
       subCategory: "Veggie",
@@ -47,7 +47,7 @@ export const wrapsItems: Record<string, MenuItem[]> = {
       name: "Smoked Chicken Wrap",
       description:
         "Juicy smoked chicken wrapped with crisp fresh vegetables and bold sauces for a rich, savory taste. Finished in a warm toasted wrap for maximum flavor and comfort.",
-      price: 11.99,
+      price: 12.99,
       image: imgSmokedChickenWrap,
       category: "Wraps",
       subCategory: "Chicken",

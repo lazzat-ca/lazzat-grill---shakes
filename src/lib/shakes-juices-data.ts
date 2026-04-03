@@ -12,7 +12,7 @@ export const shakesAndJuices: Record<string, MenuItem[]> = {
       name: "Mango Paradise Shake",
       description:
         "Fresh Alphonso mangoes blended with creamy milk and a hint of cardamom.",
-      price: 6.99,
+      price: 11.99,
       image: imgShakeMango,
       category: "Shakes & Juices",
       subCategory: "Shakes",
@@ -30,7 +30,7 @@ export const shakesAndJuices: Record<string, MenuItem[]> = {
       name: "Fresh Mint Lemonade",
       description:
         "Refreshing lemonade with fresh mint leaves and a touch of honey.",
-      price: 4.99,
+      price: 7.99,
       image: imgJuiceMintLemonade,
       category: "Shakes & Juices",
       subCategory: "Juices",

@@ -43,7 +43,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Strawberry Fruit Entremet",
       description:
         "Silky strawberry mousse, compote center, almond sponge and glossy glaze.",
-      price: 7.5,
+      price: 7.99,
       image: imgFruitStrawberry,
       category: "Desserts",
       subCategory: "Fruit Entremet",
@@ -58,7 +58,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Coconut Shell Entremet",
       description:
         "Coconut panna cotta inside a crisp chocolate shell with coconut shards.",
-      price: 7.5,
+      price: 7.99,
       image: imgFruitCoconut,
       category: "Desserts",
       subCategory: "Fruit Entremet",
@@ -73,7 +73,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Mango Marvelous Entremet",
       description:
         "Ripe mango mousse with tangy compote and delicate sponge layers.",
-      price: 7.5,
+      price: 7.99,
       image: imgFruitMango,
       category: "Desserts",
       subCategory: "Fruit Entremet",
@@ -88,7 +88,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Coffee Bean Delight Entremet",
       description:
         "Coffee mousse with dark ganache and coffee sponge layers.",
-      price: 7.5,
+      price: 7.99,
       image: imgFruitCoffee,
       category: "Desserts",
       subCategory: "Fruit Entremet",
@@ -103,7 +103,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Orange Delight Entremet",
       description:
         "Zesty orange mousse with almond sponge and a citrus glaze.",
-      price: 7.5,
+      price: 7.99,
       image: imgFruitOrange,
       category: "Desserts",
       subCategory: "Fruit Entremet",
@@ -121,7 +121,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Oreo & Cream Cheesecake",
       description:
         "Creamy cheesecake mixed with Oreo crumbs on a chocolate crust.",
-      price: 6.5,
+      price: 7.99,
       image: imgCheesecakeOreo,
       category: "Desserts",
       subCategory: "Cheesecakes",
@@ -136,7 +136,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Blueberry Swirl Cheesecake",
       description:
         "Classic cheesecake swirled with fresh blueberry compote.",
-      price: 6.5,
+      price: 6.99,
       image: imgCheesecakeBlueberry,
       category: "Desserts",
       subCategory: "Cheesecakes",
@@ -151,7 +151,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Mango Cheesecake",
       description:
         "Smooth cheesecake layered with luscious mango purée.",
-      price: 6.5,
+      price: 6.99,
       image: imgCheesecakeMango,
       category: "Desserts",
       subCategory: "Cheesecakes",
@@ -166,7 +166,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Strawberry Cheesecake",
       description:
         "Rich cheesecake crowned with fresh strawberry compote.",
-      price: 6.5,
+      price: 7.5,
       image: imgCheesecakeStrawberry,
       category: "Desserts",
       subCategory: "Cheesecakes",
@@ -181,7 +181,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Biscoff Cheesecake",
       description:
         "Caramel-spiced cheesecake on a Biscoff cookie crust.",
-      price: 6.5,
+      price: 6.99,
       image: imgCheesecakeBiscoff,
       category: "Desserts",
       subCategory: "Cheesecakes",
@@ -199,7 +199,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Mango Tiramisu",
       description:
         "Mascarpone layered with mango-soaked ladyfingers.",
-      price: 6.99,
+      price: 7.99,
       image: imgTiramisuMango,
       category: "Desserts",
       subCategory: "Tiramisu",
@@ -214,7 +214,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Chocolate Tiramisu",
       description:
         "Chocolate-soaked ladyfingers with creamy mascarpone.",
-      price: 6.99,
+      price: 8.99,
       image: imgTiramisuChocolate,
       category: "Desserts",
       subCategory: "Tiramisu",
@@ -229,7 +229,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Coffee Tiramisu",
       description:
         "Classic espresso-soaked ladyfingers with mascarpone layers.",
-      price: 6.99,
+      price: 7.99,
       image: imgTiramisuCoffee,
       category: "Desserts",
       subCategory: "Tiramisu",
@@ -244,7 +244,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Blueberry Tiramisu",
       description:
         "Berry-soaked ladyfingers with mascarpone and blueberry compote.",
-      price: 6.99,
+      price: 7.99,
       image: imgTiramisuBlueberry,
       category: "Desserts",
       subCategory: "Tiramisu",
@@ -263,7 +263,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Pistachio Dark Chocolate Brownie",
       description:
         "Decadent dark chocolate brownie layered with pistachio.",
-      price: 5.99,
+      price: 6.99,
       image: imgBrowniePistachio,
       category: "Desserts",
       subCategory: "Brownies",
@@ -281,7 +281,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Original Cinnamon Roll",
       description:
         "Classic cinnamon roll with vanilla glaze.",
-      price: 4.5,
+      price: 5.99,
       image: imgCinnamonOriginal,
       category: "Desserts",
       subCategory: "Cinnamon Rolls",
@@ -296,7 +296,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Blueberry Cinnamon Roll",
       description:
         "Cinnamon roll filled with blueberry compote.",
-      price: 4.75,
+      price: 5.75,
       image: imgCinnamonBlueberry,
       category: "Desserts",
       subCategory: "Cinnamon Rolls",
@@ -311,7 +311,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Nutella Cinnamon Roll",
       description:
         "Cinnamon roll with creamy Nutella swirl.",
-      price: 5.0,
+      price: 5.75,
       image: imgCinnamonNutella,
       category: "Desserts",
       subCategory: "Cinnamon Rolls",
@@ -326,7 +326,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Biscoff Cinnamon Roll",
       description:
         "Cinnamon roll infused with Biscoff spread.",
-      price: 5.0,
+      price: 5.75,
       image: imgCinnamonBiscoff,
       category: "Desserts",
       subCategory: "Cinnamon Rolls",
@@ -344,7 +344,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Vanilla 4x4 Cake",
       description:
         "Moist vanilla cake portion (4x4).",
-      price: 6.0,
+      price: 6.75,
       image: imgCakeVanilla,
       category: "Desserts",
       subCategory: "Cakes",
@@ -359,7 +359,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Chocolate 4x4 Cake",
       description:
         "Rich chocolate cake portion (4x4).",
-      price: 6.0,
+      price: 6.99,
       image: imgCakeChocolate,
       category: "Desserts",
       subCategory: "Cakes",
@@ -374,7 +374,7 @@ export const desserts: Record<string, MenuItem[]> = {
   name: "Dubai 17 Layer Chocolate Cake",
   description:
     "Dubai-style 17-layer chocolate cake enriched with dark Belgian chocolate ganache between every layer.",
-  price: 7.99,
+  price: 8.50,
   image: imgCakeDubai17Layer,
   category: "Desserts",
   subCategory: "Cakes",
@@ -395,7 +395,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Pistachio Tres Leches",
       description:
         "Milk-soaked sponge with pistachio and cream.",
-      price: 6.5,
+      price: 6.99,
       image: imgTresLechesPistachio,
       category: "Desserts",
       subCategory: "Tres Leches",
@@ -410,7 +410,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Coconut Tres Leches",
       description:
         "Coconut tres leches with toasted coconut.",
-      price: 6.5,
+      price: 6.99,
       image: imgTresLechesCoconut,
       category: "Desserts",
       subCategory: "Tres Leches",
@@ -425,7 +425,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Pineapple Tres Leches",
       description:
         "Pineapple-infused tres leches for a tropical twist.",
-      price: 6.5,
+      price: 6.79,
       image: imgTresLechesPineapple,
       category: "Desserts",
       subCategory: "Tres Leches",
@@ -440,7 +440,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Mango Tres Leches",
       description:
         "Mango tres leches layered with fresh mango.",
-      price: 6.5,
+      price: 6.89,
       image: imgTresLechesMango,
       category: "Desserts",
       subCategory: "Tres Leches",

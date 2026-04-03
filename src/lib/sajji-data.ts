@@ -30,7 +30,7 @@ export const sajjiItems: Record<string, MenuItem[]> = {
         "Full Chicken",
       ],
 
-      allergens: ["milk"], // possible butter / raita pairing
+      allergens: ["milk"], // possible butter / raita pairing /ghee
       dietary: ["gluten-free", "nut-free"],
     },
   ],
