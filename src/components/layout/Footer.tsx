@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Instagram, Facebook, Twitter, Mail, Phone, MapPin, ArrowRight, ChevronDown } from "lucide-react";
+import { Instagram, Facebook, Mail, Phone, MapPin, ArrowRight, ChevronDown } from "lucide-react";
+import { FaTiktok, FaPinterest } from "react-icons/fa";
 
 export const Footer = () => {
   return (
@@ -21,6 +22,7 @@ export const Footer = () => {
                 className="h-9 md:h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
               />
             </Link>
+
             <div className="flex gap-2.5 ml-2">
               <a
                 href="https://www.instagram.com/lazzat.ca/"
@@ -29,6 +31,7 @@ export const Footer = () => {
               >
                 <Instagram size={15} className="group-hover/icon:scale-110 transition-transform" />
               </a>
+
               <a
                 href="https://www.facebook.com/lazzat.ca/"
                 className="w-8 h-8 rounded-full border border-primary/20 flex items-center justify-center text-muted-foreground hover:text-background hover:bg-primary hover:border-primary transition-all duration-300 group/icon"
@@ -36,15 +39,29 @@ export const Footer = () => {
               >
                 <Facebook size={15} className="group-hover/icon:scale-110 transition-transform" />
               </a>
+
               <a
-                href="#"
+                href="https://www.tiktok.com/@lazzat.ca"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-8 h-8 rounded-full border border-primary/20 flex items-center justify-center text-muted-foreground hover:text-background hover:bg-primary hover:border-primary transition-all duration-300 group/icon"
-                aria-label="Twitter"
+                aria-label="TikTok"
               >
-                <Twitter size={15} className="group-hover/icon:scale-110 transition-transform" />
+                <FaTiktok size={15} className="group-hover/icon:scale-110 transition-transform" />
+              </a>
+
+              <a
+                href="https://ca.pinterest.com/lazzatcanada/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full border border-primary/20 flex items-center justify-center text-muted-foreground hover:text-background hover:bg-primary hover:border-primary transition-all duration-300 group/icon"
+                aria-label="Pinterest"
+              >
+                <FaPinterest size={15} className="group-hover/icon:scale-110 transition-transform" />
               </a>
             </div>
           </div>
+
           {/* Navigation Links */}
           <div className="flex flex-wrap gap-3 md:gap-5 items-center justify-center">
             <Link to="/menu" className="text-muted-foreground font-sans text-xs hover:text-primary transition-colors duration-300 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 hover:border-primary/40 hover:bg-primary/10">
@@ -72,6 +89,7 @@ export const Footer = () => {
             </a>
           </div>
         </div>
+
         <div className="flex flex-col items-center gap-3 text-[11px] md:text-xs text-muted-foreground font-sans border-t border-primary/10 pt-4 mt-2">
           <p className="text-center">© 2026 Lazzat. All rights reserved.</p>
           <div className="flex gap-4 md:gap-6">
