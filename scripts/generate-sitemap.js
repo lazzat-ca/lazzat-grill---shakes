@@ -6,7 +6,7 @@ const PAGES_DIR = path.resolve("src/pages");
 const OUTPUT_FILE = path.resolve("public/sitemap.xml");
 
 // Pages to exclude
-const EXCLUDE = ["NotFound.tsx"];
+const EXCLUDE = ["NotFound.tsx", "Catering.tsx"];
 
 const files = fs.readdirSync(PAGES_DIR);
 

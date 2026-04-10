@@ -1,13 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, UtensilsCrossed, Flame, MapPin, ConciergeBell } from "lucide-react";
+import { Home, UtensilsCrossed, Flame, MapPin, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/", icon: Home, label: "Home" },
   { href: "/menu", icon: UtensilsCrossed, label: "Menu" },
   { href: "/flavours", icon: Flame, label: "Flavours" },
-  { href: "/catering", icon: ConciergeBell, label: "Catering" },
   { href: "/locations", icon: MapPin, label: "Locations" },
+  { href: "/order", icon: ShoppingBag, label: "Order" },
 ];
 
 export const MobileNav = () => {

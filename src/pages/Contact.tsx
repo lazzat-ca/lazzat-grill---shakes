@@ -281,7 +281,6 @@ const Contact = () => {
                       tabIndex={0}
                     >
                       <option value="feedback">General Feedback</option>
-                      <option value="catering">Catering Inquiry</option>
                       <option value="franchise">Franchise Interest</option>
                       <option value="careers">Careers</option>
                       <option value="other">Other</option>

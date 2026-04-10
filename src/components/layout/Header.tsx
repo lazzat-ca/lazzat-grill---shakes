@@ -9,6 +9,7 @@ const navLinks = [
   { href: "/flavours", label: "Flavors" },
   { href: "/about", label: "About" },
   { href: "/locations", label: "Locations" },
+  { href: "/order", label: "Order" },
   { href: "/contact", label: "Contact" },
   { href: "/feedback", label: "Feedback" },
 ];
@@ -119,12 +120,11 @@ export const Header = () => {
               ))}
             </div>
 
-            {/* Catering Button */}
             <Link
-              to="/catering"
+              to="/order"
               className="hidden md:block btn-gold pulse-gold text-sm tracking-widest uppercase py-3 px-6"
             >
-              Catering
+              Order
             </Link>
 
             {/* Mobile Toggle */}
@@ -155,10 +155,10 @@ export const Header = () => {
                 </Link>
               ))}
               <Link
-                to="/catering"
+                to="/order"
                 className="btn-gold pulse-gold text-sm tracking-widest uppercase py-3 px-8 mt-2"
               >
-                Catering
+                Order
               </Link>
             </div>
           </div>
