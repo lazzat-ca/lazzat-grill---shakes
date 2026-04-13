@@ -1,5 +1,5 @@
 // src/lib/sauces-data.ts
-import { SauceItem } from "./menu-types";
+import { SauceItem } from "./menu-types.js";
 
 /* IMAGE IMPORTS */
 import imgSweetSpicy from "@/assets/sweet-spicy-sauce.jpeg";

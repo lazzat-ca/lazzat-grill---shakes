@@ -1,12 +1,12 @@
 // api/admin/seed.ts
 // One-shot seeding from local project data into Supabase tables.
-import { json, noStoreHeaders } from "../_lib/security";
-import { supabaseAdmin, verifyAdminToken } from "../_lib/supabase-admin";
-import { menuItemsFlat } from "../../src/lib/menu-data";
-import { sauces } from "../../src/lib/sauces-data";
-import { spices } from "../../src/lib/spices-data";
-import { blogPosts } from "../../src/lib/blog-data";
-import { branchLocations } from "../../src/lib/locations-data";
+import { json, noStoreHeaders } from "../_lib/security.js";
+import { supabaseAdmin, verifyAdminToken } from "../_lib/supabase-admin.js";
+import { menuItemsFlat } from "../../src/lib/menu-data.js";
+import { sauces } from "../../src/lib/sauces-data.js";
+import { spices } from "../../src/lib/spices-data.js";
+import { blogPosts } from "../../src/lib/blog-data.js";
+import { branchLocations } from "../../src/lib/locations-data.js";
 
 export default {
   async fetch(request: Request) {

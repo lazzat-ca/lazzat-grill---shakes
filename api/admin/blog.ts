@@ -1,7 +1,7 @@
 // api/admin/blog.ts
 // Blog CRUD. seo_editor and admin can read/write blog posts.
-import { json, noStoreHeaders } from "../_lib/security";
-import { supabaseAdmin, verifyAdminToken } from "../_lib/supabase-admin";
+import { json, noStoreHeaders } from "../_lib/security.js";
+import { supabaseAdmin, verifyAdminToken } from "../_lib/supabase-admin.js";
 
 export default {
   async fetch(request: Request) {

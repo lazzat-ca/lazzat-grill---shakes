@@ -1,5 +1,5 @@
 // src/lib/sides-data.ts
-import { MenuItem } from "./menu-types";
+import { MenuItem } from "./menu-types.js";
 
 /* IMAGE IMPORTS */
 import imgColeslaw from "@/assets/COLESLAW.jpg";

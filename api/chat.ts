@@ -1,7 +1,7 @@
 // api/chat.ts
 // Server-side chatbot powered by OpenRouter.
 // The API key is NEVER sent to the browser.
-import { json, noStoreHeaders } from "./_lib/security";
+import { json, noStoreHeaders } from "./_lib/security.js";
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY ?? "";
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";

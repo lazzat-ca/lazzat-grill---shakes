@@ -1,4 +1,4 @@
-import { MenuItem } from "./menu-types";
+import { MenuItem } from "./menu-types.js";
 import imgSajji from "@/assets/sajji.jpeg";
 
 export const sajjiItems: Record<string, MenuItem[]> = {

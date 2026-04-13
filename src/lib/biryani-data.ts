@@ -1,4 +1,4 @@
-import { MenuItem } from "./menu-types";
+import { MenuItem } from "./menu-types.js";
 import imgBiryaniClassic from "@/assets/biryani-classic.jpeg";
 
 export const biryaniItems: Record<string, MenuItem[]> = {

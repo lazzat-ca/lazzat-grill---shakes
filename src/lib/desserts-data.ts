@@ -1,4 +1,4 @@
-import { MenuItem } from "./menu-types";
+import { MenuItem } from "./menu-types.js";
 
 /* IMAGE IMPORTS */
 import imgFruitStrawberry from "@/assets/dessert-strawberry-fruit.jpeg";

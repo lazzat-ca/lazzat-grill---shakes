@@ -1,4 +1,4 @@
-import { MenuItem } from "./menu-types";
+import { MenuItem } from "./menu-types.js";
 
 import imgClassicDoner from "@/assets/classic-doner-supereme.jpg";
 import imgUltimateDoner from "@/assets/ultimate-flavor-doner.jpg";

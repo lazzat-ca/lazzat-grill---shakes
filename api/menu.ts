@@ -1,5 +1,5 @@
-import { json, noStoreHeaders, staleWhileRevalidateHeaders } from "./_lib/security";
-import { supabaseAdmin } from "./_lib/supabase-admin";
+import { json, noStoreHeaders, staleWhileRevalidateHeaders } from "./_lib/security.js";
+import { supabaseAdmin } from "./_lib/supabase-admin.js";
 
 const CDN_S_MAXAGE_SECONDS = 300;
 const CDN_STALE_WHILE_REVALIDATE_SECONDS = 600;

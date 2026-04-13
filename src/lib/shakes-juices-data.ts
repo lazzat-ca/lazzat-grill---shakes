@@ -1,5 +1,5 @@
 // src/lib/shakes-juices-data.ts
-import { MenuItem } from "./menu-types";
+import { MenuItem } from "./menu-types.js";
 
 /* IMAGE IMPORTS */
 import imgShakeMango from "@/assets/shake-mango.jpeg";

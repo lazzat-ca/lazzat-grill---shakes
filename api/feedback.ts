@@ -6,7 +6,7 @@ import {
   rejectIfInvalidMethod,
   sanitizeText,
   withCommonProtection,
-} from "./_lib/security";
+} from "./_lib/security.js";
 
 type FeedbackPayload = {
   name?: unknown;

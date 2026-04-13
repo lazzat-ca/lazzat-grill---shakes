@@ -1,5 +1,5 @@
 // src/lib/spices-data.ts
-import { SauceItem } from "./menu-types";
+import { SauceItem } from "./menu-types.js";
 
 /* IMAGE IMPORTS */
 import bayLeaf from "@/assets/bay-leaf-powder.273.jpeg";

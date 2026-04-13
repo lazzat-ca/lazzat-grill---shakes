@@ -1,5 +1,5 @@
 // src/lib/grills-skewers-data.ts
-import { MenuItem } from "./menu-types";
+import { MenuItem } from "./menu-types.js";
 
 /* IMAGE IMPORTS */
 import imgChickenSkewers from "@/assets/chicken-skewers.jpeg";

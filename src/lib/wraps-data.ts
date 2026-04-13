@@ -1,4 +1,4 @@
-import { MenuItem } from "./menu-types";
+import { MenuItem } from "./menu-types.js";
 
 import imgBBQSteakWrap from "@/assets/bbq-steak-wrap.531.jpeg";
 import imgBBQVeggieWrap from "@/assets/bbq-veggie-wrap.370.jpeg";
