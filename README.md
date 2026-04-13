@@ -1,3 +1,53 @@
+# Deployment on Vercel
+
+This project is fully compatible with Vercel, including backend API routes and custom domain support.
+
+## Steps to Deploy
+
+1. **Connect to Vercel**
+  - Import your GitHub/GitLab repo into Vercel (https://vercel.com/import).
+  - Vercel auto-detects Vite and sets up the build.
+
+2. **Set Environment Variables**
+  - In your Vercel dashboard, go to Project Settings → Environment Variables.
+  - Add all required variables:
+    - `VITE_SUPABASE_URL`
+    - `SUPABASE_SERVICE_ROLE_KEY`
+    - Any others used in your code (e.g., `OPENROUTER_API_KEY`)
+
+3. **Attach Your Domain**
+  - In Vercel, go to Domains and add your custom domain (e.g., `lazzat.ca`).
+  - Vercel will handle SSL and routing automatically.
+
+4. **API Routes**
+  - All files in `/api` are deployed as Vercel serverless functions.
+  - Requests to `/api/*` are routed to these endpoints.
+  - No extra rewrites are needed for API endpoints.
+
+5. **Frontend Routing**
+  - The SPA is handled by Vite and the rewrite rule in `vercel.json` ensures all non-API routes go to `index.html`.
+
+6. **Production Build**
+  - Vercel runs `npm ci` and `npm run build` (see `package.json`).
+  - Output is served from `/dist`.
+
+7. **Security & CORS**
+  - API security and allowed origins are enforced in `api/_lib/security.ts` and `middleware.ts`.
+  - Only your domain and localhost are allowed for API requests.
+
+8. **Testing**
+  - After deployment, test both the frontend and `/api/*` endpoints on your domain.
+
+---
+
+**Advanced Routing**
+
+- If you need to add more advanced rewrites, redirects, or headers, edit `vercel.json`.
+- Example: To expose a public API route, add a rewrite or header rule as needed.
+
+---
+
+For any issues, check Vercel logs and ensure all environment variables are set correctly.
 Lazzat Grills & Shakes
 
 This repository contains the source code for the Lazzat Grills & Shakes restaurant website and digital menu.

@@ -3,10 +3,9 @@ import { Layout } from "@/components/layout/Layout";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { findNearestLocation, requestUserLocation } from "@/lib/location-utils";
-import { branchLocations } from "@/lib/locations-data";
-const locationsWithCoords = branchLocations;
+import type { BranchLocation } from "@/lib/locations-data";
 
-function LocationsList() {
+function LocationsList({ locationsWithCoords }: { locationsWithCoords: BranchLocation[] }) {
   const [nearestId, setNearestId] = useState(null);
   const [userCoords, setUserCoords] = useState(null);
   const [locationStatus, setLocationStatus] = useState(
@@ -67,7 +66,9 @@ function LocationsList() {
 
 const Contact = () => {
   const { toast } = useToast();
-  const uniquePhones = Array.from(new Set(branchLocations.map((location) => location.phone)));
+  const [locations, setLocations] = useState<BranchLocation[]>([]);
+  const [locationsLoading, setLocationsLoading] = useState(true);
+  const uniquePhones = Array.from(new Set(locations.map((location) => location.phone)));
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -79,7 +80,32 @@ const Contact = () => {
   const submitTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
+
+    const loadLocations = async () => {
+      try {
+        setLocationsLoading(true);
+        const response = await fetch("/api/locations", {
+          headers: { Accept: "application/json" },
+          signal: controller.signal,
+        });
+        if (!response.ok) {
+          setLocations([]);
+          return;
+        }
+        const payload = (await response.json()) as { data?: BranchLocation[] };
+        setLocations(Array.isArray(payload.data) ? payload.data : []);
+      } catch {
+        setLocations([]);
+      } finally {
+        setLocationsLoading(false);
+      }
+    };
+
+    void loadLocations();
+
     return () => {
+      controller.abort();
       if (submitTimeoutRef.current !== null) {
         window.clearTimeout(submitTimeoutRef.current);
       }
@@ -145,7 +171,7 @@ const Contact = () => {
                     <h4 className="font-serif text-lg text-foreground mb-1">
                       Visit Us
                     </h4>
-                    {branchLocations.map((location, index) => (
+                    {locations.map((location, index) => (
                       <div key={location.id} className="mb-2 flex items-start gap-2">
                         <MapPin className="w-4 h-4 text-primary mt-1" />
                         <div>
@@ -334,7 +360,13 @@ const Contact = () => {
 
       {/* Locations List (simple) */}
       <section className="pt-0 pb-10 sm:pb-12 md:pb-16 bg-background">
-        <LocationsList />
+        {locationsLoading ? (
+          <div className="container-luxury px-2 sm:px-4 max-w-3xl mx-auto text-center text-sm text-muted-foreground">
+            Loading locations...
+          </div>
+        ) : (
+          <LocationsList locationsWithCoords={locations} />
+        )}
       </section>
 
       {/* View Menu Section */}

@@ -2,15 +2,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { menuItemsFlat } from "@/lib/menu-data";
-import { sauces } from "@/lib/sauces-data";
+import { usePublicCatalog } from "@/hooks/usePublicCatalog";
 
 export const FeaturedItems = () => {
+  const { menuItems, sauces } = usePublicCatalog();
   // Get first available from each category
-  const grillsBiryaniSajji = menuItemsFlat.find((item) => ["Grills & Skewers", "Biryani", "Sajji"].includes(item.category));
-  const wrap = menuItemsFlat.find((item) => item.category === "Wraps");
-  const seekhKebab = menuItemsFlat.find((item) => item.name.toLowerCase().includes("seekh"));
-  const dessert = menuItemsFlat.find((item) => item.category === "Desserts");
+  const grillsBiryaniSajji = menuItems.find((item) => ["Grills & Skewers", "Biryani", "Sajji"].includes(item.category));
+  const wrap = menuItems.find((item) => item.category === "Wraps");
+  const seekhKebab = menuItems.find((item) => item.name.toLowerCase().includes("seekh"));
   const sauce = sauces[0];
 
   const cards = [

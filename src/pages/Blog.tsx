@@ -1,8 +1,62 @@
+import { useEffect, useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Clock, ArrowRight } from "lucide-react";
-import { blogPosts } from "@/lib/blog-data";
+import { supabase, type DbBlogPost } from "@/lib/supabase";
+
+interface DisplayPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  author: string;
+  date: string;
+  category: string;
+  readTime: string;
+  image: string;
+  imageAlt: string;
+}
+
+const toDisplay = (p: DbBlogPost): DisplayPost => ({
+  id: p.id,
+  title: p.title,
+  excerpt: p.excerpt,
+  author: p.author,
+  date: p.date,
+  category: p.category,
+  readTime: p.read_time,
+  image: p.image,
+  imageAlt: p.image_alt || p.title,
+});
 
 const Blog = () => {
+  const [posts, setPosts] = useState<DisplayPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("blog_posts")
+          .select("*")
+          .eq("published", true)
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          setError(error.message);
+          setPosts([]);
+          return;
+        }
+        setPosts((data ?? []).map(toDisplay));
+      } catch {
+        setError("Failed to load blog posts from database.");
+        setPosts([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    void fetchPosts();
+  }, []);
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -14,7 +68,8 @@ const Blog = () => {
               Lazzat <span className="text-primary">Blog</span>
             </h1>
             <p className="font-sans text-muted-foreground max-w-2xl mx-auto">
-              Where stories meet flavors. Explore recipes, tips, and insights from the <span className="text-primary">Lazzat</span> kitchen.
+              Where stories meet flavors. Explore recipes, tips, and insights from the{" "}
+              <span className="text-primary">Lazzat</span> kitchen.
             </p>
           </div>
         </div>
@@ -23,61 +78,69 @@ const Blog = () => {
       {/* Blog Posts Grid */}
       <section className="py-12 md:py-20 bg-background">
         <div className="container-luxury px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {blogPosts.map((post) => (
-              <article
-                key={post.id}
-                className="group rounded-lg overflow-hidden border border-primary/20 bg-black/40 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
-              >
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <span className="absolute bottom-3 left-3 inline-block px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-xs text-primary font-sans">
-                    {post.category}
-                  </span>
-                </div>
+          {loading ? (
+            <div className="text-center text-muted-foreground py-12">Loading posts…</div>
+          ) : error ? (
+            <div className="text-center text-red-400 py-12">{error}</div>
+          ) : posts.length === 0 ? (
+            <div className="text-center text-muted-foreground py-12">No blog posts available yet.</div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {posts.map((post) => (
+                <article
+                  key={post.id}
+                  className="group rounded-lg overflow-hidden border border-primary/20 bg-black/40 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+                >
+                  {/* Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.imageAlt || post.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <span className="absolute bottom-3 left-3 inline-block px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-xs text-primary font-sans">
+                      {post.category}
+                    </span>
+                  </div>
 
-                {/* Content */}
-                <div className="p-5 md:p-6">
-                  <h2 className="font-serif text-lg md:text-xl text-foreground mb-3 group-hover:text-primary transition-colors duration-300 line-clamp-2">
-                    {post.title}
-                  </h2>
+                  {/* Content */}
+                  <div className="p-5 md:p-6">
+                    <h2 className="font-serif text-lg md:text-xl text-foreground mb-3 group-hover:text-primary transition-colors duration-300 line-clamp-2">
+                      {post.title}
+                    </h2>
 
-                  <p className="font-sans text-sm text-muted-foreground mb-4 line-clamp-2">
-                    {post.excerpt}
-                  </p>
+                    <p className="font-sans text-sm text-muted-foreground mb-4 line-clamp-2">
+                      {post.excerpt}
+                    </p>
 
-                  {/* Meta */}
-                  <div className="flex items-center gap-4 mb-4 text-xs text-muted-foreground border-t border-primary/10 pt-4">
-                    <div className="flex items-center gap-1.5">
-                      <Clock size={14} className="text-primary" />
-                      <span>{post.readTime}</span>
+                    {/* Meta */}
+                    <div className="flex items-center gap-4 mb-4 text-xs text-muted-foreground border-t border-primary/10 pt-4">
+                      <div className="flex items-center gap-1.5">
+                        <Clock size={14} className="text-primary" />
+                        <span>{post.readTime}</span>
+                      </div>
+                    </div>
+
+                    {/* Date and CTA */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-muted-foreground">{post.date}</span>
+                      <button
+                        disabled
+                        className="inline-flex items-center gap-1 text-muted-foreground cursor-not-allowed text-sm font-sans group/link"
+                      >
+                        Read More
+                        <ArrowRight
+                          size={16}
+                          className="group-hover/link:translate-x-1 transition-transform"
+                        />
+                      </button>
                     </div>
                   </div>
-
-                  {/* Date and CTA */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">{post.date}</span>
-                    <button
-                      disabled
-                      className="inline-flex items-center gap-1 text-muted-foreground cursor-not-allowed text-sm font-sans group/link"
-                    >
-                      Read More
-                      <ArrowRight
-                        size={16}
-                        className="group-hover/link:translate-x-1 transition-transform"
-                      />
-                    </button>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

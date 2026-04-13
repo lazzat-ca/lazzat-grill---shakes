@@ -4,10 +4,9 @@ import { cn } from "@/lib/utils";
 import { allergenIconMap } from "@/lib/menu-constants";
 import type { Allergen } from "@/lib/menu-types";
 import { useLocation, useNavigate } from "react-router-dom";
+import { usePublicCatalog } from "@/hooks/usePublicCatalog";
 
 /* CENTRAL DATA */
-import { sauces } from "@/lib/sauces-data";
-import { spices } from "@/lib/spices-data";
 import {
   mergeFlavours,
   filterFlavours,
@@ -83,6 +82,7 @@ const sortOptions: { label: string; value: FlavorSort }[] = [
 ];
 
 const SignatureFlavors = () => {
+  const { sauces, seasonings } = usePublicCatalog();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -104,8 +104,8 @@ const SignatureFlavors = () => {
   const [selectedFlavor, setSelectedFlavor] = useState<FlavorEntry | null>(null);
 
   const allFlavours = useMemo(
-    () => mergeFlavours({ sauces, spices }),
-    []
+    () => mergeFlavours({ sauces, spices: seasonings }),
+    [sauces, seasonings]
   );
 
   useEffect(() => {

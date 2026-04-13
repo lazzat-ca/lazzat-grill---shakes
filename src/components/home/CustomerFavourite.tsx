@@ -1,9 +1,11 @@
 import React from "react";
-import { menuItemsFlat } from "@/lib/menu-data";
+import { usePublicCatalog } from "@/hooks/usePublicCatalog";
 
-const favourites = menuItemsFlat.slice(0, 4); // Pick first 4 as favourites for demo
+const CustomerFavourite = () => {
+  const { menuItems } = usePublicCatalog();
+  const favourites = menuItems.slice(0, 4);
 
-const CustomerFavourite = () => (
+  return (
   <section className="py-12">
     <div className="container mx-auto px-4 bg-transparent">
       <div className="gold-divider w-16 mb-6 mx-auto" />
@@ -24,6 +26,7 @@ const CustomerFavourite = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default CustomerFavourite;

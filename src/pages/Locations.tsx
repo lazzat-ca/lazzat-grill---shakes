@@ -8,17 +8,12 @@ import {
   getTravelTimeMinutes,
   requestUserLocation,
 } from "@/lib/location-utils";
-import { branchLocations } from "@/lib/locations-data";
-
-/* =====================
-   Location Data
-===================== */
-const locations = branchLocations;
+import type { BranchLocation } from "@/lib/locations-data";
 
 /* =====================
    Helpers
 ===================== */
-const isLocationOpen = (hours: typeof locations[0]['hours']) => {
+const isLocationOpen = (hours: BranchLocation["hours"]) => {
   const now = new Date();
   const day = now.getDay(); // 0 = Sunday
   const currentTime = now.getHours() * 60 + now.getMinutes();
@@ -65,6 +60,9 @@ const amenityIcons: Record<string, { icon: LucideIcon; label: string }> = {
    Component
 ===================== */
 const Locations = () => {
+  const [locations, setLocations] = useState<BranchLocation[]>([]);
+  const [loadingLocations, setLoadingLocations] = useState(true);
+  const [locationsError, setLocationsError] = useState<string | null>(null);
   const [nearestId, setNearestId] = useState<number | null>(null);
   const [userCoords, setUserCoords] = useState<{ lat: number; lng: number } | null>(null);
   const [openMaps, setOpenMaps] = useState<{ [key: number]: boolean }>({});
@@ -82,7 +80,38 @@ const Locations = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const loadLocations = async () => {
+      try {
+        setLoadingLocations(true);
+        const response = await fetch("/api/locations", {
+          headers: { Accept: "application/json" },
+          signal: controller.signal,
+        });
+        if (!response.ok) {
+          setLocationsError("Failed to load locations from database.");
+          setLocations([]);
+          return;
+        }
+        const payload = (await response.json()) as { data?: BranchLocation[] };
+        setLocations(Array.isArray(payload.data) ? payload.data : []);
+      } catch {
+        setLocationsError("Failed to load locations from database.");
+        setLocations([]);
+      } finally {
+        setLoadingLocations(false);
+      }
+    };
+
+    void loadLocations();
+
+    return () => controller.abort();
+  }, []);
+
   const requestLocation = () => {
+    if (locations.length === 0) return;
     setLocationStatus('loading');
     setHasRequestedLocation(true);
     requestUserLocation({ timeout: 10000 })
@@ -130,7 +159,7 @@ const Locations = () => {
     }
   };
 
-  const shareLocation = async (location: typeof locations[0]) => {
+  const shareLocation = async (location: BranchLocation) => {
     const shareData = {
       title: location.name,
       text: `Check out ${location.name} at ${location.address}`,
@@ -167,8 +196,20 @@ const Locations = () => {
       {/* Locations */}
       <section className="pt-6 pb-12 md:pt-8 md:pb-16 bg-card">
         <div className="container-luxury px-4">
+          {loadingLocations && (
+            <div className="mb-6 p-4 rounded-lg border border-primary/20 bg-background/50 text-center text-sm text-muted-foreground">
+              Loading locations...
+            </div>
+          )}
+
+          {locationsError && (
+            <div className="mb-6 p-4 rounded-lg border border-red-800/40 bg-red-950/20 text-center text-sm text-red-300">
+              {locationsError}
+            </div>
+          )}
+
           {/* Location Permission Prompt */}
-          {!hasRequestedLocation && (
+          {!loadingLocations && locations.length > 0 && !hasRequestedLocation && (
             <div className="mb-6 p-6 rounded-lg border border-primary/30 bg-background/95 text-center">
               <MapPin className="w-8 h-8 text-primary mx-auto mb-3" />
               <h3 className="text-lg font-serif text-foreground mb-2">
@@ -382,6 +423,10 @@ const Locations = () => {
             );
           })}
           </div>
+
+          {!loadingLocations && locations.length === 0 && !locationsError && (
+            <div className="text-center py-10 text-muted-foreground">No locations available.</div>
+          )}
         </div>
       </section>
     </Layout>

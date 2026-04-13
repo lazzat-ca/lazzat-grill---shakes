@@ -16,13 +16,7 @@ import { Helmet } from "react-helmet";
 import { Layout } from "@/components/layout/Layout";
 import { Flame, X, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import {
-  menuItemsFlat,
-} from "@/lib/menu-data";
-// ...removed sauces import
 import type { MenuItem } from "@/lib/menu-types";
-import { findSauce } from "@/lib/find-sauce";
-import { spices } from "@/lib/spices-data";
 import {
   filterMenuItems,
   hasSelectedDietaryFilter,
@@ -31,6 +25,8 @@ import {
 type MenuApiResponse = {
   ok?: boolean;
   data?: unknown;
+  sauces?: unknown;
+  seasonings?: unknown;
   count?: unknown;
 };
 
@@ -49,6 +45,20 @@ const isMenuItemArray = (value: unknown): value is MenuItem[] => {
       typeof candidate.image === "string" &&
       Array.isArray(candidate.saucePairings) &&
       Array.isArray(candidate.customizations)
+    );
+  });
+};
+
+const isSauceItemArray = (value: unknown): value is SauceItem[] => {
+  if (!Array.isArray(value)) return false;
+
+  return value.every((item) => {
+    if (!item || typeof item !== "object") return false;
+    const candidate = item as Partial<SauceItem>;
+    return (
+      typeof candidate.name === "string" &&
+      typeof candidate.description === "string" &&
+      typeof candidate.level === "number"
     );
   });
 };
@@ -277,7 +287,10 @@ export default function MenuPage() {
   const navigate = useNavigate();
     const pageTitle = "Menu | Lazzat - Premium Grills, Biryani, Sajji & More";
     const pageDescription = "Explore Lazzat's full menu: BBQ, Tikka, Kabab, Biryani, Sajji, desserts, sides, shakes, and more. Fresh, halal, and luxurious dining.";
-  const [runtimeMenuItems, setRuntimeMenuItems] = useState<MenuItem[] | null>(null);
+  const [runtimeMenuItems, setRuntimeMenuItems] = useState<MenuItem[]>([]);
+  const [runtimeSauces, setRuntimeSauces] = useState<SauceItem[]>([]);
+  const [runtimeSeasonings, setRuntimeSeasonings] = useState<SauceItem[]>([]);
+  const [menuLoadError, setMenuLoadError] = useState<string | null>(null);
   // State declarations
     const [activeSidesTab, setActiveSidesTab] = useState<"carb" | "green">(() => parseInitialSideTab(location.search));
     const [activeCategory, setActiveCategory] = useState<string>(() => parseInitialCategory(location.search));
@@ -305,17 +318,22 @@ export default function MenuPage() {
         });
 
         if (!response.ok) {
+          setMenuLoadError("Failed to load menu data from database.");
           return;
         }
 
         const payload = (await response.json()) as MenuApiResponse;
         if (!isMenuItemArray(payload.data)) {
+          setMenuLoadError("Invalid menu data received from database.");
           return;
         }
 
         setRuntimeMenuItems(payload.data);
+        setRuntimeSauces(isSauceItemArray(payload.sauces) ? payload.sauces : []);
+        setRuntimeSeasonings(isSauceItemArray(payload.seasonings) ? payload.seasonings : []);
+        setMenuLoadError(null);
       } catch {
-        // Keep local bundled data when API fetch fails.
+        setMenuLoadError("Failed to load menu data from database.");
       }
     };
 
@@ -326,7 +344,12 @@ export default function MenuPage() {
     };
   }, []);
 
-  const effectiveMenuItems = useMemo(() => runtimeMenuItems ?? menuItemsFlat, [runtimeMenuItems]);
+  const effectiveMenuItems = useMemo(() => runtimeMenuItems, [runtimeMenuItems]);
+  const effectiveSauces = useMemo(() => runtimeSauces, [runtimeSauces]);
+  const effectiveSeasonings = useMemo(() => runtimeSeasonings, [runtimeSeasonings]);
+
+  const findSauce = (name: string) =>
+    effectiveSauces.find((s) => s.name.toLowerCase() === name.toLowerCase());
 
   // Helper to clear filters
   const clearFilters = () => setSelectedFilters(new Set());
@@ -966,14 +989,14 @@ export default function MenuPage() {
                                   </div>
                                 )}
                                 {/* Seasonings Section */}
-                                {spices && spices.length > 0 && selectedItem && (() => {
+                                {effectiveSeasonings.length > 0 && selectedItem && (() => {
                                   // Show for Sides (not rice/naan), Grills & Skewers, Döner, Wraps
                                   const cat = selectedItem.category;
                                   const name = selectedItem.name.toLowerCase();
                                   const isRice = name.includes("rice");
                                   const isNaan = name.includes("naan");
                                   const isColeslaw = name.includes("coleslaw");
-                                  // Show for all menu items that can support spices (not rice, naan, desserts, shakes)
+                                  // Show for all menu items that can support seasonings (not rice, naan, desserts, shakes)
                                   const excludedCategories = ["Desserts", "Shakes & Juices", "Biryani", "Sajji"];
                                   const showSeasonings =
                                     !excludedCategories.includes(cat) &&
@@ -981,32 +1004,32 @@ export default function MenuPage() {
                                     !isNaan;
                                   if (!showSeasonings) return null;
                                   const selectedSeasonings = isColeslaw
-                                    ? spices.filter(s => ["Dried Parsley", "Dried Lemon Peel", "Lemon Zest"].includes(s.name))
+                                    ? effectiveSeasonings.filter(s => ["Dried Parsley", "Dried Lemon Peel", "Lemon Zest"].includes(s.name))
                                     : cat === "Sides"
                                       ? name.includes("fries")
-                                        ? spices.filter(s => [
+                                        ? effectiveSeasonings.filter(s => [
                                             "Crushed Red Chilli", "Smoked Paprika", "Cracked Black Pepper", "Mustard Powder", "Dried Parsley"
                                           ].includes(s.name))
                                         : name.includes("corn")
-                                          ? spices.filter(s => [
+                                          ? effectiveSeasonings.filter(s => [
                                               "Crushed Red Chilli", "Smoked Paprika", "Dried Parsley", "Lemon Zest"
                                             ].includes(s.name))
                                           : name.includes("salad") || name.includes("vegetable")
-                                            ? spices.filter(s => ["Dried Parsley", "Lemon Zest", "Dried Lemon Peel"].includes(s.name))
-                                            : spices.filter(s => s.level <= 3).slice(0, 3)
+                                            ? effectiveSeasonings.filter(s => ["Dried Parsley", "Lemon Zest", "Dried Lemon Peel"].includes(s.name))
+                                            : effectiveSeasonings.filter(s => s.level <= 3).slice(0, 3)
                                       : cat === "Grills & Skewers"
-                                        ? spices.filter(s => [
+                                        ? effectiveSeasonings.filter(s => [
                                             "Crushed Red Chilli", "Korean Chilli Flakes", "Smoked Paprika", "Coriander Seed Powder", "Toasted Cumin", "Dried Parsley"
                                           ].includes(s.name))
                                         : cat === "Döner"
-                                          ? spices.filter(s => [
+                                          ? effectiveSeasonings.filter(s => [
                                               "Crushed Red Chilli", "Smoked Paprika", "Coriander Seed Powder", "Dried Parsley", "Mustard Powder"
                                             ].includes(s.name))
                                           : cat === "Wraps"
-                                            ? spices.filter(s => [
+                                            ? effectiveSeasonings.filter(s => [
                                                 "Crushed Red Chilli", "Smoked Paprika", "Dried Parsley", "Mustard Powder", "Cracked Black Pepper"
                                               ].includes(s.name))
-                                            : spices.filter(s => s.level >= 2 && s.level <= 6).slice(0, 3);
+                                            : effectiveSeasonings.filter(s => s.level >= 2 && s.level <= 6).slice(0, 3);
                                   if (selectedSeasonings.length === 0) return null;
                                   return (
                                     <div className="mb-6">

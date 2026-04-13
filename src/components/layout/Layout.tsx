@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { MobileNav } from "./MobileNav";
+import { ChatBot } from "@/components/shared/ChatBot";
 import { ChevronUp } from "lucide-react";
 
 interface LayoutProps {
@@ -68,6 +69,9 @@ export const Layout = ({ children }: LayoutProps) => {
 
       {/* Global scroll-to-top button */}
       <ScrollToTopButton />
+
+      {/* Floating chatbot (excluded from admin routes) */}
+      <ChatBot />
     </div>
   );
 };

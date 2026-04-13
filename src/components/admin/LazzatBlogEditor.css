@@ -1,0 +1,97 @@
+/* src/components/admin/LazzatBlogEditor.css */
+.lazzat-editor-root {
+  display: flex;
+  height: 80vh;
+  background: #18181b;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px #000a;
+  overflow: hidden;
+}
+.lazzat-editor-sidebar {
+  width: 180px;
+  background: #111112;
+  border-right: 2px solid #eab308;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 12px 0;
+  gap: 8px;
+}
+.lazzat-editor-slide-thumb {
+  background: #232323;
+  color: #eab308;
+  border-radius: 8px;
+  margin: 0 12px;
+  padding: 10px 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.2s, background 0.2s;
+}
+.lazzat-editor-slide-thumb.active {
+  border: 2px solid #eab308;
+  background: #18181b;
+}
+.lazzat-editor-slide-thumb-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #eab308;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lazzat-editor-add-slide {
+  margin: 16px 12px 0 12px;
+  background: #eab308;
+  color: #18181b;
+  border: none;
+  border-radius: 8px;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: background 0.2s;
+}
+.lazzat-editor-add-slide:hover {
+  background: #fffbe6;
+}
+.lazzat-editor-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #18181b;
+}
+.lazzat-editor-toolbar {
+  display: flex;
+  align-items: center;
+  background: #232323;
+  border-bottom: 2px solid #eab308;
+  padding: 8px 16px;
+  gap: 8px;
+}
+.lazzat-editor-toolbar button {
+  background: none;
+  border: none;
+  color: #eab308;
+  font-size: 18px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.lazzat-editor-toolbar button.active, .lazzat-editor-toolbar button:hover {
+  background: #eab308;
+  color: #18181b;
+}
+.lazzat-editor-canvas {
+  flex: 1;
+  background: #18181b;
+  color: #fffbe6;
+  font-family: 'Inter', serif;
+  font-size: 1.2rem;
+  min-height: 400px;
+  padding: 48px 64px;
+  outline: none;
+  border: none;
+  border-radius: 0 0 12px 12px;
+}
