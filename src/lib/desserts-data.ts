@@ -1,40 +1,21 @@
 import { MenuItem } from "./menu-types.js";
 
 /* IMAGE IMPORTS */
-import imgFruitStrawberry from "@/assets/dessert-strawberry-fruit.jpeg";
-import imgFruitCoconut from "@/assets/dessert-coconut-shell.jpeg";
-import imgFruitMango from "@/assets/dessert-mango-marvelous.jpeg";
-import imgFruitCoffee from "@/assets/dessert-coffee-bean-delight.jpeg";
-import imgFruitOrange from "@/assets/dessert-orange-delight.jpeg";
-
-import imgCheesecakeOreo from "@/assets/dessert-cheesecake-oreo.jpeg";
-import imgCheesecakeBlueberry from "@/assets/dessert-cheesecake-blueberry.jpeg";
-import imgCheesecakeMango from "@/assets/dessert-cheesecake-mango.jpeg";
-import imgCheesecakeStrawberry from "@/assets/dessert-cheesecake-strawberry.jpeg";
-import imgCheesecakeBiscoff from "@/assets/dessert-cheesecake-biscoff.jpeg";
-
-import imgTiramisuMango from "@/assets/dessert-tiramisu-mango.jpeg";
-import imgTiramisuChocolate from "@/assets/dessert-tiramisu-chocolate.jpeg";
-import imgTiramisuCoffee from "@/assets/dessert-tiramisu-coffee.jpeg";
-import imgTiramisuBlueberry from "@/assets/dessert-tiramisu-blueberry.jpeg";
 
 
-import imgBrowniePistachio from "@/assets/dessert-brownie-pistachio.jpeg";
-
-import imgCinnamonOriginal from "@/assets/dessert-cinnamon-original.jpeg";
-import imgCinnamonBlueberry from "@/assets/dessert-cinnamon-blueberry.jpeg";
-import imgCinnamonNutella from "@/assets/dessert-cinnamon-nutella.jpeg";
-import imgCinnamonBiscoff from "@/assets/dessert-cinnamon-biscoff.jpeg";
-
-import imgCakeVanilla from "@/assets/dessert-cake-vanilla.jpeg";
-import imgCakeChocolate from "@/assets/dessert-cake-chocolate.jpeg";
-import imgCakeDubai17Layer from "@/assets/Dubai17layerchocolatecak.jpeg";
 
 
-import imgTresLechesPistachio from "@/assets/dessert-tresleches-pistachio.jpeg";
-import imgTresLechesCoconut from "@/assets/dessert-tresleches-coconut.jpeg";
-import imgTresLechesPineapple from "@/assets/dessert-tresleches-pineapple.jpeg";
-import imgTresLechesMango from "@/assets/dessert-tresleches-mango.jpeg";
+
+
+
+
+
+
+
+
+
+
+
 
 export const desserts: Record<string, MenuItem[]> = {
   "Fruit Entremet": [
@@ -44,7 +25,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Silky strawberry mousse, compote center, almond sponge and glossy glaze.",
       price: 7.99,
-      image: imgFruitStrawberry,
+      image: "/assets/dessert-strawberry-fruit.jpeg",
       category: "Desserts",
       subCategory: "Fruit Entremet",
       heatLevel: 0,
@@ -59,7 +40,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Coconut panna cotta inside a crisp chocolate shell with coconut shards.",
       price: 7.99,
-      image: imgFruitCoconut,
+      image: "/assets/dessert-coconut-shell.jpeg",
       category: "Desserts",
       subCategory: "Fruit Entremet",
       heatLevel: 0,
@@ -74,7 +55,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Ripe mango mousse with tangy compote and delicate sponge layers.",
       price: 7.99,
-      image: imgFruitMango,
+      image: "/assets/dessert-mango-marvelous.jpeg",
       category: "Desserts",
       subCategory: "Fruit Entremet",
       heatLevel: 0,
@@ -89,7 +70,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Coffee mousse with dark ganache and coffee sponge layers.",
       price: 7.99,
-      image: imgFruitCoffee,
+      image: "/assets/dessert-coffee-bean-delight.jpeg",
       category: "Desserts",
       subCategory: "Fruit Entremet",
       heatLevel: 0,
@@ -104,7 +85,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Zesty orange mousse with almond sponge and a citrus glaze.",
       price: 7.99,
-      image: imgFruitOrange,
+      image: "/assets/dessert-orange-delight.jpeg",
       category: "Desserts",
       subCategory: "Fruit Entremet",
       heatLevel: 0,
@@ -122,7 +103,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Creamy cheesecake mixed with Oreo crumbs on a chocolate crust.",
       price: 7.99,
-      image: imgCheesecakeOreo,
+      image: "/assets/dessert-cheesecake-oreo.jpeg",
       category: "Desserts",
       subCategory: "Cheesecakes",
       heatLevel: 0,
@@ -137,7 +118,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Classic cheesecake swirled with fresh blueberry compote.",
       price: 6.99,
-      image: imgCheesecakeBlueberry,
+      image: "/assets/dessert-cheesecake-blueberry.jpeg",
       category: "Desserts",
       subCategory: "Cheesecakes",
       heatLevel: 0,
@@ -152,7 +133,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Smooth cheesecake layered with luscious mango purée.",
       price: 6.99,
-      image: imgCheesecakeMango,
+      image: "/assets/dessert-cheesecake-mango.jpeg",
       category: "Desserts",
       subCategory: "Cheesecakes",
       heatLevel: 0,
@@ -167,7 +148,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Rich cheesecake crowned with fresh strawberry compote.",
       price: 7.5,
-      image: imgCheesecakeStrawberry,
+      image: "/assets/dessert-cheesecake-strawberry.jpeg",
       category: "Desserts",
       subCategory: "Cheesecakes",
       heatLevel: 0,
@@ -182,7 +163,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Caramel-spiced cheesecake on a Biscoff cookie crust.",
       price: 6.99,
-      image: imgCheesecakeBiscoff,
+      image: "/assets/dessert-cheesecake-biscoff.jpeg",
       category: "Desserts",
       subCategory: "Cheesecakes",
       heatLevel: 0,
@@ -200,7 +181,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Mascarpone layered with mango-soaked ladyfingers.",
       price: 7.99,
-      image: imgTiramisuMango,
+      image: "/assets/dessert-tiramisu-mango.jpeg",
       category: "Desserts",
       subCategory: "Tiramisu",
       heatLevel: 0,
@@ -215,7 +196,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Chocolate-soaked ladyfingers with creamy mascarpone.",
       price: 8.99,
-      image: imgTiramisuChocolate,
+      image: "/assets/dessert-tiramisu-chocolate.jpeg",
       category: "Desserts",
       subCategory: "Tiramisu",
       heatLevel: 0,
@@ -230,7 +211,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Classic espresso-soaked ladyfingers with mascarpone layers.",
       price: 7.99,
-      image: imgTiramisuCoffee,
+      image: "/assets/dessert-tiramisu-coffee.jpeg",
       category: "Desserts",
       subCategory: "Tiramisu",
       heatLevel: 0,
@@ -245,7 +226,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Berry-soaked ladyfingers with mascarpone and blueberry compote.",
       price: 7.99,
-      image: imgTiramisuBlueberry,
+      image: "/assets/dessert-tiramisu-blueberry.jpeg",
       category: "Desserts",
       subCategory: "Tiramisu",
       heatLevel: 0,
@@ -264,7 +245,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Decadent dark chocolate brownie layered with pistachio.",
       price: 6.99,
-      image: imgBrowniePistachio,
+      image: "/assets/dessert-brownie-pistachio.jpeg",
       category: "Desserts",
       subCategory: "Brownies",
       heatLevel: 0,
@@ -282,7 +263,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Classic cinnamon roll with vanilla glaze.",
       price: 5.99,
-      image: imgCinnamonOriginal,
+      image: "/assets/dessert-cinnamon-original.jpeg",
       category: "Desserts",
       subCategory: "Cinnamon Rolls",
       heatLevel: 0,
@@ -297,7 +278,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Cinnamon roll filled with blueberry compote.",
       price: 5.75,
-      image: imgCinnamonBlueberry,
+      image: "/assets/dessert-cinnamon-blueberry.jpeg",
       category: "Desserts",
       subCategory: "Cinnamon Rolls",
       heatLevel: 0,
@@ -312,7 +293,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Cinnamon roll with creamy Nutella swirl.",
       price: 5.75,
-      image: imgCinnamonNutella,
+      image: "/assets/dessert-cinnamon-nutella.jpeg",
       category: "Desserts",
       subCategory: "Cinnamon Rolls",
       heatLevel: 0,
@@ -327,7 +308,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Cinnamon roll infused with Biscoff spread.",
       price: 5.75,
-      image: imgCinnamonBiscoff,
+      image: "/assets/dessert-cinnamon-biscoff.jpeg",
       category: "Desserts",
       subCategory: "Cinnamon Rolls",
       heatLevel: 0,
@@ -345,7 +326,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Moist vanilla cake portion (4x4).",
       price: 6.75,
-      image: imgCakeVanilla,
+      image: "/assets/dessert-cake-vanilla.jpeg",
       category: "Desserts",
       subCategory: "Cakes",
       heatLevel: 0,
@@ -360,7 +341,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Rich chocolate cake portion (4x4).",
       price: 6.99,
-      image: imgCakeChocolate,
+      image: "/assets/dessert-cake-chocolate.jpeg",
       category: "Desserts",
       subCategory: "Cakes",
       heatLevel: 0,
@@ -375,7 +356,7 @@ export const desserts: Record<string, MenuItem[]> = {
   description:
     "Dubai-style 17-layer chocolate cake enriched with dark Belgian chocolate ganache between every layer.",
   price: 8.50,
-  image: imgCakeDubai17Layer,
+  image: "/assets/Dubai17layerchocolatecak.jpeg",
   category: "Desserts",
   subCategory: "Cakes",
   heatLevel: 0,
@@ -396,7 +377,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Milk-soaked sponge with pistachio and cream.",
       price: 6.99,
-      image: imgTresLechesPistachio,
+      image: "/assets/dessert-tresleches-pistachio.jpeg",
       category: "Desserts",
       subCategory: "Tres Leches",
       heatLevel: 0,
@@ -411,7 +392,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Coconut tres leches with toasted coconut.",
       price: 6.99,
-      image: imgTresLechesCoconut,
+      image: "/assets/dessert-tresleches-coconut.jpeg",
       category: "Desserts",
       subCategory: "Tres Leches",
       heatLevel: 0,
@@ -426,7 +407,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Pineapple-infused tres leches for a tropical twist.",
       price: 6.79,
-      image: imgTresLechesPineapple,
+      image: "/assets/dessert-tresleches-pineapple.jpeg",
       category: "Desserts",
       subCategory: "Tres Leches",
       heatLevel: 0,
@@ -441,7 +422,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Mango tres leches layered with fresh mango.",
       price: 6.89,
-      image: imgTresLechesMango,
+      image: "/assets/dessert-tresleches-mango.jpeg",
       category: "Desserts",
       subCategory: "Tres Leches",
       heatLevel: 0,

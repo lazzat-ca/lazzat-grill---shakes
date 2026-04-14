@@ -65,7 +65,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       description:
         "A mix of seasonal veggies grilled to perfection, lightly seasoned.",
       price: 4.99,
-      image: imgGrilledVegetables,
+      image: "/assets/GRILLED-VEGETABLES.jpg",
       category: "Sides",
       subCategory: "Classic",
       heatLevel: 0,
@@ -84,7 +84,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       description:
         "Crunchy, tangy coleslaw with shredded cabbage, carrots, and a hint of vinegar.",
       price: 3.99,
-      image: imgColeslaw,
+      image: "/assets/COLESLAW.jpg",
       category: "Sides",
       subCategory: "Classic",
       heatLevel: 0,
@@ -103,7 +103,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       description:
         "Grilled corn with paprika and a bright finishing touch.",
       price: 4.99,
-      image: imgCornOnTheCob,
+      image: "/assets/CORN-ON-THE-CОB.jpg",
       category: "Sides",
       subCategory: "Classic",
       heatLevel: 1,
@@ -122,7 +122,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       description:
         "Fresh, mixed greens with a light vinaigrette dressing.",
       price: 3.99,
-      image: imgSideSalad,
+      image: "/assets/SIDE-SALAD.jpg",
       category: "Sides",
       subCategory: "Classic",
       heatLevel: 0,
@@ -142,7 +142,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       description:
         "Soft, pillowy naan brushed with melted butter. Warm, fragrant, and perfect for pairing with any dish.",
       price: 3.99,
-      image: imgButterNaan,
+      image: "/assets/Butter Naan.jpg",
       category: "Sides",
       subCategory: "Naan",
       heatLevel: 0,

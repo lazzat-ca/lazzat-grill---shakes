@@ -1,8 +1,6 @@
 import { MenuItem } from "./menu-types.js";
 
-import imgClassicDoner from "@/assets/classic-doner-supereme.jpg";
-import imgUltimateDoner from "@/assets/ultimate-flavor-doner.jpg";
-import imgLoadedDoner from "@/assets/loaded-delight-doner.jpg";
+
 
 export const donerItems: Record<string, MenuItem[]> = {
   "Döner": [
@@ -12,7 +10,7 @@ export const donerItems: Record<string, MenuItem[]> = {
       description:
         "Tender lamb döner layered with fresh lettuce, tomatoes, onions, and cucumbers, finished with bold BBQ and chili sauces. A timeless classic with rich flavor and perfect balance.",
       price: 13.99,
-      image: imgClassicDoner,
+      image: "/assets/classic-doner-supereme.jpg",
       category: "Döner",
       subCategory: "Classic",
       heatLevel: 2,
@@ -30,7 +28,7 @@ export const donerItems: Record<string, MenuItem[]> = {
       description:
         "Juicy lamb döner stacked with fresh greens and loaded with BBQ, spicy garlic-style chili, sriracha, and jalapeño chipotle sauces. Big flavors, bold heat, and a seriously satisfying finish.",
       price: 15.99,
-      image: imgUltimateDoner,
+      image: "/assets/ultimate-flavor-doner.jpg",
       category: "Döner",
       subCategory: "Ultimate",
       heatLevel: 3,
@@ -48,7 +46,7 @@ export const donerItems: Record<string, MenuItem[]> = {
       description:
         "Juicy lamb döner loaded with fresh greens and generously drizzled BBQ, chipotle, sriracha, and jalapeño sauces for a bold, smoky-spicy kick. Packed in warm toasted pita for a rich, satisfying bite.",
       price: 14.99,
-      image: imgLoadedDoner,
+      image: "/assets/loaded-delight-doner.jpg",
       category: "Döner",
       subCategory: "Loaded",
       heatLevel: 3,

@@ -1,8 +1,6 @@
 import { MenuItem } from "./menu-types.js";
 
-import imgBBQSteakWrap from "@/assets/bbq-steak-wrap.531.jpeg";
-import imgBBQVeggieWrap from "@/assets/bbq-veggie-wrap.370.jpeg";
-import imgSmokedChickenWrap from "@/assets/smoked-chicken-wrap.742.jpeg";
+
 
 export const wrapsItems: Record<string, MenuItem[]> = {
   Classic: [
@@ -12,7 +10,7 @@ export const wrapsItems: Record<string, MenuItem[]> = {
       description:
         "Tender grilled steak slices wrapped with fresh greens and drizzled in rich, smoky BBQ sauce for deep, bold flavor. Served in a warm toasted wrap for a hearty, satisfying bite.",
       price: 12.99,
-      image: imgBBQSteakWrap,
+      image: "/assets/bbq-steak-wrap.531.jpeg",
       category: "Wraps",
       subCategory: "Steak",
       heatLevel: 2,
@@ -30,7 +28,7 @@ export const wrapsItems: Record<string, MenuItem[]> = {
       description:
         "A colorful mix of grilled vegetables wrapped with fresh greens and coated in smoky BBQ sauce. Light, flavorful, and perfectly balanced in a warm toasted wrap.",
       price: 11.99,
-      image: imgBBQVeggieWrap,
+      image: "/assets/bbq-veggie-wrap.370.jpeg",
       category: "Wraps",
       subCategory: "Veggie",
       heatLevel: 1,
@@ -48,7 +46,7 @@ export const wrapsItems: Record<string, MenuItem[]> = {
       description:
         "Juicy smoked chicken wrapped with crisp fresh vegetables and bold sauces for a rich, savory taste. Finished in a warm toasted wrap for maximum flavor and comfort.",
       price: 12.99,
-      image: imgSmokedChickenWrap,
+      image: "/assets/smoked-chicken-wrap.742.jpeg",
       category: "Wraps",
       subCategory: "Chicken",
       heatLevel: 2,

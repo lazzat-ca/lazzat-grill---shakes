@@ -2,13 +2,7 @@
 import { MenuItem } from "./menu-types.js";
 
 /* IMAGE IMPORTS */
-import imgChickenSkewers from "@/assets/chicken-skewers.jpeg";
-import imgLambSkewers from "@/assets/lamb-skewers.jpeg";
-import imgSalmonTikka from "@/assets/salmon-tikka.jpeg";
-import imgChickenSeekh from "@/assets/chicken-seekh.jpeg";
-import imgLambSeekh from "@/assets/lamb-seekh.jpeg";
-import imgLambChops from "@/assets/lamb-chops.jpeg";
-import imgPaneerTikka from "@/assets/paneer-tikka.jpg";
+
 
 export const grillsAndSkewers: Record<string, MenuItem[]> = {
   Chicken: [
@@ -18,7 +12,7 @@ export const grillsAndSkewers: Record<string, MenuItem[]> = {
       description:
         "Tender chicken skewers marinated with house spices and grilled over charcoal.",
       price: 12.99,
-      image: imgChickenSkewers,
+      image: "/assets/chicken-skewers.jpeg",
       category: "Grills & Skewers",
       subCategory: "Chicken",
       heatLevel: 3,
@@ -39,7 +33,7 @@ export const grillsAndSkewers: Record<string, MenuItem[]> = {
       description:
         "Hand-pressed chicken seekh seasoned with aromatic spices and grilled.",
       price: 13.99,
-      image: imgChickenSeekh,
+      image: "/assets/chicken-seekh.jpeg",
       category: "Grills & Skewers",
       subCategory: "Seekh",
       heatLevel: 4,
@@ -62,7 +56,7 @@ export const grillsAndSkewers: Record<string, MenuItem[]> = {
       description:
         "Minced lamb skewers seasoned with traditional spices and charred to perfection.",
       price: 15.99,
-      image: imgLambSkewers,
+      image: "/assets/lamb-skewers.jpeg",
       category: "Grills & Skewers",
       subCategory: "Lamb",
       heatLevel: 4,
@@ -82,7 +76,7 @@ export const grillsAndSkewers: Record<string, MenuItem[]> = {
       description:
         "Juicy lamb seekh infused with spices and charred over coals.",
       price: 15.99,
-      image: imgLambSeekh,
+      image: "/assets/lamb-seekh.jpeg",
       category: "Grills & Skewers",
       subCategory: "Seekh",
       heatLevel: 5,
@@ -101,7 +95,7 @@ export const grillsAndSkewers: Record<string, MenuItem[]> = {
       description:
         "Premium lamb chops marinated and grilled to medium-rare perfection.",
       price: 22.99,
-      image: imgLambChops,
+      image: "/assets/lamb-chops.jpeg",
       category: "Grills & Skewers",
       subCategory: "Lamb Chops",
       heatLevel: 3,
@@ -123,7 +117,7 @@ export const grillsAndSkewers: Record<string, MenuItem[]> = {
       description:
         "Chunks of salmon marinated in delicate spices and grilled for a smoky finish.",
       price: 17.99,
-      image: imgSalmonTikka,
+      image: "/assets/salmon-tikka.jpeg",
       category: "Grills & Skewers",
       subCategory: "Salmon",
       heatLevel: 2,
@@ -145,7 +139,7 @@ export const grillsAndSkewers: Record<string, MenuItem[]> = {
       description:
         "Tender cubes of fresh paneer, marinated in aromatic spices and char-grilled to smoky perfection. Finished with your choice of Lazzat’s signature sauce for a bold, irresistible kick. A vegetarian favorite elevated to a bold, indulgent, and unforgettable experience.",
       price: 13.99,
-      image: imgPaneerTikka,
+      image: "/assets/paneer-tikka.jpg",
       category: "Grills & Skewers",
       subCategory: "Vegetarian",
       heatLevel: 3,

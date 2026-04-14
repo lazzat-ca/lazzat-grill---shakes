@@ -62,7 +62,7 @@ export const sauces: SauceItem[] = [
     level: 7,
     description:
       "Chipotle, Jalapeno, Fresh Garlic, Sriracha",
-    image: imgJalapenoChipotle,
+    image: "/assets/jalapeno-chipotle-sauce.jpeg",
     allergens: [], // chili-based
   },
   {
@@ -70,7 +70,7 @@ export const sauces: SauceItem[] = [
     level: 8,
     description:
       "Tomato Ketchup, Brown Sugar, Soya Sauce, Hot Sauce, Garlic Powder",
-    image: imgBBQ,
+    image: "/assets/bbq-sauce.jpeg",
     allergens: ["soy"], // soya sauce
   },
 ];

@@ -2,8 +2,7 @@
 import { MenuItem } from "./menu-types.js";
 
 /* IMAGE IMPORTS */
-import imgShakeMango from "@/assets/shake-mango.jpeg";
-import imgJuiceMintLemonade from "@/assets/juice-mint-lemonade.jpeg";
+
 
 export const shakesAndJuices: Record<string, MenuItem[]> = {
   Shakes: [
@@ -13,7 +12,7 @@ export const shakesAndJuices: Record<string, MenuItem[]> = {
       description:
         "Fresh Alphonso mangoes blended with creamy milk and a hint of cardamom.",
       price: 11.99,
-      image: imgShakeMango,
+      image: "/assets/shake-mango.jpeg",
       category: "Shakes & Juices",
       subCategory: "Shakes",
       heatLevel: 0,
@@ -31,7 +30,7 @@ export const shakesAndJuices: Record<string, MenuItem[]> = {
       description:
         "Refreshing lemonade with fresh mint leaves and a touch of honey.",
       price: 7.99,
-      image: imgJuiceMintLemonade,
+      image: "/assets/juice-mint-lemonade.jpeg",
       category: "Shakes & Juices",
       subCategory: "Juices",
       heatLevel: 0,
