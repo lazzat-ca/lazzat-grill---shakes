@@ -6,7 +6,7 @@ import lazzatSauceBranding from "@/assets/lazzat-sauce-branding-shot.jpeg";
 import lazzatExterior from "@/assets/lazzat-exterior.jpeg";
 import lazzatWallDesign from "@/assets/Lazzat-wall-Design.jpg";
 import { HealthyPromise } from "@/components/home/HealthyPromise";
-import { menuItemsFlat } from "@/lib/menu-data";
+
 
 const About = () => {
   return (

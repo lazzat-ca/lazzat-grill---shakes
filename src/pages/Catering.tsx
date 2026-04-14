@@ -17,7 +17,7 @@ import { ChevronRight, ChevronLeft, Calendar } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { branchLocations } from "@/lib/locations-data";
-import { menuItemsFlat } from "@/lib/menu-data";
+
 import { sauces } from "@/lib/sauces-data";
 import type { MenuItem } from "@/lib/menu-types";
 import { toast } from "sonner";

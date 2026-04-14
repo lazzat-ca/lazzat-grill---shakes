@@ -133,9 +133,18 @@ const AdminMenu = () => {
                 <tr key={item.id} className="border-b border-primary/10 hover:bg-white/5">
                   <td className="px-3 py-2">
                     {item.image ? (
-                      <img src={item.image} alt={item.image_alt || item.name} className="h-10 w-14 object-cover rounded" />
+                      <img
+                        src={item.image}
+                        alt={item.image_alt || item.name}
+                        className="h-10 w-14 object-cover rounded"
+                        onError={e => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = "/assets/placeholder.svg";
+                          console.error("AdminMenu image failed to load:", item.name, item.image);
+                        }}
+                      />
                     ) : (
-                      <div className="h-10 w-14 rounded bg-white/5 border border-primary/10" />
+                      <img src="/assets/placeholder.svg" alt="No image" className="h-10 w-14 object-cover rounded opacity-60" />
                     )}
                   </td>
                   <td className="px-3 py-2 font-medium">{item.name}</td>

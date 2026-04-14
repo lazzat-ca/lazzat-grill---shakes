@@ -661,10 +661,16 @@ export default function MenuPage() {
                         >
                           {item.image && (
                             <div className="relative aspect-[4/3] overflow-hidden">
+                              {item.category === "Grills & Skewers" && console.log("Grills & Skewers image src:", item.name, item.image)}
                               <img
                                 src={item.image}
                                 alt={item.name}
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                onError={e => {
+                                  e.currentTarget.onerror = null;
+                                  e.currentTarget.src = "/assets/placeholder.svg";
+                                  console.error("Image failed to load:", item.name, item.image);
+                                }}
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                               <div className="absolute top-4 left-4 flex gap-2">
@@ -718,10 +724,16 @@ export default function MenuPage() {
                                 className="card-luxury cursor-pointer group focus:outline-none focus:ring-2 focus:ring-primary"
                               >
                                 <div className="relative aspect-[4/3] overflow-hidden">
+                                  {item.category === "Grills & Skewers" && console.log("Grills & Skewers image src:", item.name, item.image)}
                                   <img
                                     src={item.image}
                                     alt={item.name}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    onError={e => {
+                                      e.currentTarget.onerror = null;
+                                      e.currentTarget.src = "/assets/placeholder.svg";
+                                      console.error("Image failed to load:", item.name, item.image);
+                                    }}
                                   />
                                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                                   <div className="absolute top-4 left-4 flex gap-2">
@@ -790,11 +802,19 @@ export default function MenuPage() {
                         <div className="lg:col-span-2 h-60 lg:h-full lg:max-h-[75vh] bg-black/80 flex flex-col items-center justify-center px-2 py-3 relative">
                           <div className="relative w-full h-full rounded-xl border border-primary/20 overflow-hidden bg-black flex items-center justify-center">
                             {selectedItem?.image && (
-                              <img
-                                src={selectedItem.image}
-                                alt={selectedItem.name}
-                                className="w-full h-full object-contain"
-                              />
+                              <>
+                                {selectedItem?.category === "Grills & Skewers" && (console.log("Grills & Skewers modal image src:", selectedItem.name, selectedItem.image), null)}
+                                <img
+                                  src={selectedItem.image}
+                                  alt={selectedItem.name}
+                                  className="w-full h-full object-contain"
+                                  onError={e => {
+                                    e.currentTarget.onerror = null;
+                                    e.currentTarget.src = "/assets/placeholder.svg";
+                                    console.error("Modal image failed to load:", selectedItem.name, selectedItem.image);
+                                  }}
+                                />
+                              </>
                             )}
                             {/* Allergen Info Button - bottom center, floating, styled */}
                             <button

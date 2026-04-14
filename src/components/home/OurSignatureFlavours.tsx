@@ -8,7 +8,7 @@ import mediterranean from "@/assets/chicken-seekh.jpeg";
 import cleanProteins from "@/assets/sajji.jpeg";
 import vibrantSides from "@/assets/SIDE-SALAD.jpg";
 import { useNavigate } from "react-router-dom";
-import { menuItemsFlat } from "@/lib/menu-data";
+
 
 const signatureFlavors = [
   {

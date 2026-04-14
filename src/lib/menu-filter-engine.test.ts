@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { deriveDietary, filterMenuItems, hasSelectedDietaryFilter } from "@/lib/menu-filter-engine";
-import { menuItemsFlat } from "@/lib/menu-data";
+
 import type { FilterId } from "@/lib/menu-constants";
 import type { MenuItem } from "@/lib/menu-types";
 
