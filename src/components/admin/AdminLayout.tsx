@@ -23,12 +23,13 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
-  { label: "Menu Items", href: "/admin/menu", icon: UtensilsCrossed },
-  { label: "Sauces", href: "/admin/sauces", icon: FlaskConical },
-  { label: "Seasonings", href: "/admin/seasonings", icon: Sparkles },
+  { label: "Dashboard", href: "/admin", icon: LayoutDashboard, adminOnly: true },
+  { label: "Menu Items", href: "/admin/menu", icon: UtensilsCrossed, adminOnly: true },
+  { label: "Sauces", href: "/admin/sauces", icon: FlaskConical, adminOnly: true },
+  { label: "Seasonings", href: "/admin/seasonings", icon: Sparkles, adminOnly: true },
   { label: "Blog Posts", href: "/admin/blog", icon: BookOpen },
   { label: "Users", href: "/admin/users", icon: Users, adminOnly: true },
+  { label: "Account", href: "/admin/account", icon: Users }, // for email/password change
 ];
 
 export const AdminLayout = ({ children }: { children: ReactNode }) => {
@@ -67,9 +68,10 @@ export const AdminLayout = ({ children }: { children: ReactNode }) => {
     );
   }
 
-  const visibleNav = navItems.filter(
-    (item) => !item.adminOnly || isAdmin
-  );
+  // Only show Blog Posts and Account for seo_editor
+  const visibleNav = isAdmin
+    ? navItems
+    : navItems.filter((item) => item.label === "Blog Posts" || item.label === "Account");
 
   const handleSignOut = async () => {
     await signOut();
