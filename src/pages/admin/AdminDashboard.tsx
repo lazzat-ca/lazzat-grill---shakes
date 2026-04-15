@@ -5,16 +5,19 @@ import { UtensilsCrossed, FlaskConical, Sparkles, BookOpen, Users } from "lucide
 import { Link } from "react-router-dom";
 
 const cards = [
-  { label: "Menu Items", href: "/admin/menu", icon: UtensilsCrossed, desc: "Add, edit or remove menu items" },
-  { label: "Sauces", href: "/admin/sauces", icon: FlaskConical, desc: "Manage sauce offerings" },
-  { label: "Seasonings", href: "/admin/seasonings", icon: Sparkles, desc: "Manage spice & seasoning library" },
+  { label: "Menu Items", href: "/admin/menu", icon: UtensilsCrossed, desc: "Add, edit or remove menu items", adminOnly: true },
+  { label: "Sauces", href: "/admin/sauces", icon: FlaskConical, desc: "Manage sauce offerings", adminOnly: true },
+  { label: "Seasonings", href: "/admin/seasonings", icon: Sparkles, desc: "Manage spice & seasoning library", adminOnly: true },
   { label: "Blog Posts", href: "/admin/blog", icon: BookOpen, desc: "Create and publish blog content" },
   { label: "Users", href: "/admin/users", icon: Users, desc: "Manage admin users and roles", adminOnly: true },
 ];
 
 const AdminDashboard = () => {
-  const { profile, isAdmin } = useAuthContext();
-  const visibleCards = cards.filter((c) => !c.adminOnly || isAdmin);
+  const { profile, isAdmin, isSeoEditor } = useAuthContext();
+  // Only show blogs and account settings for seo_editor
+  const visibleCards = isAdmin
+    ? cards
+    : cards.filter((c) => c.label === "Blog Posts");
 
   return (
     <AdminLayout>

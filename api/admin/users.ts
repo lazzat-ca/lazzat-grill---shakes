@@ -36,7 +36,8 @@ export default {
 
       const email = typeof body.email === "string" ? body.email.trim() : "";
       const password = typeof body.password === "string" ? body.password : "";
-      const role = body.role === "admin" || body.role === "seo_editor" ? body.role : "seo_editor";
+      // Default to 'pending' role for new registrations
+      const role = body.role === "admin" || body.role === "seo_editor" ? body.role : "pending";
 
       if (!email || !password) {
         return json({ error: "email and password are required" }, 400, noStoreHeaders());
@@ -69,6 +70,7 @@ export default {
       return json({ ok: true, data: { id: newUser.user.id, email, role } }, 201, noStoreHeaders());
     }
 
+
     // PUT – update role
     if (method === "PUT") {
       if (!id) return json({ error: "id required" }, 400, noStoreHeaders());
@@ -86,6 +88,27 @@ export default {
         .single();
       if (error) return json({ error: error.message }, 400, noStoreHeaders());
       return json({ ok: true, data }, 200, noStoreHeaders());
+    }
+
+    // PATCH – update email or password
+    if (method === "PATCH") {
+      if (!id) return json({ error: "id required" }, 400, noStoreHeaders());
+      let body: { email?: string; password?: string };
+      try { body = (await request.json()) as { email?: string; password?: string }; } catch { return json({ error: "Invalid JSON" }, 400, noStoreHeaders()); }
+
+      // Update email
+      if (body.email) {
+        const { error: emailError } = await supabaseAdmin.auth.admin.updateUserById(id, { email: body.email });
+        if (emailError) return json({ error: emailError.message }, 400, noStoreHeaders());
+        await supabaseAdmin.from("profiles").update({ email: body.email }).eq("id", id);
+      }
+      // Update password
+      if (body.password) {
+        if (body.password.length < 8) return json({ error: "Password must be at least 8 characters" }, 400, noStoreHeaders());
+        const { error: passError } = await supabaseAdmin.auth.admin.updateUserById(id, { password: body.password });
+        if (passError) return json({ error: passError.message }, 400, noStoreHeaders());
+      }
+      return json({ ok: true }, 200, noStoreHeaders());
     }
 
     // DELETE – delete user

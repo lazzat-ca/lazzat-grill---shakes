@@ -89,6 +89,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     password: string
   ): Promise<{ error: string | null }> => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
+    // Always redirect to /admin after login
+    if (!error && typeof window !== "undefined") {
+      window.location.href = "/admin";
+    }
     return { error: error?.message ?? null };
   };
 
