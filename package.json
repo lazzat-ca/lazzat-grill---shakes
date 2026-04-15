@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/validate-menu-data.js && node scripts/generate-sitemap.js && vite build",
+    "build": "node scripts/validate-menu-data.js && vite build",
+    "postbuild": "node scripts/generate-sitemap.js",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "test": "vitest run",
