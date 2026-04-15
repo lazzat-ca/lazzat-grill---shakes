@@ -73,8 +73,7 @@ const isMenuItemArray = (value: unknown): value is MenuItem[] => {
 };
 
 const Catering = () => {
-  const [runtimeMenuItems, setRuntimeMenuItems] = useState<MenuItem[] | null>(null);
-  const effectiveMenuItems = useMemo(() => runtimeMenuItems ?? menuItemsFlat, [runtimeMenuItems]);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<CateringFormData>({
@@ -114,9 +113,9 @@ const Catering = () => {
           return;
         }
 
-        setRuntimeMenuItems(payload.data);
+        setMenuItems(payload.data);
       } catch {
-        // Keep local bundled data when API fetch fails.
+        // No fallback: do not show deleted items from static data.
       }
     };
 
@@ -129,10 +128,11 @@ const Catering = () => {
 
   const getSauceKey = (name: string) => `sauce-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 
+
   const categorizedSelectionItems = useMemo(() => {
     const grouped: Record<string, SelectableCateringItem[]> = {};
 
-    effectiveMenuItems.forEach((item) => {
+    menuItems.forEach((item) => {
       if (!grouped[item.category]) {
         grouped[item.category] = [];
       }

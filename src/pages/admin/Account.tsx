@@ -1,5 +1,6 @@
 // src/pages/admin/Account.tsx
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { useAuthContext } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,7 @@ import { X } from "lucide-react";
 const Account = () => {
   const { profile, user, request, loadProfile } = useAuthContext();
   const [showModal, setShowModal] = useState(true);
+  const navigate = useNavigate();
   const [email, setEmail] = useState(profile?.email || user?.email || "");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -39,7 +41,10 @@ const Account = () => {
     loadProfile && loadProfile();
   };
 
-  if (!showModal) return null;
+  if (!showModal) {
+    navigate("/admin");
+    return null;
+  }
 
   return (
     <AdminLayout>
