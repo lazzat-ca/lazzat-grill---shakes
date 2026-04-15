@@ -24,10 +24,9 @@ export const sidesItems: Record<string, MenuItem[]> = {
     {
       id: 200,
       name: "Crispy Fries",
-      description:
-        "Golden, crispy fries served with a sprinkle of seasoning.",
+      description: "Golden, crispy fries served with a sprinkle of seasoning.",
       price: 4.99,
-      image: imgCrispyFries,
+      image: "/assets/CRISPY-FRIES.jpg",
       category: "Sides",
       subCategory: "Classic",
       heatLevel: 0,
@@ -43,10 +42,9 @@ export const sidesItems: Record<string, MenuItem[]> = {
     {
       id: 201,
       name: "Garlic Bread",
-      description:
-        "Soft, buttery bread with a garlic infusion, perfect for dipping.",
+      description: "Soft, buttery bread with a garlic infusion, perfect for dipping.",
       price: 4.99,
-      image: imgGarlicBread,
+      image: "/assets/GARLIC-BREAD.jpg",
       category: "Sides",
       subCategory: "Classic",
       heatLevel: 0,
@@ -62,8 +60,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
     {
       id: 202,
       name: "Grilled Vegetables",
-      description:
-        "A mix of seasonal veggies grilled to perfection, lightly seasoned.",
+      description: "A mix of seasonal veggies grilled to perfection, lightly seasoned.",
       price: 4.99,
       image: "/assets/GRILLED-VEGETABLES.jpg",
       category: "Sides",
@@ -81,8 +78,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
     {
       id: 203,
       name: "Coleslaw",
-      description:
-        "Crunchy, tangy coleslaw with shredded cabbage, carrots, and a hint of vinegar.",
+      description: "Crunchy, tangy coleslaw with shredded cabbage, carrots, and a hint of vinegar.",
       price: 3.99,
       image: "/assets/COLESLAW.jpg",
       category: "Sides",
@@ -100,10 +96,9 @@ export const sidesItems: Record<string, MenuItem[]> = {
     {
       id: 204,
       name: "Corn on the Cob",
-      description:
-        "Grilled corn with paprika and a bright finishing touch.",
+      description: "Grilled corn with paprika and a bright finishing touch.",
       price: 4.99,
-      image: "/assets/CORN-ON-THE-CОB.jpg",
+      image: "/assets/CORN-ON-THE-CОВ.jpg",
       category: "Sides",
       subCategory: "Classic",
       heatLevel: 1,
@@ -119,8 +114,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
     {
       id: 205,
       name: "Side Salad",
-      description:
-        "Fresh, mixed greens with a light vinaigrette dressing.",
+      description: "Fresh, mixed greens with a light vinaigrette dressing.",
       price: 3.99,
       image: "/assets/SIDE-SALAD.jpg",
       category: "Sides",
@@ -139,8 +133,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
     {
       id: 210,
       name: "Classic Butter Naan",
-      description:
-        "Soft, pillowy naan brushed with melted butter. Warm, fragrant, and perfect for pairing with any dish.",
+      description: "Soft, pillowy naan brushed with melted butter. Warm, fragrant, and perfect for pairing with any dish.",
       price: 3.99,
       image: "/assets/Butter Naan.jpg",
       category: "Sides",
@@ -158,10 +151,9 @@ export const sidesItems: Record<string, MenuItem[]> = {
     {
       id: 211,
       name: "Cheese Stuffed Naan",
-      description:
-        "Soft naan filled with gooey, melted cheese. Rich, indulgent, and a crowd favorite with every bite.",
+      description: "Soft naan filled with gooey, melted cheese. Rich, indulgent, and a crowd favorite with every bite.",
       price: 3.99,
-      image: imgCheeseStuffedNaan,
+      image: "/assets/Cheese-Stuffed Naan.jpg",
       category: "Sides",
       subCategory: "Naan",
       heatLevel: 0,
@@ -177,10 +169,9 @@ export const sidesItems: Record<string, MenuItem[]> = {
     {
       id: 212,
       name: "Garlic & Herb Naan",
-      description:
-        "Freshly baked naan topped with minced garlic and aromatic herbs. Savory, flavorful, and irresistibly fragrant.",
+      description: "Freshly baked naan topped with minced garlic and aromatic herbs. Savory, flavorful, and irresistibly fragrant.",
       price: 3.99,
-      image: imgGarlicHerbNaan,
+      image: "/assets/Garlic & Herb Naan.jpg",
       category: "Sides",
       subCategory: "Naan",
       heatLevel: 0,
@@ -193,31 +184,29 @@ export const sidesItems: Record<string, MenuItem[]> = {
       sideType: "carb",
     },
         {
-      id: 213,
-      name: "Saffron Basmati Rice",
-      description:
-        "Fragrant long-grain basmati gently infused with saffron for a rich, aromatic base.",
-      price: 3.99,
-      image: imgSaffronBasmatiRice,
-      category: "Sides",
-      subCategory: "Classic",
-      heatLevel: 0,
-      saucePairings: [],
-      customizations: ["Extra Saffron", "Extra Butter"],
-      allergens: [],
-      dietary: ["vegetarian", "vegan", "gluten-free", "dairy-free", "nut-free"],
-      isNew: true,
-      isPopular: true,
-      sideType: "carb",
-    },
+          id: 213,
+          name: "Saffron Basmati Rice",
+          description: "Fragrant long-grain basmati gently infused with saffron for a rich, aromatic base.",
+          price: 3.99,
+          image: "/assets/saffron-basmati-rice.jpeg",
+          category: "Sides",
+          subCategory: "Classic",
+          heatLevel: 0,
+          saucePairings: [],
+          customizations: ["Extra Saffron", "Extra Butter"],
+          allergens: [],
+          dietary: ["vegetarian", "vegan", "gluten-free", "dairy-free", "nut-free"],
+          isNew: true,
+          isPopular: true,
+          sideType: "carb",
+        },
 
     {
       id: 214,
       name: "Butter Garlic Rice",
-      description:
-        "Fluffy rice tossed with butter and roasted garlic for a smooth, comforting finish.",
+      description: "Fluffy rice tossed with butter and roasted garlic for a smooth, comforting finish.",
       price: 3.99,
-      image: imgGarlicButterRice,
+      image: "/assets/garlic-butter-rice.jpeg",
       category: "Sides",
       subCategory: "Classic",
       heatLevel: 0,
@@ -233,10 +222,9 @@ export const sidesItems: Record<string, MenuItem[]> = {
     {
       id: 215,
       name: "Sweet Potato Fries",
-      description:
-        "A slightly sweet contrast to the smoky, savory BBQ flavors.",
+      description: "A slightly sweet contrast to the smoky, savory BBQ flavors.",
       price: 4.99,
-      image: imgSweetPotatoFries,
+      image: "/assets/sweet-potato-fries.jpeg",
       category: "Sides",
       subCategory: "Classic",
       heatLevel: 0,

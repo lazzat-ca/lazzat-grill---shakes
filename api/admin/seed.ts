@@ -8,6 +8,8 @@ import { spices } from "../../src/lib/spices-data.js";
 import { blogPosts } from "../../src/lib/blog-data.js";
 import { branchLocations } from "../../src/lib/locations-data.js";
 
+import { menuItemsFlat } from "../../src/lib/menu-data.js";
+
 export default {
   async fetch(request: Request) {
     if (request.method !== "POST") {

@@ -1,5 +1,14 @@
 // src/lib/menu-data.ts
+
 import { MenuItem } from "./menu-types.js";
+import { grillsAndSkewers } from "./grills-skewers-data.js";
+import { wrapsItems } from "./wraps-data.js";
+import { biryaniItems } from "./biryani-data.js";
+import { sajjiItems } from "./sajji-data.js";
+import { donerItems } from "./doner-data.js";
+import { desserts } from "./desserts-data.js";
+import { shakesAndJuices } from "./shakes-juices-data.js";
+import { sidesItems } from "./sides-data.js";
 
 
 
