@@ -30,6 +30,7 @@ const AdminSeasonings = lazy(() => import("./pages/admin/AdminSeasonings"));
 const AdminBlog = lazy(() => import("./pages/admin/AdminBlog"));
 const AdminBlogEditor = lazy(() => import("./pages/admin/AdminBlogEditor"));
 const AdminUsers = lazy(() => import("./pages/admin/AdminUsers"));
+const Account = lazy(() => import("./pages/admin/Account"));
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,7 @@ const App = () => (
               <Route path="/admin/blog" element={<AdminBlog />} />
               <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
               <Route path="/admin/users" element={<AdminUsers />} />
+              <Route path="/admin/account" element={<Account />} />
 
               {/* Catch-all */}
               <Route path="*" element={<NotFound />} />

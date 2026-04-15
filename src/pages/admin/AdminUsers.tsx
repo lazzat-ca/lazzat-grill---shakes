@@ -7,11 +7,29 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, Trash2, X, ShieldAlert, Pencil } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import type { DbProfile } from "@/lib/supabase";
+
+const AdminUsers = () => {
+  const { request } = useAdminApi();
+  const { isAdmin } = useAuthContext();
+  const navigate = useNavigate();
+
   const [editUser, setEditUser] = useState<DbProfile | null>(null);
   const [editEmail, setEditEmail] = useState("");
   const [editPassword, setEditPassword] = useState("");
   const [editLoading, setEditLoading] = useState(false);
   const [editError, setEditError] = useState<string | null>(null);
+  const [users, setUsers] = useState<DbProfile[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [showCreate, setShowCreate] = useState(false);
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [creating, setCreating] = useState(false);
+  const [createError, setCreateError] = useState<string | null>(null);
+  const pendingCount = users.filter((u) => u.role === "pending").length;
+
   const openEditModal = (user: DbProfile) => {
     setEditUser(user);
     setEditEmail(user.email);
@@ -47,28 +65,10 @@ import { Plus, Trash2, X, ShieldAlert, Pencil } from "lucide-react";
     closeEditModal();
     void load();
   };
-import { useNavigate } from "react-router-dom";
-import type { DbProfile } from "@/lib/supabase";
 
-const AdminUsers = () => {
-  const { request } = useAdminApi();
-  const { isAdmin } = useAuthContext();
-  const navigate = useNavigate();
-  const [users, setUsers] = useState<DbProfile[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [showCreate, setShowCreate] = useState(false);
-  const [newEmail, setNewEmail] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  // New users are always created as 'pending' now
-  const [creating, setCreating] = useState(false);
-  const [createError, setCreateError] = useState<string | null>(null);
-  const pendingCount = users.filter((u) => u.role === "pending").length;
 
-  // Guard: redirect non-admins
-  useEffect(() => {
-    if (!isAdmin) navigate("/admin");
-  }, [isAdmin, navigate]);
+
+
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -79,6 +79,22 @@ const AdminUsers = () => {
   }, [request]);
 
   useEffect(() => { void load(); }, [load]);
+
+  useEffect(() => {
+    if (!isAdmin) navigate("/admin");
+  }, [isAdmin, navigate]);
+
+  if (!isAdmin) {
+    return (
+      <AdminLayout>
+        <div className="min-h-[60vh] flex flex-col items-center justify-center">
+          <h1 className="font-serif text-2xl text-foreground mb-2">403 Forbidden</h1>
+          <p className="text-muted-foreground mb-4">You do not have access to this page.</p>
+        </div>
+      </AdminLayout>
+    );
+  }
+
 
   const handleCreate = async () => {
     setCreateError(null);
@@ -116,6 +132,18 @@ const AdminUsers = () => {
 
   if (!isAdmin) return null;
 
+  // Fallback error UI if something goes wrong
+  if (error) {
+    return (
+      <AdminLayout>
+        <div className="min-h-[60vh] flex flex-col items-center justify-center">
+          <h1 className="font-serif text-2xl text-red-400 mb-2">Error</h1>
+          <p className="text-muted-foreground mb-4">{error}</p>
+        </div>
+      </AdminLayout>
+    );
+  }
+
   return (
     <AdminLayout>
       <div className="flex items-center justify-between mb-6">
@@ -129,8 +157,6 @@ const AdminUsers = () => {
           <Plus size={16} className="mr-1" /> Add User
         </Button>
       </div>
-
-      {error && <p className="text-red-400 mb-4 text-sm">{error}</p>}
 
       <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground bg-amber-950/20 border border-amber-800/30 rounded-lg px-4 py-2">
         <ShieldAlert size={16} className="text-amber-500 shrink-0" />

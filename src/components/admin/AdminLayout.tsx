@@ -68,7 +68,7 @@ export const AdminLayout = ({ children }: { children: ReactNode }) => {
     );
   }
 
-  // Only show Blog Posts and Account for seo_editor
+  // Only show Blog Posts and Account for seo_editor (admins see all)
   const visibleNav = isAdmin
     ? navItems
     : navItems.filter((item) => item.label === "Blog Posts" || item.label === "Account");
