@@ -18,41 +18,43 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const updates = [
   {
     name: "Chicken Skewers",
-    image: "https://YOUR_SUPABASE_URL/storage/v1/object/public/menu-images/chicken-skewers.jpeg"
+    image: `${supabaseUrl}/storage/v1/object/public/menu-images/chicken-skewers.jpeg`
   },
   {
     name: "Chicken Seekh Kabab",
-    image: "https://YOUR_SUPABASE_URL/storage/v1/object/public/menu-images/chicken-seekh.jpeg"
+    image: `${supabaseUrl}/storage/v1/object/public/menu-images/chicken-seekh.jpeg`
   },
   {
     name: "Lamb Skewers",
-    image: "https://YOUR_SUPABASE_URL/storage/v1/object/public/menu-images/lamb-skewers.jpeg"
+    image: `${supabaseUrl}/storage/v1/object/public/menu-images/lamb-skewers.jpeg`
   },
   {
     name: "Lamb Seekh Kabab",
-    image: "https://YOUR_SUPABASE_URL/storage/v1/object/public/menu-images/lamb-seekh.jpeg"
+    image: `${supabaseUrl}/storage/v1/object/public/menu-images/lamb-seekh.jpeg`
   },
   {
     name: "Lamb Chops",
-    image: "https://YOUR_SUPABASE_URL/storage/v1/object/public/menu-images/lamb-chops.jpeg"
+    image: `${supabaseUrl}/storage/v1/object/public/menu-images/lamb-chops.jpeg`
   },
   {
     name: "Salmon Tikka",
-    image: "https://YOUR_SUPABASE_URL/storage/v1/object/public/menu-images/salmon-tikka.jpeg"
+    image: `${supabaseUrl}/storage/v1/object/public/menu-images/salmon-tikka.jpeg`
   }
 ];
 
 async function main() {
   for (const { name, image } of updates) {
+    // Evaluate template string for image
+    const resolvedImage = typeof image === 'function' ? image() : image.replace(/\$\{supabaseUrl\}/g, supabaseUrl);
     const { data, error } = await supabase
       .from('menu_items')
-      .update({ image })
+      .update({ image: resolvedImage })
       .eq('name', name)
       .eq('category', 'Grills & Skewers');
     if (error) {
       console.error(`❌ Failed to update ${name}:`, error);
     } else {
-      console.log(`✅ Updated ${name} with image: ${image}`);
+      console.log(`✅ Updated ${name} with image: ${resolvedImage}`);
     }
   }
   console.log('Bulk update complete.');
