@@ -1,10 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
-import lazzatFoodBox from "@/assets/lazzat-food-item-box.jpeg";
-import lazzatFoodBoxes from "@/assets/lazzat-food-boxes.jpeg";
-import lazzatMulticulture from "@/assets/lazzat-multiculture.jpeg";
-import lazzatSauceBranding from "@/assets/lazzat-sauce-branding-shot.jpeg";
-import lazzatExterior from "@/assets/lazzat-exterior.jpeg";
-import lazzatWallDesign from "@/assets/Lazzat-wall-Design.jpg";
+import { menuItemsFlat } from "../lib/menu-data";
 import { HealthyPromise } from "@/components/home/HealthyPromise";
 
 
@@ -30,7 +25,7 @@ const About = () => {
             <div>
               <div className="story-glow-image p-2 md:p-3 max-w-sm md:max-w-md mx-auto">
                 <img
-                  src={lazzatFoodBox}
+                  src={"/assets/lazzat-food-item-box.jpeg"}
                   alt="Lazzat food item box"
                   className="w-full rounded-lg gold-border relative z-10"
                 />
@@ -68,7 +63,7 @@ const About = () => {
             <div className="order-1 lg:order-2">
               <div className="story-glow-image p-2 md:p-3 max-w-sm md:max-w-md mx-auto">
                 <img
-                  src={lazzatMulticulture}
+                  src={"/assets/lazzat-multiculture.jpeg"}
                   alt="Lazzat multicultural food"
                   className="w-full rounded-lg gold-border relative z-10"
                 />
@@ -85,7 +80,7 @@ const About = () => {
             <div className="order-1 lg:order-1">
               <div className="story-glow-image p-2 md:p-3 max-w-sm md:max-w-md mx-auto">
                 <img
-                  src={lazzatFoodBoxes}
+                  src={"/assets/lazzat-food-boxes.jpeg"}
                   alt="Lazzat food boxes"
                   className="w-full rounded-lg gold-border relative z-10"
                 />
@@ -136,7 +131,7 @@ const About = () => {
             <div className="order-2 lg:order-2">
               <div className="story-glow-image p-2 md:p-3 max-w-sm md:max-w-md mx-auto">
                 <img
-                  src={lazzatSauceBranding}
+                  src={"/assets/lazzat-sauce-branding-shot.jpeg"}
                   alt="Lazzat sauce branding shot"
                   className="w-full rounded-lg gold-border relative z-10"
                 />
@@ -179,7 +174,7 @@ const About = () => {
             <div className="order-1 lg:order-1">
               <div className="story-glow-image p-2 md:p-3 max-w-sm md:max-w-md mx-auto">
                 <img
-                  src={lazzatExterior}
+                  src={"/assets/lazzat-exterior.jpeg"}
                   alt="Lazzat exterior"
                   className="w-full rounded-lg gold-border relative z-10"
                 />
