@@ -1,148 +1,58 @@
-// src/pages/admin/AdminUsers.tsx
 import { useState, useEffect, useCallback } from "react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { useAdminApi } from "@/hooks/useAdminApi";
 import { useAuthContext } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Plus, Trash2, X, ShieldAlert, Pencil } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import type { DbProfile } from "@/lib/supabase";
+
+
+type User = {
+  id: string;
+  email: string;
+  role: "admin" | "seo_editor" | "pending";
+  created_at: string;
+};
 
 const AdminUsers = () => {
-  const { request } = useAdminApi();
-  const { isAdmin } = useAuthContext();
-  const navigate = useNavigate();
-
-  const [editUser, setEditUser] = useState<DbProfile | null>(null);
-  const [editEmail, setEditEmail] = useState("");
-  const [editPassword, setEditPassword] = useState("");
-  const [editLoading, setEditLoading] = useState(false);
-  const [editError, setEditError] = useState<string | null>(null);
-  const [users, setUsers] = useState<DbProfile[]>([]);
+  const { session } = useAuthContext();
+  const api = useAdminApi();
+  const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showCreate, setShowCreate] = useState(false);
-  const [newEmail, setNewEmail] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [creating, setCreating] = useState(false);
-  const [createError, setCreateError] = useState<string | null>(null);
-  const pendingCount = users.filter((u) => u.role === "pending").length;
-
-  const openEditModal = (user: DbProfile) => {
-    setEditUser(user);
-    setEditEmail(user.email);
-    setEditPassword("");
-    setEditError(null);
-  };
-
-  const closeEditModal = () => {
-    setEditUser(null);
-    setEditEmail("");
-    setEditPassword("");
-    setEditError(null);
-  };
-
-  const handleEditSave = async () => {
-    if (!editUser) return;
-    setEditLoading(true);
-    setEditError(null);
-    const patch: { email?: string; password?: string } = {};
-    if (editEmail && editEmail !== editUser.email) patch.email = editEmail;
-    if (editPassword) patch.password = editPassword;
-    if (!patch.email && !patch.password) {
-      setEditError("No changes to save.");
-      setEditLoading(false);
-      return;
-    }
-    const { error: err } = await request(`/api/admin/users?id=${editUser.id}`, {
-      method: "PATCH",
-      body: JSON.stringify(patch),
-    });
-    setEditLoading(false);
-    if (err) { setEditError(err); return; }
-    closeEditModal();
-    void load();
-  };
-
-
-
-
-
-  const load = useCallback(async () => {
-    setLoading(true);
-    const { data, error: err } = await request<DbProfile[]>("/api/admin/users");
-    setLoading(false);
-    if (err) { setError(err); return; }
-    setUsers(data ?? []);
-  }, [request]);
-
-  useEffect(() => { void load(); }, [load]);
+  const [activeTab, setActiveTab] = useState<"pending" | "all">("pending");
+  const [pendingCount, setPendingCount] = useState(0);
 
   useEffect(() => {
-    if (!isAdmin) navigate("/admin");
-  }, [isAdmin, navigate]);
+    setLoading(true);
+    setError(null);
+    api.getUsers()
+      .then((data: User[]) => {
+        setUsers(data);
+        setPendingCount(data.filter((u) => u.role === "pending").length);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message || "Failed to load users");
+        setLoading(false);
+      });
+  }, []);
 
-  if (!isAdmin) {
-    return (
-      <AdminLayout>
-        <div className="min-h-[60vh] flex flex-col items-center justify-center">
-          <h1 className="font-serif text-2xl text-foreground mb-2">403 Forbidden</h1>
-          <p className="text-muted-foreground mb-4">You do not have access to this page.</p>
-        </div>
-      </AdminLayout>
-    );
-  }
+  const handleRoleChange = useCallback(async (userId: string, newRole: "admin" | "seo_editor") => {
+    await api.updateUserRole(userId, newRole);
+    setUsers((prev) => prev.map((u) => (u.id === userId ? { ...u, role: newRole } : u)));
+    setPendingCount((prev) => prev - 1);
+  }, [api]);
 
+  const handleDelete = useCallback(async (userId: string) => {
+    await api.deleteUser(userId);
+    setUsers((prev) => prev.filter((u) => u.id !== userId));
+  }, [api]);
 
-  const handleCreate = async () => {
-    setCreateError(null);
-    if (!newEmail.trim() || !newPassword) return;
-    setCreating(true);
-    // No role sent: backend will default to 'pending'
-    const { error: err } = await request("/api/admin/users", {
-      method: "POST",
-      body: JSON.stringify({ email: newEmail.trim(), password: newPassword }),
-    });
-    setCreating(false);
-    if (err) { setCreateError(err); return; }
-    setShowCreate(false);
-    setNewEmail("");
-    setNewPassword("");
-    void load();
+  const openEditModal = (user: User) => {
+    // Implement edit modal logic here
+    alert(`Edit user: ${user.email}`);
   };
-
-  const handleRoleChange = async (userId: string, role: "admin" | "seo_editor") => {
-    // Only allow approving pending users to admin or seo_editor
-    const { error: err } = await request(`/api/admin/users?id=${userId}`, {
-      method: "PUT",
-      body: JSON.stringify({ role }),
-    });
-    if (err) { alert(`Update failed: ${err}`); return; }
-    void load();
-  };
-
-  const handleDelete = async (userId: string) => {
-    if (!confirm("Delete this user? This cannot be undone.")) return;
-    const { error: err } = await request(`/api/admin/users?id=${userId}`, { method: "DELETE" });
-    if (err) { alert(`Delete failed: ${err}`); return; }
-    void load();
-  };
-
-  if (!isAdmin) return null;
-
-  // Fallback error UI if something goes wrong
-  if (error) {
-    return (
-      <AdminLayout>
-        <div className="min-h-[60vh] flex flex-col items-center justify-center">
-          <h1 className="font-serif text-2xl text-red-400 mb-2">Error</h1>
-          <p className="text-muted-foreground mb-4">{error}</p>
-        </div>
-      </AdminLayout>
-    );
-  }
 
   return (
     <AdminLayout>
@@ -158,6 +68,22 @@ const AdminUsers = () => {
         </Button>
       </div>
 
+      {/* Tabs */}
+      <div className="flex gap-2 mb-4">
+        <button
+          className={`px-4 py-2 rounded-t-lg border-b-2 font-semibold transition-colors ${activeTab === "pending" ? "border-amber-400 text-amber-300 bg-amber-950/40" : "border-transparent text-muted-foreground bg-transparent hover:bg-white/5"}`}
+          onClick={() => setActiveTab("pending")}
+        >
+          Pending Users
+        </button>
+        <button
+          className={`px-4 py-2 rounded-t-lg border-b-2 font-semibold transition-colors ${activeTab === "all" ? "border-primary text-primary bg-black/30" : "border-transparent text-muted-foreground bg-transparent hover:bg-white/5"}`}
+          onClick={() => setActiveTab("all")}
+        >
+          All Users
+        </button>
+      </div>
+
       <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground bg-amber-950/20 border border-amber-800/30 rounded-lg px-4 py-2">
         <ShieldAlert size={16} className="text-amber-500 shrink-0" />
         Admin-only section. Changes take effect immediately.
@@ -165,6 +91,8 @@ const AdminUsers = () => {
 
       {loading ? (
         <p className="text-muted-foreground">Loading…</p>
+      ) : error ? (
+        <div className="text-destructive px-4 py-3">{error}</div>
       ) : (
         <div className="overflow-x-auto rounded-xl border border-primary/20">
           <table className="w-full text-sm">
@@ -177,7 +105,10 @@ const AdminUsers = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((u) => (
+              {(activeTab === "pending"
+                ? users.filter((u) => u.role === "pending")
+                : users
+              ).map((u) => (
                 <tr
                   key={u.id}
                   className={
@@ -251,75 +182,16 @@ const AdminUsers = () => {
                       <Trash2 size={13} />
                     </Button>
                   </td>
-                      {/* Edit User Modal */}
-                      {editUser && (
-                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-                          <div className="w-full max-w-sm bg-background border border-primary/30 rounded-xl p-6 space-y-4">
-                            <div className="flex items-center justify-between">
-                              <h2 className="font-serif text-xl">Edit User</h2>
-                              <Button variant="ghost" size="icon" onClick={closeEditModal}><X size={16} /></Button>
-                            </div>
-                            <div className="space-y-3">
-                              <div className="space-y-1">
-                                <Label>Email</Label>
-                                <Input type="email" value={editEmail} onChange={e => setEditEmail(e.target.value)} />
-                              </div>
-                              <div className="space-y-1">
-                                <Label>New Password <span className="text-muted-foreground">(leave blank to keep unchanged)</span></Label>
-                                <Input type="password" value={editPassword} onChange={e => setEditPassword(e.target.value)} />
-                              </div>
-                              {editError && (
-                                <p className="text-sm text-red-400 bg-red-950/40 border border-red-800/30 rounded px-3 py-2">{editError}</p>
-                              )}
-                            </div>
-                            <div className="flex justify-end gap-2 pt-2 border-t border-primary/20">
-                              <Button variant="outline" onClick={closeEditModal}>Cancel</Button>
-                              <Button onClick={handleEditSave} disabled={editLoading || (!editEmail && !editPassword)}>
-                                {editLoading ? "Saving…" : "Save Changes"}
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
-                      )}
                 </tr>
               ))}
-              {users.length === 0 && (
+              {(activeTab === "pending"
+                ? users.filter((u) => u.role === "pending").length === 0
+                : users.length === 0
+              ) && (
                 <tr><td colSpan={4} className="px-4 py-8 text-center text-muted-foreground">No users found</td></tr>
               )}
             </tbody>
           </table>
-        </div>
-      )}
-
-      {/* Create modal */}
-      {showCreate && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-          <div className="w-full max-w-sm bg-background border border-primary/30 rounded-xl p-6 space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="font-serif text-xl">New User</h2>
-              <Button variant="ghost" size="icon" onClick={() => setShowCreate(false)}><X size={16} /></Button>
-            </div>
-            <div className="space-y-3">
-              <div className="space-y-1">
-                <Label>Email *</Label>
-                <Input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} />
-              </div>
-              <div className="space-y-1">
-                <Label>Password * (min 8 chars)</Label>
-                <Input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
-              </div>
-              {/* Role selection removed: new users are always pending */}
-              {createError && (
-                <p className="text-sm text-red-400 bg-red-950/40 border border-red-800/30 rounded px-3 py-2">{createError}</p>
-              )}
-            </div>
-            <div className="flex justify-end gap-2 pt-2 border-t border-primary/20">
-              <Button variant="outline" onClick={() => setShowCreate(false)}>Cancel</Button>
-              <Button onClick={handleCreate} disabled={creating || !newEmail || !newPassword}>
-                {creating ? "Creating…" : "Create"}
-              </Button>
-            </div>
-          </div>
         </div>
       )}
     </AdminLayout>

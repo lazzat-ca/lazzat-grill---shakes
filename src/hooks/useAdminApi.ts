@@ -40,5 +40,27 @@ export const useAdminApi = () => {
     [accessToken]
   );
 
-  return { request };
+  // Admin API helpers
+  const getUsers = useCallback(async () => {
+    const { data, error } = await request<any[]>("/api/admin/users");
+    if (error) throw new Error(error);
+    return data || [];
+  }, [request]);
+
+  const updateUserRole = useCallback(async (userId: string, newRole: "admin" | "seo_editor") => {
+    const { error } = await request(`/api/admin/users?id=${userId}`, {
+      method: "PUT",
+      body: JSON.stringify({ role: newRole }),
+    });
+    if (error) throw new Error(error);
+  }, [request]);
+
+  const deleteUser = useCallback(async (userId: string) => {
+    const { error } = await request(`/api/admin/users?id=${userId}`, {
+      method: "DELETE",
+    });
+    if (error) throw new Error(error);
+  }, [request]);
+
+  return { request, getUsers, updateUserRole, deleteUser };
 };
