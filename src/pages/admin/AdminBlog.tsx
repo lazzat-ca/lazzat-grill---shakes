@@ -30,8 +30,8 @@ const AdminBlog = () => {
   // Supabase Realtime subscription for blog posts
   useEffect(() => {
     const channel = supabase
-      .channel('public:blog')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'blog' }, payload => {
+      .channel('public:blog_posts')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'blog_posts' }, payload => {
         // Refetch blog posts on any change
         void load();
       })

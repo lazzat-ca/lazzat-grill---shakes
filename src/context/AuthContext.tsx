@@ -102,10 +102,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   ): Promise<{ error: string | null }> => {
     const { data, error } = await supabase.auth.signUp({ email, password });
     if (error) return { error: error?.message ?? null };
-    // Insert profile with role 'pending' if user created
+    // Wait for trigger to create profile, then fetch it
     const userId = data?.user?.id;
     if (userId) {
-      await supabase.from("profiles").insert({ id: userId, email, role: "pending" });
+      // Wait a moment for trigger to run
+      await new Promise((res) => setTimeout(res, 500));
+      await fetchProfile(userId);
     }
     return { error: null };
   };
