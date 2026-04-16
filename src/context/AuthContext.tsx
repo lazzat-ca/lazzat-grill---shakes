@@ -100,8 +100,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     email: string,
     password: string
   ): Promise<{ error: string | null }> => {
-    const { error } = await supabase.auth.signUp({ email, password });
-    return { error: error?.message ?? null };
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    if (error) return { error: error?.message ?? null };
+    // Insert profile with role 'pending' if user created
+    const userId = data?.user?.id;
+    if (userId) {
+      await supabase.from("profiles").insert({ id: userId, email, role: "pending" });
+    }
+    return { error: null };
   };
 
   const signOut = async () => {
