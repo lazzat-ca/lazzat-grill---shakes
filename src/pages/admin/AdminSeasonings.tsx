@@ -1,5 +1,7 @@
 // src/pages/admin/AdminSeasonings.tsx
 import { useState, useEffect, useCallback } from "react";
+import { supabase } from "@/lib/supabase";
+import { toast } from "@/components/ui/use-toast";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { useAdminApi } from "@/hooks/useAdminApi";
 import { Button } from "@/components/ui/button";
@@ -32,7 +34,23 @@ const AdminSeasonings = () => {
     setItems(data ?? []);
   }, [request]);
 
+
+  // Initial load
   useEffect(() => { void load(); }, [load]);
+
+  // Supabase Realtime subscription for seasonings
+  useEffect(() => {
+    const channel = supabase
+      .channel('public:seasonings')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'seasonings' }, payload => {
+        // Refetch seasonings on any change
+        void load();
+      })
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [load]);
 
   const handleSave = async () => {
     if (!editing) return;
@@ -45,14 +63,21 @@ const AdminSeasonings = () => {
     setSaving(false);
     if (err) { alert(`Save failed: ${err}`); return; }
     setEditing(null);
+    if (isNew) {
+      toast({ title: "Seasoning added", description: "A new seasoning was created successfully." });
+    }
     void load();
   };
 
   const handleDelete = async (id: number) => {
     if (!confirm("Delete this seasoning?")) return;
     const { error: err } = await request(`/api/admin/seasonings?id=${id}`, { method: "DELETE" });
-    if (err) { alert(`Delete failed: ${err}`); return; }
-    void load();
+    if (err) {
+      toast({ title: "Delete failed", description: err, variant: "destructive" });
+      return;
+    }
+    toast({ title: "Seasoning deleted", description: "The seasoning was removed successfully." });
+    // No need to call load() here, realtime will update
   };
 
   const setField = <K extends keyof DbSeasoning>(key: K, value: DbSeasoning[K]) =>

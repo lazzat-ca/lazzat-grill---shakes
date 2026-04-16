@@ -1,5 +1,7 @@
 // src/pages/admin/AdminBlog.tsx
 import { useState, useEffect, useCallback } from "react";
+import { supabase } from "@/lib/supabase";
+import { toast } from "@/components/ui/use-toast";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { useAdminApi } from "@/hooks/useAdminApi";
 import { Button } from "@/components/ui/button";
@@ -21,12 +23,45 @@ const AdminBlog = () => {
     setPosts(data ?? []);
   }, [request]);
 
+
+  // Initial load
   useEffect(() => { void load(); }, [load]);
+
+  // Supabase Realtime subscription for blog posts
+  useEffect(() => {
+    const channel = supabase
+      .channel('public:blog')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'blog' }, payload => {
+        // Refetch blog posts on any change
+        void load();
+      })
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [load]);
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this blog post?")) return;
     const { error: err } = await request(`/api/admin/blog?id=${id}`, { method: "DELETE" });
-    if (err) { alert(`Delete failed: ${err}`); return; }
+    if (err) {
+      toast({ title: "Delete failed", description: err, variant: "destructive" });
+      return;
+    }
+    toast({ title: "Blog post deleted", description: "The post was removed successfully." });
+    // No need to call load() here, realtime will update
+  };
+
+  // Show notification when a blog post is added (after save)
+  const handleSave = async (post: Partial<DbBlogPost>, isNew: boolean) => {
+    const { error: err } = await request(
+      isNew ? "/api/admin/blog" : `/api/admin/blog?id=${post.id}`,
+      { method: isNew ? "POST" : "PUT", body: JSON.stringify(post) }
+    );
+    if (err) { alert(`Save failed: ${err}`); return; }
+    if (isNew) {
+      toast({ title: "Blog post added", description: "A new blog post was created successfully." });
+    }
     void load();
   };
 

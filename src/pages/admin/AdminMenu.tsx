@@ -1,5 +1,7 @@
 // src/pages/admin/AdminMenu.tsx
 import { useState, useEffect, useCallback } from "react";
+import { supabase } from "@/lib/supabase";
+import { toast } from "@/components/ui/use-toast";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { useAdminApi } from "@/hooks/useAdminApi";
 import { Button } from "@/components/ui/button";
@@ -46,7 +48,23 @@ const AdminMenu = () => {
     setItems(data ?? []);
   }, [request]);
 
+
+  // Initial load
   useEffect(() => { void load(); }, [load]);
+
+  // Supabase Realtime subscription for menu_items
+  useEffect(() => {
+    const channel = supabase
+      .channel('public:menu_items')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'menu_items' }, payload => {
+        // Refetch menu items on any change
+        void load();
+      })
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [load]);
 
   const handleSave = async () => {
     if (!editing) return;
@@ -59,14 +77,21 @@ const AdminMenu = () => {
     setSaving(false);
     if (err) { alert(`Save failed: ${err}`); return; }
     setEditing(null);
+    if (isNew) {
+      toast({ title: "Menu item added", description: "A new menu item was created successfully." });
+    }
     void load();
   };
 
   const handleDelete = async (id: number) => {
     if (!confirm("Delete this menu item?")) return;
     const { error: err } = await request(`/api/admin/menu?id=${id}`, { method: "DELETE" });
-    if (err) { alert(`Delete failed: ${err}`); return; }
-    void load();
+    if (err) {
+      toast({ title: "Delete failed", description: err, variant: "destructive" });
+      return;
+    }
+    toast({ title: "Menu item deleted", description: "The item was removed successfully." });
+    // No need to call load() here, realtime will update
   };
 
   const filtered = items.filter((it) => {
