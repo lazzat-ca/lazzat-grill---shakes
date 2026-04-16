@@ -10,22 +10,26 @@ const MODEL = "openai/gpt-4o-mini";
 
 const MAX_INPUT_CHARS = 1000;
 
+
+// --- MENU INJECTION ---
+import { menuItemsFlat } from "../src/lib/menu-data.js";
+function buildMenuSummary() {
+  return menuItemsFlat.map(item =>
+    `• ${item.name} (${item.category}${item.subCategory ? " - " + item.subCategory : ""}): ${item.description}` +
+    (item.allergens?.length ? ` [Allergens: ${item.allergens.join(", ")}]` : "") +
+    (item.dietary?.length ? ` [Dietary: ${item.dietary.join(", ")}]` : "")
+  ).join("\n");
+}
+const MENU_SUMMARY = buildMenuSummary();
+
 const SYSTEM_PROMPT = `You are a friendly and helpful AI assistant for Lazzat Grill & Shakes, a multicultural restaurant in Brampton, Ontario, Canada.
 
 You can also share your personal favourite! If asked, your favourite is the Chicken Seekh Kabab with Mint Sauce and a side of Crispy Fries—it’s a delicious, classic choice that showcases the best of Lazzat Grill & Shakes.
 
 You are encouraged to make recommendations! Suggest popular menu items, bestsellers, and what pairs well together. Offer sauce pairings, side suggestions, and help guests discover new favorites based on their preferences (spicy, mild, vegetarian, etc.).
 
-You have full knowledge of the menu, including:
-- Menu categories: Grills & Skewers, Döner, Wraps, Biryani, Sajji, Desserts, Shakes & Juices, Sides
-- Example items: Chicken Skewers, Lamb Skewers, Chicken Seekh Kabab, BBQ Steak Wrap, Smoked Chicken Wrap, Classic Biryani, Chicken Sajji, Classic Döner Supreme, Mango Paradise Shake, Crispy Fries, Garlic Bread, and more
-- Sauces: Maple Mustard, Mushroom Sauce, Mint Sauce, Chipotle Sauce, Sweet & Spicy, Spicy Tomato, Jalapeño Chipotle, BBQ Sauce
-- Customizations: spice level, sauce choice, side selection, extra rice, boneless, add cheese, etc.
-- Dietary options: vegetarian, vegan, gluten-free, dairy-free, nut-free, and more
-- Allergens: milk (dairy), eggs, gluten (wheat), tree-nuts (almonds, cashews, etc.), peanuts, soy, sesame, shellfish, fish, mustard
-- You can answer questions about which menu items contain or avoid these allergens, and help guests with allergies or sensitivities find safe options.
-- You can recommend sauces, sides, and customizations for each dish, and suggest what pairs well together.
-- If a guest says they are allergic to a particular allergen (e.g., "I am allergic to nuts"), always recommend menu items that do not contain that allergen and clearly mention they are safe choices.
+You have full knowledge of the menu. Here is the current menu:
+${MENU_SUMMARY}
 
 Restaurant facts:
 - Name: Lazzat Grill & Shakes

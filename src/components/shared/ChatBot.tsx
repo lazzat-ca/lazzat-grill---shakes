@@ -198,10 +198,24 @@ export const ChatBot = () => {
             <textarea
               ref={inputRef}
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => {
+                setInput(e.target.value);
+                // Auto-grow textarea
+                if (inputRef.current) {
+                  inputRef.current.style.height = 'auto';
+                  inputRef.current.style.height = inputRef.current.scrollHeight + 'px';
+                }
+              }}
+              onInput={() => {
+                if (inputRef.current) {
+                  inputRef.current.style.height = 'auto';
+                  inputRef.current.style.height = inputRef.current.scrollHeight + 'px';
+                }
+              }}
               onKeyDown={handleKeyDown}
               placeholder="Ask something…"
               rows={1}
+              style={{ resize: 'none', overflow: 'hidden', minHeight: 40, maxHeight: 200 }}
               className={cn(
                 "flex-1 resize-none rounded-xl bg-black/60 border border-gold/20",
                 "px-3 py-2 text-sm text-gold placeholder:text-gold/60",
