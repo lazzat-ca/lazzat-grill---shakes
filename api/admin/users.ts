@@ -36,8 +36,8 @@ export default {
 
       const email = typeof body.email === "string" ? body.email.trim() : "";
       const password = typeof body.password === "string" ? body.password : "";
-      // Default to 'pending' role for new registrations
-      const role = body.role === "admin" || body.role === "seo_editor" ? body.role : "pending";
+      // Always set 'pending' role for new registrations
+      const role = "pending";
 
       if (!email || !password) {
         return json({ error: "email and password are required" }, 400, noStoreHeaders());
