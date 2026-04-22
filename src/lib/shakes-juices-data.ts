@@ -1,3 +1,13 @@
+// Heading for Build Your Own Blend section in Shakes & Juices
+export const buildYourOwnBlendHeading = "Build Your Own Blend";
+// Section info for Build Your Own Shake or Blend (for UI display)
+export const buildYourOwnInfo = [
+  'Build Your Own Shake or Blend:',
+  'Pick up to 3 fruits.',
+  'Shake (Milk+Cream): $6.99',
+  'Fruit Blend (No Dairy, Water Base): $7.49',
+  'No artificial flavours or colours. Blended fresh when you order.'
+];
 import { MenuItem } from "./menu-types.js";
 
 export const shakesAndJuices: Record<string, MenuItem[]> = {
@@ -128,7 +138,9 @@ export const shakesAndJuices: Record<string, MenuItem[]> = {
       subCategory: "Popular Fruit Blends",
       heatLevel: 0,
       saucePairings: [],
-      customizations: [],
+      customizations: [
+        "Build Your Own: Pick up to 3 fruits. Shake (Milk+Cream) $6.99 | Fruit Blend (No Dairy, Water Base) $7.49"
+      ],
       allergens: [],
       dietary: ["vegan", "dairy-free", "gluten-free", "nut-free"],
     },
@@ -142,7 +154,9 @@ export const shakesAndJuices: Record<string, MenuItem[]> = {
       subCategory: "Popular Fruit Blends",
       heatLevel: 0,
       saucePairings: [],
-      customizations: [],
+      customizations: [
+        "Build Your Own: Pick up to 3 fruits. Shake (Milk+Cream) $6.99 | Fruit Blend (No Dairy, Water Base) $7.49"
+      ],
       allergens: [],
       dietary: ["vegan", "dairy-free", "gluten-free", "nut-free"],
     },
@@ -156,25 +170,11 @@ export const shakesAndJuices: Record<string, MenuItem[]> = {
       subCategory: "Popular Fruit Blends",
       heatLevel: 0,
       saucePairings: [],
-      customizations: [],
+      customizations: [
+        "Build Your Own: Pick up to 3 fruits. Shake (Milk+Cream) $6.99 | Fruit Blend (No Dairy, Water Base) $7.49"
+      ],
       allergens: [],
       dietary: ["vegan", "dairy-free", "gluten-free", "nut-free"],
-    },
-    // Build Your Own (as a single menu item for UI, fruits as reference below)
-    {
-      id: 220,
-      name: "Build Your Own Shake or Blend",
-      description: "Pick up to 3 fruits. Shake (Milk+Cream) $6.99 | Fruit Blend (No Dairy, Water Base) $7.49",
-      price: 6.99,
-      image: "",
-      category: "Shakes & Juices",
-      subCategory: "Build Your Own",
-      heatLevel: 0,
-      saucePairings: [],
-      customizations: [],
-      allergens: ["milk"],
-      dietary: ["vegetarian", "gluten-free"],
-      isNew: true,
     },
     // Indulgent Flavors (Shake base only)
     {

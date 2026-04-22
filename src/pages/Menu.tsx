@@ -661,7 +661,8 @@ export default function MenuPage() {
                         >
                           {item.image && (
                             <div className="relative aspect-[4/3] overflow-hidden">
-                              {item.category === "Grills & Skewers" && console.log("Grills & Skewers image src:", item.name, item.image)}
+                              {/* Debug: Uncomment for troubleshooting images */}
+                              {/* {item.category === "Grills & Skewers" && console.log("Grills & Skewers image src:", item.name, item.image)} */}
                               <img
                                 src={item.image}
                                 alt={item.name}
@@ -724,7 +725,8 @@ export default function MenuPage() {
                                 className="card-luxury cursor-pointer group focus:outline-none focus:ring-2 focus:ring-primary"
                               >
                                 <div className="relative aspect-[4/3] overflow-hidden">
-                                  {item.category === "Grills & Skewers" && console.log("Grills & Skewers image src:", item.name, item.image)}
+                                  {/* Debug: Uncomment for troubleshooting images */}
+                                  {/* {item.category === "Grills & Skewers" && console.log("Grills & Skewers image src:", item.name, item.image)} */}
                                   <img
                                     src={item.image}
                                     alt={item.name}
@@ -803,7 +805,11 @@ export default function MenuPage() {
                           <div className="relative w-full h-full rounded-xl border border-primary/20 overflow-hidden bg-black flex items-center justify-center">
                             {selectedItem?.image && (
                               <>
-                                {selectedItem?.category === "Grills & Skewers" && (console.log("Grills & Skewers modal image src:", selectedItem.name, selectedItem.image), null)}
+                                {isMenuItem(selectedItem) && selectedItem.category === "Grills & Skewers" && (
+                                  /* Debug: Uncomment for troubleshooting images */
+                                  // console.log("Grills & Skewers modal image src:", selectedItem.name, selectedItem.image)
+                                  null
+                                )}
                                 <img
                                   src={selectedItem.image}
                                   alt={selectedItem.name}
