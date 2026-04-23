@@ -305,10 +305,10 @@ const Catering = () => {
             <p className="font-sans text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-2 mt-2">
               For urgent catering orders, contact us directly at{" "}
               <a
-                href="tel:+16471234567"
+                href="tel:+12894010002"
                 className="text-primary font-semibold hover:underline"
               >
-                +1 (647) 123-4567
+                +1 289-401-0002
               </a>
             </p>
           </div>

@@ -24,7 +24,7 @@ export const branchLocations: BranchLocation[] = [
     address: "Lazzat Grill and Shakes 43/49 - 11685 Mcvean Dr Brampton ON L6P 4N5",
     lat: 43.8065,
     lng: -79.6421,
-    phone: "+1 (212) 555-0100",
+    phone: "+1 289-401-0002",
     hours: {
       weekday: "11:00 AM - 11:00 PM",
       weekend: "11:00 AM - 12:00 AM",
@@ -38,7 +38,7 @@ export const branchLocations: BranchLocation[] = [
     address: "Lazzat Grill and Shakes 143 Clarence St, Unit 10 Brampton ON L6W 1T2",
     lat: 43.6847,
     lng: -79.7599,
-    phone: "+1 (234) 567-8200",
+    phone: "+1 289-401-0002",
     hours: {
       weekday: "10:00 AM - 10:00 PM",
       weekend: "10:00 AM - 11:00 PM",
