@@ -16,17 +16,22 @@ import { Helmet } from "react-helmet";
 import { Layout } from "@/components/layout/Layout";
 import { Flame, X, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  menuItemsFlat,
+} from "@/lib/menu-data";
+// ...removed sauces import
 import type { MenuItem } from "@/lib/menu-types";
+import { findSauce } from "@/lib/find-sauce";
+import { spices } from "@/lib/spices-data";
 import {
   filterMenuItems,
   hasSelectedDietaryFilter,
 } from "@/lib/menu-filter-engine";
+import { BuildYourShake } from "@/components/menu/BuildYourShake";
 
 type MenuApiResponse = {
   ok?: boolean;
   data?: unknown;
-  sauces?: unknown;
-  seasonings?: unknown;
   count?: unknown;
 };
 
@@ -45,20 +50,6 @@ const isMenuItemArray = (value: unknown): value is MenuItem[] => {
       typeof candidate.image === "string" &&
       Array.isArray(candidate.saucePairings) &&
       Array.isArray(candidate.customizations)
-    );
-  });
-};
-
-const isSauceItemArray = (value: unknown): value is SauceItem[] => {
-  if (!Array.isArray(value)) return false;
-
-  return value.every((item) => {
-    if (!item || typeof item !== "object") return false;
-    const candidate = item as Partial<SauceItem>;
-    return (
-      typeof candidate.name === "string" &&
-      typeof candidate.description === "string" &&
-      typeof candidate.level === "number"
     );
   });
 };
@@ -287,10 +278,7 @@ export default function MenuPage() {
   const navigate = useNavigate();
     const pageTitle = "Menu | Lazzat - Premium Grills, Biryani, Sajji & More";
     const pageDescription = "Explore Lazzat's full menu: BBQ, Tikka, Kabab, Biryani, Sajji, desserts, sides, shakes, and more. Fresh, halal, and luxurious dining.";
-  const [runtimeMenuItems, setRuntimeMenuItems] = useState<MenuItem[]>([]);
-  const [runtimeSauces, setRuntimeSauces] = useState<SauceItem[]>([]);
-  const [runtimeSeasonings, setRuntimeSeasonings] = useState<SauceItem[]>([]);
-  const [menuLoadError, setMenuLoadError] = useState<string | null>(null);
+  const [runtimeMenuItems, setRuntimeMenuItems] = useState<MenuItem[] | null>(null);
   // State declarations
     const [activeSidesTab, setActiveSidesTab] = useState<"carb" | "green">(() => parseInitialSideTab(location.search));
     const [activeCategory, setActiveCategory] = useState<string>(() => parseInitialCategory(location.search));
@@ -318,22 +306,17 @@ export default function MenuPage() {
         });
 
         if (!response.ok) {
-          setMenuLoadError("Failed to load menu data from database.");
           return;
         }
 
         const payload = (await response.json()) as MenuApiResponse;
         if (!isMenuItemArray(payload.data)) {
-          setMenuLoadError("Invalid menu data received from database.");
           return;
         }
 
         setRuntimeMenuItems(payload.data);
-        setRuntimeSauces(isSauceItemArray(payload.sauces) ? payload.sauces : []);
-        setRuntimeSeasonings(isSauceItemArray(payload.seasonings) ? payload.seasonings : []);
-        setMenuLoadError(null);
       } catch {
-        setMenuLoadError("Failed to load menu data from database.");
+        // Keep local bundled data when API fetch fails.
       }
     };
 
@@ -344,12 +327,7 @@ export default function MenuPage() {
     };
   }, []);
 
-  const effectiveMenuItems = useMemo(() => runtimeMenuItems, [runtimeMenuItems]);
-  const effectiveSauces = useMemo(() => runtimeSauces, [runtimeSauces]);
-  const effectiveSeasonings = useMemo(() => runtimeSeasonings, [runtimeSeasonings]);
-
-  const findSauce = (name: string) =>
-    effectiveSauces.find((s) => s.name.toLowerCase() === name.toLowerCase());
+  const effectiveMenuItems = useMemo(() => runtimeMenuItems ?? menuItemsFlat, [runtimeMenuItems]);
 
   // Helper to clear filters
   const clearFilters = () => setSelectedFilters(new Set());
@@ -643,13 +621,85 @@ export default function MenuPage() {
                     )}
                     {/* ...removed Sauces Filter Dropdown */}
                     {/* Grid for Sides or other single category */}
-                    <div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"}>
-                      {(activeCategory === "Sides"
-                        ? hasDietarySelection
-                          ? filteredItems
-                          : filteredItems.filter((item) => item.sideType === activeSidesTab)
-                        : filteredItems
-                      ).map((item) => (
+{activeCategory === "Shakes & Juices" ? (
+  (() => {
+    const shakeCard = (item: MenuItem) => (
+      <div
+        key={item.id}
+        tabIndex={0}
+        role="button"
+        aria-label={`View details for ${item.name}`}
+        onClick={() => setModalStack([item])}
+        onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setModalStack([item])}
+        className="card-luxury cursor-pointer group focus:outline-none focus:ring-2 focus:ring-primary"
+      >
+        {item.image && (
+          <div className="relative aspect-[4/3] overflow-hidden">
+            <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+            <div className="absolute top-4 left-4 flex gap-2">
+              {item.isNew && <span className="bg-primary text-primary-foreground text-xs px-3 py-1 rounded">New</span>}
+              {item.isPopular && <span className="bg-foreground text-background text-xs px-3 py-1 rounded">Popular</span>}
+            </div>
+          </div>
+        )}
+        <div className="p-6">
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="font-serif text-xl group-hover:text-primary transition-colors">{item.name}</h3>
+            {typeof item.price === "number" && (
+              <span className="text-primary font-semibold text-sm shrink-0 mt-1">${item.price.toFixed(2)}</span>
+            )}
+          </div>
+          <p className="text-sm text-muted-foreground line-clamp-2 mt-1">{item.description}</p>
+          <div className="mt-3 text-xs text-primary uppercase tracking-wider">{item.subCategory}</div>
+        </div>
+      </div>
+    );
+
+    const signatureItems = filteredItems.filter(item => item.subCategory === "Signature Shakes");
+    const blendItems = filteredItems.filter(item => item.subCategory === "Popular Fruit Blends");
+
+    return (
+      <div className="space-y-12">
+        {/* Signature Shakes */}
+        {signatureItems.length > 0 && (
+          <div>
+            <div className="mb-6">
+              <h3 className="font-serif text-2xl text-foreground">Signature Shakes</h3>
+              <div className="gold-divider w-10 mt-2" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {signatureItems.map(shakeCard)}
+            </div>
+          </div>
+        )}
+
+        {/* Build Your Own — between the two sections */}
+        <BuildYourShake />
+
+        {/* Popular Fruit Blends */}
+        {blendItems.length > 0 && (
+          <div>
+            <div className="mb-6">
+              <h3 className="font-serif text-2xl text-foreground">Popular Fruit Blends</h3>
+              <div className="gold-divider w-10 mt-2" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {blendItems.map(shakeCard)}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  })()
+) : (
+<div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"}>
+  {(activeCategory === "Sides"
+    ? hasDietarySelection
+      ? filteredItems
+      : filteredItems.filter((item) => item.sideType === activeSidesTab)
+    : filteredItems
+  ).map((item) => (
                         <div
                           key={item.id}
                           tabIndex={0}
@@ -661,17 +711,10 @@ export default function MenuPage() {
                         >
                           {item.image && (
                             <div className="relative aspect-[4/3] overflow-hidden">
-                              {/* Debug: Uncomment for troubleshooting images */}
-                              {/* {item.category === "Grills & Skewers" && console.log("Grills & Skewers image src:", item.name, item.image)} */}
                               <img
                                 src={item.image}
                                 alt={item.name}
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                onError={e => {
-                                  e.currentTarget.onerror = null;
-                                  e.currentTarget.src = "/assets/placeholder.svg";
-                                  console.error("Image failed to load:", item.name, item.image);
-                                }}
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                               <div className="absolute top-4 left-4 flex gap-2">
@@ -685,7 +728,14 @@ export default function MenuPage() {
                             </div>
                           )}
                           <div className="p-6">
-                            <h3 className="font-serif text-xl group-hover:text-primary transition-colors">{item.name}</h3>
+                            <div className="flex items-start justify-between gap-2">
+                              <h3 className="font-serif text-xl group-hover:text-primary transition-colors">{item.name}</h3>
+                              {typeof item.price === "number" && (
+                                <span className="text-primary font-semibold text-sm shrink-0 mt-1">
+                                  ${item.price.toFixed(2)}
+                                </span>
+                              )}
+                            </div>
                             <p className="text-sm text-muted-foreground line-clamp-2 mt-1">{item.description}</p>
                             <div className="mt-3 text-xs text-primary uppercase tracking-wider">
                               {item.category}
@@ -695,6 +745,7 @@ export default function MenuPage() {
                         </div>
                       ))}
                     </div>
+                    )}
                     {/* No items found */}
                     {filteredItems.length === 0 && (
                       <div className="text-center py-16">
@@ -725,17 +776,10 @@ export default function MenuPage() {
                                 className="card-luxury cursor-pointer group focus:outline-none focus:ring-2 focus:ring-primary"
                               >
                                 <div className="relative aspect-[4/3] overflow-hidden">
-                                  {/* Debug: Uncomment for troubleshooting images */}
-                                  {/* {item.category === "Grills & Skewers" && console.log("Grills & Skewers image src:", item.name, item.image)} */}
                                   <img
                                     src={item.image}
                                     alt={item.name}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                    onError={e => {
-                                      e.currentTarget.onerror = null;
-                                      e.currentTarget.src = "/assets/placeholder.svg";
-                                      console.error("Image failed to load:", item.name, item.image);
-                                    }}
                                   />
                                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                                   <div className="absolute top-4 left-4 flex gap-2">
@@ -748,7 +792,14 @@ export default function MenuPage() {
                                   </div>
                                 </div>
                                 <div className="p-6">
-                                  <h3 className="font-serif text-xl group-hover:text-primary transition-colors">{item.name}</h3>
+                                  <div className="flex items-start justify-between gap-2">
+                                    <h3 className="font-serif text-xl group-hover:text-primary transition-colors">{item.name}</h3>
+                                    {typeof item.price === "number" && (
+                                      <span className="text-primary font-semibold text-sm shrink-0 mt-1">
+                                        ${item.price.toFixed(2)}
+                                      </span>
+                                    )}
+                                  </div>
                                   <p className="text-sm text-muted-foreground line-clamp-2 mt-1">{item.description}</p>
                                   <div className="mt-3 text-xs text-primary uppercase tracking-wider">
                                     {item.category}
@@ -804,23 +855,11 @@ export default function MenuPage() {
                         <div className="lg:col-span-2 h-60 lg:h-full lg:max-h-[75vh] bg-black/80 flex flex-col items-center justify-center px-2 py-3 relative">
                           <div className="relative w-full h-full rounded-xl border border-primary/20 overflow-hidden bg-black flex items-center justify-center">
                             {selectedItem?.image && (
-                              <>
-                                {isMenuItem(selectedItem) && selectedItem.category === "Grills & Skewers" && (
-                                  /* Debug: Uncomment for troubleshooting images */
-                                  // console.log("Grills & Skewers modal image src:", selectedItem.name, selectedItem.image)
-                                  null
-                                )}
-                                <img
-                                  src={selectedItem.image}
-                                  alt={selectedItem.name}
-                                  className="w-full h-full object-contain"
-                                  onError={e => {
-                                    e.currentTarget.onerror = null;
-                                    e.currentTarget.src = "/assets/placeholder.svg";
-                                    console.error("Modal image failed to load:", selectedItem.name, selectedItem.image);
-                                  }}
-                                />
-                              </>
+                              <img
+                                src={selectedItem.image}
+                                alt={selectedItem.name}
+                                className="w-full h-full object-contain"
+                              />
                             )}
                             {/* Allergen Info Button - bottom center, floating, styled */}
                             <button
@@ -1015,14 +1054,14 @@ export default function MenuPage() {
                                   </div>
                                 )}
                                 {/* Seasonings Section */}
-                                {effectiveSeasonings.length > 0 && selectedItem && (() => {
+                                {spices && spices.length > 0 && selectedItem && (() => {
                                   // Show for Sides (not rice/naan), Grills & Skewers, Döner, Wraps
                                   const cat = selectedItem.category;
                                   const name = selectedItem.name.toLowerCase();
                                   const isRice = name.includes("rice");
                                   const isNaan = name.includes("naan");
                                   const isColeslaw = name.includes("coleslaw");
-                                  // Show for all menu items that can support seasonings (not rice, naan, desserts, shakes)
+                                  // Show for all menu items that can support spices (not rice, naan, desserts, shakes)
                                   const excludedCategories = ["Desserts", "Shakes & Juices", "Biryani", "Sajji"];
                                   const showSeasonings =
                                     !excludedCategories.includes(cat) &&
@@ -1030,32 +1069,32 @@ export default function MenuPage() {
                                     !isNaan;
                                   if (!showSeasonings) return null;
                                   const selectedSeasonings = isColeslaw
-                                    ? effectiveSeasonings.filter(s => ["Dried Parsley", "Dried Lemon Peel", "Lemon Zest"].includes(s.name))
+                                    ? spices.filter(s => ["Dried Parsley", "Dried Lemon Peel", "Lemon Zest"].includes(s.name))
                                     : cat === "Sides"
                                       ? name.includes("fries")
-                                        ? effectiveSeasonings.filter(s => [
+                                        ? spices.filter(s => [
                                             "Crushed Red Chilli", "Smoked Paprika", "Cracked Black Pepper", "Mustard Powder", "Dried Parsley"
                                           ].includes(s.name))
                                         : name.includes("corn")
-                                          ? effectiveSeasonings.filter(s => [
+                                          ? spices.filter(s => [
                                               "Crushed Red Chilli", "Smoked Paprika", "Dried Parsley", "Lemon Zest"
                                             ].includes(s.name))
                                           : name.includes("salad") || name.includes("vegetable")
-                                            ? effectiveSeasonings.filter(s => ["Dried Parsley", "Lemon Zest", "Dried Lemon Peel"].includes(s.name))
-                                            : effectiveSeasonings.filter(s => s.level <= 3).slice(0, 3)
+                                            ? spices.filter(s => ["Dried Parsley", "Lemon Zest", "Dried Lemon Peel"].includes(s.name))
+                                            : spices.filter(s => s.level <= 3).slice(0, 3)
                                       : cat === "Grills & Skewers"
-                                        ? effectiveSeasonings.filter(s => [
+                                        ? spices.filter(s => [
                                             "Crushed Red Chilli", "Korean Chilli Flakes", "Smoked Paprika", "Coriander Seed Powder", "Toasted Cumin", "Dried Parsley"
                                           ].includes(s.name))
                                         : cat === "Döner"
-                                          ? effectiveSeasonings.filter(s => [
+                                          ? spices.filter(s => [
                                               "Crushed Red Chilli", "Smoked Paprika", "Coriander Seed Powder", "Dried Parsley", "Mustard Powder"
                                             ].includes(s.name))
                                           : cat === "Wraps"
-                                            ? effectiveSeasonings.filter(s => [
+                                            ? spices.filter(s => [
                                                 "Crushed Red Chilli", "Smoked Paprika", "Dried Parsley", "Mustard Powder", "Cracked Black Pepper"
                                               ].includes(s.name))
-                                            : effectiveSeasonings.filter(s => s.level >= 2 && s.level <= 6).slice(0, 3);
+                                            : spices.filter(s => s.level >= 2 && s.level <= 6).slice(0, 3);
                                   if (selectedSeasonings.length === 0) return null;
                                   return (
                                     <div className="mb-6">
