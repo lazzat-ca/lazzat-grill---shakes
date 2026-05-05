@@ -1,17 +1,17 @@
 // src/lib/menu-data.ts
-import { MenuItem } from "./menu-types";
+import { MenuItem } from "./menu-types.js";
 
 import { proteinCubeSkewerPlatters } from "./protein-cube-skewer-platter-data.js";
-import { familyPlatters } from "./family-platters-data";
+import { familyPlatters } from "./family-platters-data.js";
 import { biryaniItems } from "./biryani-data.js";
-import { sajjiItems } from "./sajji-data";
-import { desserts } from "./desserts-data";
-import { shakesAndJuices } from "./shakes-juices-data";
-import { sidesItems } from "./sides-data";
-import { donerItems } from "./doner-data";
-import { wrapsItems } from "./wraps-data";
-import { kidsMenu } from "./kids-menu-data";
-import { combosMenu } from "./combos-menu-data";
+import { sajjiItems } from "./sajji-data.js";
+import { desserts } from "./desserts-data.js";
+import { shakesAndJuices } from "./shakes-juices-data.js";
+import { sidesItems } from "./sides-data.js";
+import { donerItems } from "./doner-data.js";
+import { wrapsItems } from "./wraps-data.js";
+import { kidsMenu } from "./kids-menu-data.js";
+import { combosMenu } from "./combos-menu-data.js";
 
 /* Grouped Menu data */
 export const menuItemsGrouped: Record<string, MenuItem[]> = {

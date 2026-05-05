@@ -1,10 +1,7 @@
 import imgRoastedPotato from "/assets/roasted-potato.jpg";
-// src/lib/sides-data.ts
 import { MenuItem } from "./menu-types.js";
 
-/* IMAGE IMPORTS */
 import imgCucumberTomato from "/assets/cucumber-tomato.jpeg";
-
 import imgPickledOnion from "/assets/pickled-onion.jpeg";
 import imgSweetCorn from "/assets/sweet-corn.jpeg";
 import imgLazzatBeanSalad from "/assets/lazzat-bean-salad.jpeg";

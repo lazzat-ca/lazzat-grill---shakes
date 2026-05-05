@@ -1,6 +1,5 @@
 import { MenuItem } from "./menu-types.js";
 
-// Only import images for the six required desserts
 import imgCheesecakeOreo from "/assets/dessert-cheesecake-oreo.jpeg";
 import imgCheesecakeMango from "/assets/dessert-cheesecake-mango.jpeg";
 import imgPistachioCheesecake from "/assets/pistachio-cheesecake.jpeg";
