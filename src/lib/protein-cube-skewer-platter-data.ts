@@ -1,9 +1,9 @@
 import { MenuItem } from "./menu-types.js";
-import imgChicken from "/assets/chicken.jpeg";
-import imgLamb from "/assets/lamb.jpeg";
-import imgPaneer from "/assets/paneer.jpeg";
-import imgGoat from "/assets/goat-cubes.jpeg";
-import imgSoya from "/assets/soya-chaap.jpeg";
+import imgChicken from "../assets/chicken.jpeg";
+import imgLamb from "../assets/lamb.jpeg";
+import imgPaneer from "../assets/paneer.jpeg";
+import imgGoat from "../assets/goat-cubes.jpeg";
+import imgSoya from "../assets/soya-chaap.jpeg";
 
 export const proteinCubeSkewerPlatters: MenuItem[] = [
   {

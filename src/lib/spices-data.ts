@@ -2,28 +2,28 @@
 import { SauceItem } from "./menu-types.js";
 
 /* IMAGE IMPORTS */
-import bayLeaf from "/assets/bay-leaf-powder.273.jpeg";
-import cinnamon from "/assets/cinnamon-powder.202.jpeg";
-import coriander from "/assets/coriander-seed-powder.410.jpeg";
-import blackPepper from "/assets/cracked-black-pepper.369.jpeg";
-import redChilli from "/assets/crushed-red-chilli.392.jpeg";
-import lemonPeel from "/assets/dried-lemon-peel.922.jpeg";
-import parsley from "/assets/dried-parsley.549.jpeg";
-import friedOnion from "/assets/fried-onion-powder.550.jpeg";
-import garlic from "/assets/garlic-powder.580.jpeg";
-import cardamom from "/assets/green-cardamom.216.jpeg";
-import koreanChilli from "/assets/korean-chilli-flakes.907.jpeg";
-import lemonZest from "/assets/lemon-zest.186.jpeg";
-import mustard from "/assets/mustard-powder.113.jpeg";
-import onion from "/assets/onion-powder.939.jpeg";
-import pinkSalt from "/assets/pink-salt.241.jpeg";
-import roastedGarlic from "/assets/roasted-garlic-flakes.431.jpeg";
-import paprika from "/assets/smoked-paprik.jpeg";
-import starAnise from "/assets/star-ainse.993.jpeg";
-import thyme from "/assets/thyme.521.jpeg";
-import cumin from "/assets/toasted-cumin.jpeg";
-import sesame from "/assets/toasted-seseame.201.jpeg";
-import whitePepper from "/assets/white-pepper.jpeg";
+import bayLeaf from "../assets/bay-leaf-powder.273.jpeg";
+import cinnamon from "../assets/cinnamon-powder.202.jpeg";
+import coriander from "../assets/coriander-seed-powder.410.jpeg";
+import blackPepper from "../assets/cracked-black-pepper.369.jpeg";
+import redChilli from "../assets/crushed-red-chilli.392.jpeg";
+import lemonPeel from "../assets/dried-lemon-peel.922.jpeg";
+import parsley from "../assets/dried-parsley.549.jpeg";
+import friedOnion from "../assets/fried-onion-powder.550.jpeg";
+import garlic from "../assets/garlic-powder.580.jpeg";
+import cardamom from "../assets/green-cardamom.216.jpeg";
+import koreanChilli from "../assets/korean-chilli-flakes.907.jpeg";
+import lemonZest from "../assets/lemon-zest.186.jpeg";
+import mustard from "../assets/mustard-powder.113.jpeg";
+import onion from "../assets/onion-powder.939.jpeg";
+import pinkSalt from "../assets/pink-salt.241.jpeg";
+import roastedGarlic from "../assets/roasted-garlic-flakes.431.jpeg";
+import paprika from "../assets/smoked-paprik.jpeg";
+import starAnise from "../assets/star-ainse.993.jpeg";
+import thyme from "../assets/thyme.521.jpeg";
+import cumin from "../assets/toasted-cumin.jpeg";
+import sesame from "../assets/toasted-seseame.201.jpeg";
+import whitePepper from "../assets/white-pepper.jpeg";
 
 export const spices: SauceItem[] = [
   {

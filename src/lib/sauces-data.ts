@@ -2,14 +2,14 @@
 import { SauceItem } from "./menu-types.js";
 
 /* IMAGE IMPORTS */
-import imgSweetSpicy from "/assets/sweet-spicy-sauce.jpeg";
-import imgBBQ from "/assets/bbq-sauce.jpeg";
-import imgChipotle from "/assets/chipotle-sauce.jpeg";
-import imgJalapenoChipotle from "/assets/jalapeno-chipotle-sauce.jpeg";
-import imgMapleMustard from "/assets/maple-mustard-sauce.jpeg";
-import imgMint from "/assets/mint-sauce.jpeg";
-import imgMushroom from "/assets/mushroom-sauce.jpeg";
-import imgSpicyTomato from "/assets/spicy-tomato-sauce.jpeg";
+import imgSweetSpicy from "../assets/sweet-spicy-sauce.jpeg";
+import imgBBQ from "../assets/bbq-sauce.jpeg";
+import imgChipotle from "../assets/chipotle-sauce.jpeg";
+import imgJalapenoChipotle from "../assets/jalapeno-chipotle-sauce.jpeg";
+import imgMapleMustard from "../assets/maple-mustard-sauce.jpeg";
+import imgMint from "../assets/mint-sauce.jpeg";
+import imgMushroom from "../assets/mushroom-sauce.jpeg";
+import imgSpicyTomato from "../assets/spicy-tomato-sauce.jpeg";
 
 export const sauces: SauceItem[] = [
   {

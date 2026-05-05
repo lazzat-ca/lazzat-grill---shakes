@@ -1,8 +1,8 @@
-import imgVegCombo from "/assets/Veg-Combo.jpeg";
+import imgVegCombo from "../assets/Veg-Combo.jpeg";
 import { MenuItem } from "./menu-types.js";
-import imgChickenCombo from "/assets/chicken-combo.jpeg";
-import imgPremiumCombo from "/assets/premium-combo.jpeg";
-import imgKidsCombo from "/assets/kids-combo.jpeg";
+import imgChickenCombo from "../assets/chicken-combo.jpeg";
+import imgPremiumCombo from "../assets/premium-combo.jpeg";
+import imgKidsCombo from "../assets/kids-combo.jpeg";
 
 export const combosMenu: MenuItem[] = [
   {
