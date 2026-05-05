@@ -8,12 +8,12 @@ import imgShakeCoconut from "/assets/shakes/Coconut-Shake.jpeg";
 import imgShakeAlmondDate from "/assets/shakes/Almond-Date-Shake.jpeg";
 
 /* IMAGE IMPORTS — Popular Fruit Blends */
-import imgBlendBlueLagoon from "/assets/blends/Blue-Lagoon.jpeg";
-import imgBlendTropical from "/assets/blends/Tropical-Blend.jpeg";
-import imgBlendBerryBurst from "/assets/blends/Berry-Burst-Blend.jpeg";
+import imgBlendBlueLagoon from "/assets/blends/blue-lagoon.jpeg";
+import imgBlendTropical from "/assets/blends/tropical-blend.jpeg";
+import imgBlendBerryBurst from "/assets/blends/berry-burst-blend.jpeg";
 import imgBlendSunrise from "/assets/blends/Sunrise-Blend.jpeg";
 import imgBlendWatermelon from "/assets/blends/Watermelon-Cooler.jpeg";
-import imgBlendGreen from "/assets/blends/Green-Blend.jpeg";
+import imgBlendGreen from "/assets/blends/green-blend.jpeg";
 
 export const shakesAndJuices: Record<string, MenuItem[]> = {
   "Shakes": [
