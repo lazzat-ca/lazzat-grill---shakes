@@ -71,7 +71,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <ScrollToTopButton />
 
       {/* Floating chatbot (excluded from admin routes) */}
-      <ChatBot />
+      {/* <ChatBot /> */}
     </div>
   );
 };

@@ -10,6 +10,7 @@ import { branchLocations } from "../../src/lib/locations-data.js";
 
 import { menuItemsFlat } from "../../src/lib/menu-data.js";
 
+
 export default {
   async fetch(request: Request) {
     if (request.method !== "POST") {
@@ -34,6 +35,8 @@ export default {
       }
     }
 
+
+    // 2. Seed menu items
     const menuRows = menuItemsFlat.map((item) => ({
       name: item.name,
       description: item.description,
@@ -99,6 +102,7 @@ export default {
       amenities: loc.amenities,
       is_active: true,
     }));
+
 
     // Clear then insert to keep DB as single source of truth.
     const [menuDel, sauceDel, seasoningDel, blogDel, locDel] = await Promise.all([

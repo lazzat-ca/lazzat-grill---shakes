@@ -14,7 +14,7 @@ import AllergenInfo from "@/components/shared/AllergenInfo";
 import type { SauceItem } from "../lib/menu-types";
 import { Helmet } from "react-helmet";
 import { Layout } from "@/components/layout/Layout";
-import { Flame, X, Filter, ChevronLeft, ChevronRight } from "lucide-react";
+import { Flame, X, Filter, ChevronLeft, ChevronRight, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   menuItemsFlat,
@@ -66,9 +66,13 @@ function isSauceItem(item: unknown): item is SauceItem {
 
 // Category headings data (needed by CategoryHeading component)
 const categoryHeadings: Record<string, { title: string; subtitle: string }> = {
-  "Grills & Skewers": {
-    title: "Grills & Skewers",
-    subtitle: "Charcoal grilled meats and skewers."
+  "Protein Cube Skewer Platter": {
+    title: "Protein Cube Skewer Platter",
+    subtitle: "Charcoal grilled protein cubes served with rice and salad."
+  },
+  "Family Platters": {
+    title: "Family Platters",
+    subtitle: "Whole and cut chicken platters for sharing."
   },
   "Döner": {
     title: "Döner",
@@ -90,9 +94,17 @@ const categoryHeadings: Record<string, { title: string; subtitle: string }> = {
     title: "Sajji",
     subtitle: "Traditional Sajji specialties."
   },
-  "Sides": {
-    title: "Sides",
-    subtitle: "Perfect accompaniments for your meal."
+  "Salads": {
+    title: "Salads",
+    subtitle: "Fresh, vibrant salads for every meal."
+  },
+  "Combos": {
+    title: "Combos",
+    subtitle: "Great value meal combinations."
+  },
+  "Kids Menu": {
+    title: "Kids Menu",
+    subtitle: "Tasty, kid-friendly meals and snacks."
   },
   "Shakes & Juices": {
     title: "Shakes & Juices",
@@ -280,7 +292,7 @@ export default function MenuPage() {
     const pageDescription = "Explore Lazzat's full menu: BBQ, Tikka, Kabab, Biryani, Sajji, desserts, sides, shakes, and more. Fresh, halal, and luxurious dining.";
   const [runtimeMenuItems, setRuntimeMenuItems] = useState<MenuItem[] | null>(null);
   // State declarations
-    const [activeSidesTab, setActiveSidesTab] = useState<"carb" | "green">(() => parseInitialSideTab(location.search));
+    // No tabs for salads
     const [activeCategory, setActiveCategory] = useState<string>(() => parseInitialCategory(location.search));
   // Modal stack: allows back navigation
   const [modalStack, setModalStack] = useState<(MenuItem | SauceItem | null)[]>([]);
@@ -359,7 +371,7 @@ export default function MenuPage() {
   };
 
   // Side catalog pulled from existing menu items
-  const sidesCatalog = effectiveMenuItems.filter((item) => item.category === "Sides");
+  const sidesCatalog = effectiveMenuItems.filter((item) => item.category === "Salads");
 
   // Find side details by name (case-insensitive)
   const findSide = (name: string) =>
@@ -367,7 +379,7 @@ export default function MenuPage() {
 
   // Fallback side pairings by category when an item does not define its own
   const defaultSidePairingsByCategory: Record<string, string[]> = {
-    "Grills & Skewers": [
+    "Protein Cube Skewer Platter": [
       "Crispy Fries",
       "Side Salad",
       "Classic Butter Naan",
@@ -390,13 +402,12 @@ export default function MenuPage() {
 
   const categories = [
     "All",
-    "Grills & Skewers",
-    "Döner",
-    "Wraps",
-    "Biryani",
-    "Sajji",
+    "Protein Cube Skewer Platter",
+    "Family Platters",
+    "Combos",
+    "Kids Menu",
+    "Salads",
     "Desserts",
-    "Sides",
     "Shakes & Juices",
   ];
 
@@ -421,11 +432,7 @@ export default function MenuPage() {
       params.delete("category");
     }
 
-    if (activeCategory === "Sides") {
-      params.set("side", activeSidesTab);
-    } else {
-      params.delete("side");
-    }
+    // No side tab param for salads
 
     const nextSearch = params.toString();
     const currentSearch = location.search.replace(/^\?/, "");
@@ -438,7 +445,7 @@ export default function MenuPage() {
         { replace: true }
       );
     }
-  }, [selectedFilters, activeCategory, activeSidesTab, location.pathname, location.search, navigate]);
+  }, [selectedFilters, activeCategory, location.pathname, location.search, navigate]);
 
   const filterCounts = useMemo(() => {
     const categoryItems =
@@ -585,6 +592,15 @@ export default function MenuPage() {
                       <Filter size={16} className="text-primary" />
                       Open Panel
                     </button>
+                    <a
+                      href="/allergenguide"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 bg-secondary/80 backdrop-blur px-5 py-2.5 text-sm font-medium rounded-full border border-primary/30 hover:border-primary hover:bg-primary/10 transition-all"
+                    >
+                      <Info size={16} className="text-primary" />
+                      Allergen Guide
+                    </a>
                   </div>
                 </div>
               </div>
@@ -599,26 +615,7 @@ export default function MenuPage() {
                   <>
                     <CategoryHeading category={activeCategory} />
                     {/* Sides Tabs and Filtering */}
-                    {activeCategory === "Sides" && (
-                      <div className="flex gap-2 mb-6">
-                        {sidesTabs.map((tab) => (
-                          <button
-                            key={tab.id}
-                            onClick={() => {
-                              if (isSideTab(tab.id)) setActiveSidesTab(tab.id);
-                            }}
-                            className={cn(
-                              "px-4 py-2 rounded-full text-sm font-semibold transition",
-                              activeSidesTab === tab.id
-                                ? "bg-primary text-primary-foreground shadow"
-                                : "bg-secondary/80 text-muted-foreground hover:bg-secondary/60"
-                            )}
-                          >
-                            {tab.label}
-                          </button>
-                        ))}
-                      </div>
-                    )}
+                    {/* No tabs for salads */}
                     {/* ...removed Sauces Filter Dropdown */}
                     {/* Grid for Sides or other single category */}
 {activeCategory === "Shakes & Juices" ? (
@@ -646,8 +643,16 @@ export default function MenuPage() {
         <div className="p-6">
           <div className="flex items-start justify-between gap-2">
             <h3 className="font-serif text-xl group-hover:text-primary transition-colors">{item.name}</h3>
-            {typeof item.price === "number" && (
-              <span className="text-primary font-semibold text-sm shrink-0 mt-1">${item.price.toFixed(2)}</span>
+            {item.category === "Shakes & Juices" && (item.priceStandard || item.priceCombo) ? (
+              <span className="ml-2 text-lg font-semibold text-gold-400">
+                {item.priceStandard ? `Simple Price: $${item.priceStandard.toFixed(2)}` : ""}
+                {item.priceStandard && item.priceCombo ? " | " : ""}
+                {item.priceCombo ? `Combo 500ml Price: $${item.priceCombo.toFixed(2)}` : ""}
+              </span>
+            ) : (
+              typeof item.price === 'number' && (
+                <span className="ml-2 text-lg font-semibold text-primary">{item.price.toFixed(2)}</span>
+              )
             )}
           </div>
           <p className="text-sm text-muted-foreground line-clamp-2 mt-1">{item.description}</p>
@@ -694,12 +699,7 @@ export default function MenuPage() {
   })()
 ) : (
 <div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"}>
-  {(activeCategory === "Sides"
-    ? hasDietarySelection
-      ? filteredItems
-      : filteredItems.filter((item) => item.sideType === activeSidesTab)
-    : filteredItems
-  ).map((item) => (
+  {(filteredItems).map((item) => (
                         <div
                           key={item.id}
                           tabIndex={0}
@@ -728,15 +728,43 @@ export default function MenuPage() {
                             </div>
                           )}
                           <div className="p-6">
-                            <div className="flex items-start justify-between gap-2">
+                            <div>
                               <h3 className="font-serif text-xl group-hover:text-primary transition-colors">{item.name}</h3>
-                              {typeof item.price === "number" && (
-                                <span className="text-primary font-semibold text-sm shrink-0 mt-1">
-                                  ${item.price.toFixed(2)}
-                                </span>
-                              )}
+                              {item.category === "Protein Cube Skewer Platter" ? (
+                                <div className="font-semibold text-gold text-left text-xs mt-1 whitespace-nowrap">
+                                  {(() => {
+                                    const match = item.description.match(/(1-Skewer[^/]+\/ 2-Skewers[^/]+\/ 3 Skewers[^\n]+)/);
+                                    return match ? match[1] : null;
+                                  })()}
+                                </div>
+                              ) : item.category === "Salads" ? (
+                                <div className="font-semibold text-gold text-left text-xs mt-1">
+                                  {(() => {
+                                    const match = item.description.match(/(70G per Scoop Price:\s*5\.99)/);
+                                    return match ? match[1] : null;
+                                  })()}
+                                </div>
+                              ) : ((item.category === "Shakes & Juices" && (item.priceStandard || item.priceCombo)) ? (
+                                <div className="font-semibold text-gold-400 text-left text-xs mt-1 whitespace-pre-line">
+                                  {item.priceStandard ? `Simple Price: $${item.priceStandard.toFixed(2)}` : ""}
+                                  {item.priceStandard && item.priceCombo ? " | " : ""}
+                                  {item.priceCombo ? `Combo 500ml Price: $${item.priceCombo.toFixed(2)}` : ""}
+                                </div>
+                              ) : (
+                                typeof item.price === 'number' && (
+                                  <div className="font-semibold text-primary text-left text-xs mt-1">Price: {item.price.toFixed(2)}</div>
+                                )
+                              ))}
                             </div>
-                            <p className="text-sm text-muted-foreground line-clamp-2 mt-1">{item.description}</p>
+                            {/* Show a short description for all menu items */}
+                            <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
+                              {(() => {
+                                // Show only the first line or up to 80 chars
+                                const desc = item.description || "";
+                                const firstLine = desc.split(/\r?\n/)[0];
+                                return firstLine.length > 80 ? firstLine.slice(0, 77) + "..." : firstLine;
+                              })()}
+                            </p>
                             <div className="mt-3 text-xs text-primary uppercase tracking-wider">
                               {item.category}
                               {item.subCategory ? ` • ${item.subCategory}` : ""}
@@ -794,10 +822,8 @@ export default function MenuPage() {
                                 <div className="p-6">
                                   <div className="flex items-start justify-between gap-2">
                                     <h3 className="font-serif text-xl group-hover:text-primary transition-colors">{item.name}</h3>
-                                    {typeof item.price === "number" && (
-                                      <span className="text-primary font-semibold text-sm shrink-0 mt-1">
-                                        ${item.price.toFixed(2)}
-                                      </span>
+                                    {typeof item.price === 'number' && (
+                                      <span className="font-semibold text-lg text-primary ml-2">{item.price.toFixed(2)}</span>
                                     )}
                                   </div>
                                   <p className="text-sm text-muted-foreground line-clamp-2 mt-1">{item.description}</p>
@@ -929,7 +955,7 @@ export default function MenuPage() {
                                 {Array.isArray(selectedItem.allergens) && selectedItem.allergens.length > 0 && (
                                   <div className="mb-6 pb-6 border-b border-primary/10">
                                     <div
-                                      className="flex items-center rounded-xl border border-[#3a2a1a] px-3 py-1.5 gap-2 shadow-inner"
+                                      className="flex flex-col gap-1 rounded-xl border border-[#3a2a1a] px-3 py-2 shadow-inner"
                                       style={{
                                         background: 'rgba(35, 24, 15, 0.35)',
                                         width: '260px',
@@ -937,26 +963,61 @@ export default function MenuPage() {
                                         maxWidth: '260px',
                                       }}
                                     >
-                                      <span className="text-xs font-semibold text-white mr-2">
-                                        {selectedItem.allergens.length === 1 ? 'Allergen' : 'Allergens'}
+                                      <span className="text-xs font-semibold text-white mb-1">
+                                        {selectedItem.allergens.length === 1 ? 'This menu item contains:' : 'This menu item contains:'}
                                       </span>
-                                      {selectedItem.allergens.map((a) => {
-                                        const Icon = allergenIconMap[a]?.icon;
-                                        if (!Icon) return null;
-                                        return (
-                                          <span key={a} className="flex items-center text-xs">
-                                            <Icon size={18} className="text-red-500" />
-                                          </span>
-                                        );
-                                      })}
+                                      <div className="flex flex-wrap gap-2">
+                                        {selectedItem.allergens.map((a) => {
+                                          const Icon = allergenIconMap[a]?.icon;
+                                          if (!Icon) return null;
+                                          return (
+                                            <span key={a} className="flex items-center text-xs gap-1">
+                                              <Icon size={18} className="text-red-500" />
+                                              <span>{allergenIconMap[a]?.label}</span>
+                                            </span>
+                                          );
+                                        })}
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+
+                                {/* Dietary flags for menu item */}
+                                {Array.isArray(selectedItem.dietary) && selectedItem.dietary.length > 0 && (
+                                  <div className="mb-6 pb-6 border-b border-primary/10">
+                                    <div
+                                      className="flex flex-col gap-1 rounded-xl border border-[#1a3a1a] px-3 py-2 shadow-inner"
+                                      style={{
+                                        background: 'rgba(24, 35, 15, 0.25)',
+                                        width: '260px',
+                                        minWidth: '260px',
+                                        maxWidth: '260px',
+                                      }}
+                                    >
+                                      <span className="text-xs font-semibold text-white mb-1">
+                                        Dietary:
+                                      </span>
+                                      <div className="flex flex-wrap gap-2">
+                                        {selectedItem.dietary.map((d) => {
+                                          const filter = dietaryFilters.find(f => f.id === d);
+                                          if (!filter) return null;
+                                          let iconColor = "text-primary";
+                                          if (d === "vegan" || d === "vegetarian") iconColor = "text-green-500";
+                                          return (
+                                            <span key={d} className="flex items-center text-xs gap-1">
+                                              <span className={iconColor + " font-bold"}>{filter.label}</span>
+                                            </span>
+                                          );
+                                        })}
+                                      </div>
                                     </div>
                                   </div>
                                 )}
                                 {/* Side Pairings Section */}
-                                {sideRecommendations.length > 0 && ["Grills & Skewers", "Döner", "Wraps", "Biryani", "Sajji"].includes(selectedItem.category) && (
+                                {sideRecommendations.length > 0 && ["Protein Cube Skewer Platter"].includes(selectedItem.category) && (
                                   <div className="mb-6">
                                     <h4 className="font-serif text-sm mb-4 uppercase tracking-wider text-muted-foreground">
-                                      Recommended Sides
+                                      Recommended Salads
                                     </h4>
                                     <div className="space-y-3">
                                       {sideRecommendations.map((name) => {
@@ -989,11 +1050,6 @@ export default function MenuPage() {
                                             <div className="flex-1 min-w-0">
                                               <div className="flex items-center justify-between gap-2 mb-1">
                                                 <span className="text-sm font-semibold truncate">{side.name}</span>
-                                                {typeof side.price === "number" && (
-                                                  <span className="text-xs font-semibold text-primary">
-                                                    ${side.price.toFixed(2)}
-                                                  </span>
-                                                )}
                                               </div>
                                               <p className="text-xs text-muted-foreground line-clamp-2">
                                                 {side.description}
@@ -1006,7 +1062,7 @@ export default function MenuPage() {
                                   </div>
                                 )}
                                 {/* Sauce Pairings Section */}
-                                {Array.isArray(selectedItem.saucePairings) && selectedItem.saucePairings.length > 0 && ["Grills & Skewers", "Döner", "Wraps", "Biryani", "Sajji"].includes(selectedItem.category) && (
+                                {Array.isArray(selectedItem.saucePairings) && selectedItem.saucePairings.length > 0 && ["Protein Cube Skewer Platter"].includes(selectedItem.category) && (
                                   <div className="mb-6">
                                     <h4 className="font-serif text-sm mb-4 uppercase tracking-wider text-muted-foreground">
                                       Recommended Sauces
@@ -1055,14 +1111,27 @@ export default function MenuPage() {
                                 )}
                                 {/* Seasonings Section */}
                                 {spices && spices.length > 0 && selectedItem && (() => {
-                                  // Show for Sides (not rice/naan), Grills & Skewers, Döner, Wraps
+                                  // Show for Sides (not rice/naan), Protein Cube Skewer Platter
                                   const cat = selectedItem.category;
                                   const name = selectedItem.name.toLowerCase();
                                   const isRice = name.includes("rice");
                                   const isNaan = name.includes("naan");
                                   const isColeslaw = name.includes("coleslaw");
                                   // Show for all menu items that can support spices (not rice, naan, desserts, shakes)
-                                  const excludedCategories = ["Desserts", "Shakes & Juices", "Biryani", "Sajji"];
+                                  const excludedCategories = ["Desserts", "Shakes & Juices", "Biryani", "Sajji", "Family Platters", "Protein Cube Skewer Platter"];
+                                                                  {/* Recommended Sauces for Family Platters */}
+                                                                  {selectedItem.category === "Family Platters" && (
+                                                                    <div className="mb-6">
+                                                                      <h4 className="font-serif text-sm mb-3 uppercase tracking-wider text-muted-foreground">
+                                                                        Recommended Sauces
+                                                                      </h4>
+                                                                      <div className="flex flex-wrap gap-2">
+                                                                        <span className="text-xs bg-primary/10 text-primary px-3 py-2 rounded-lg border border-primary/30 font-medium">Mint Chutney</span>
+                                                                        <span className="text-xs bg-primary/10 text-primary px-3 py-2 rounded-lg border border-primary/30 font-medium">Tamarind Sauce</span>
+                                                                        <span className="text-xs bg-primary/10 text-primary px-3 py-2 rounded-lg border border-primary/30 font-medium">Garlic Mayo</span>
+                                                                      </div>
+                                                                    </div>
+                                                                  )}
                                   const showSeasonings =
                                     !excludedCategories.includes(cat) &&
                                     !isRice &&
@@ -1082,7 +1151,7 @@ export default function MenuPage() {
                                           : name.includes("salad") || name.includes("vegetable")
                                             ? spices.filter(s => ["Dried Parsley", "Lemon Zest", "Dried Lemon Peel"].includes(s.name))
                                             : spices.filter(s => s.level <= 3).slice(0, 3)
-                                      : cat === "Grills & Skewers"
+                                      : cat === "Protein Cube Skewer Platter"
                                         ? spices.filter(s => [
                                             "Crushed Red Chilli", "Korean Chilli Flakes", "Smoked Paprika", "Coriander Seed Powder", "Toasted Cumin", "Dried Parsley"
                                           ].includes(s.name))
@@ -1099,7 +1168,7 @@ export default function MenuPage() {
                                   return (
                                     <div className="mb-6">
                                       <h4 className="font-serif text-sm mb-4 uppercase tracking-wider text-muted-foreground">
-                                        Seasonings
+                                        Optional Seasonings
                                       </h4>
                                       <div className="space-y-3">
                                         {selectedSeasonings.map((seasoning) => (
@@ -1143,7 +1212,7 @@ export default function MenuPage() {
                                           key={c}
                                           className="text-xs bg-primary/10 text-primary px-3 py-2 rounded-lg border border-primary/30 font-medium"
                                         >
-                                          {c}
+                                          {c.replace(/\$/g, "")}
                                         </span>
                                       ))}
                                     </div>

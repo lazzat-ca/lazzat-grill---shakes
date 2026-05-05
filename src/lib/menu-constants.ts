@@ -27,7 +27,7 @@ export const allergenFilters: { id: Allergen; label: string }[] = [
   { id: "peanuts", label: "Peanuts" },
   { id: "soy", label: "Soy" },
   { id: "sesame", label: "Sesame" },
-  { id: "shellfish", label: "Shellfish" },
+  // { id: "shellfish", label: "Shellfish" },
   { id: "fish", label: "Fish" },
   { id: "mustard", label: "Mustard" },
 ];
@@ -55,7 +55,7 @@ export const allergenIconMap = {
   peanuts: { icon: Bean, label: "Peanuts" },
   soy: { icon: Leaf, label: "Soy" },
   sesame: { icon: Leaf, label: "Sesame" },
-  shellfish: { icon: Shell, label: "Shellfish" },
+  // shellfish: { icon: Shell, label: "Shellfish" },
   fish: { icon: Fish, label: "Fish" },
   mustard: { icon: Wine, label: "Mustard" },
 };

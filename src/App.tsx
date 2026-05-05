@@ -21,6 +21,9 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const Catering = lazy(() => import("./pages/Catering"));
 const Blog = lazy(() => import("./pages/Blog"));
 
+const AllergenGuide = lazy(() => import("./pages/AllergenGuide"));
+const BlogDetail = lazy(() => import("./pages/BlogDetail"));
+
 // Admin pages (lazy-loaded, only loaded when navigating to /admin)
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -53,9 +56,11 @@ const App = () => (
               <Route path="/flavours" element={<Flavours />} />
               <Route path="/feedback" element={<Feedback />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogDetail />} />
               <Route path="/catering" element={<Catering />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
+              <Route path="/allergenguide" element={<AllergenGuide />} />
 
               {/* Admin routes */}
               <Route path="/admin/login" element={<AdminLogin />} />

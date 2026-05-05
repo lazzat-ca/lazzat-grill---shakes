@@ -1,34 +1,31 @@
 // src/lib/menu-data.ts
+import { MenuItem } from "./menu-types";
 
-import { MenuItem } from "./menu-types.js";
-import { grillsAndSkewers } from "./grills-skewers-data.js";
-import { wrapsItems } from "./wraps-data.js";
-import { biryaniItems } from "./biryani-data.js";
-import { sajjiItems } from "./sajji-data.js";
-import { donerItems } from "./doner-data.js";
-import { desserts } from "./desserts-data.js";
-import { shakesAndJuices } from "./shakes-juices-data.js";
-import { sidesItems } from "./sides-data.js";
-
-
+import { proteinCubeSkewerPlatters } from "./protein-cube-skewer-platter-data.ts";
+import { familyPlatters } from "./family-platters-data";
+import { biryaniItems } from "./biryani-data";
+import { sajjiItems } from "./sajji-data";
+import { desserts } from "./desserts-data";
+import { shakesAndJuices } from "./shakes-juices-data";
+import { sidesItems } from "./sides-data";
+import { donerItems } from "./doner-data";
+import { wrapsItems } from "./wraps-data";
+import { kidsMenu } from "./kids-menu-data";
+import { combosMenu } from "./combos-menu-data";
 
 /* Grouped Menu data */
-export const menuItemsGrouped: Record<string, Record<string, MenuItem[]>> = {
-  "Grills & Skewers": grillsAndSkewers,
-  "Wraps": wrapsItems,
-  "Biryani": biryaniItems,
-  "Sajji": sajjiItems,
-  "Döner": donerItems,
-  "Desserts": desserts,
-  "Shakes & Juices": shakesAndJuices,
-  "Sides": sidesItems,
+export const menuItemsGrouped: Record<string, MenuItem[]> = {
+  "Protein Cube Skewer Platter": proteinCubeSkewerPlatters,
+  "Family Platters": familyPlatters,
+  "Combos": combosMenu,
+  "Kids Menu": kidsMenu,
+  "Desserts": Object.values(desserts).flat(),
+  "Shakes & Juices": Object.values(shakesAndJuices).flat(),
+  "Salads": Object.values(sidesItems).flat(),
 };
 
 /* Flat Export for Filter sort */
-export const menuItemsFlat: MenuItem[] = Object.values(menuItemsGrouped)
-  .flatMap((category) =>
-    Object.values(category).flat()
-  );
+export const menuItemsFlat: MenuItem[] = Object.values(menuItemsGrouped).flat();
 
 type MenuCacheEntry = {
   data: MenuItem[];

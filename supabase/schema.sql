@@ -49,17 +49,17 @@ CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
 
--- ----------------------------------------------------------------
--- 2. MENU ITEMS
--- ----------------------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS public.menu_items (
   id              BIGSERIAL PRIMARY KEY,
   name            TEXT NOT NULL,
   description     TEXT NOT NULL DEFAULT '',
   price           NUMERIC(10,2),
+  price_standard  NUMERIC(10,2),
+  price_combo     NUMERIC(10,2),
   image           TEXT NOT NULL DEFAULT '',
   image_alt       TEXT NOT NULL DEFAULT '',
-  category        TEXT NOT NULL,
+  category        TEXT NOT NULL, -- Reverted to only use category as TEXT
   sub_category    TEXT,
   heat_level      INTEGER NOT NULL DEFAULT 0,
   is_new          BOOLEAN NOT NULL DEFAULT FALSE,

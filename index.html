@@ -1,15 +1,67 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JJ4M30KN7S"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-JJ4M30KN7S');
-</script>
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NPR2HGW7');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) - Existing -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-972057929"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-972057929');
+    </script>
+
+    <!-- Google tag (gtag.js) - NEW AW-18126803392 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126803392"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18126803392');
+    </script>
+
+    <!-- Event snippet for Get directions conversion page -->
+    <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-972057929/KlLTCMm61p0ZEMnawc8D',
+          'event_callback': callback
+      });
+      return false;
+    }
+    </script>
+
+    <!-- Google tag (gtag.js) event - delayed navigation helper -->
+    <script>
+      // Helper function to delay opening a URL until a gtag event is sent.
+      // Call it in response to an action that should navigate to a URL.
+      function gtagSendEvent(url) {
+        var callback = function () {
+          if (typeof url === 'string') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'ads_conversion_Purchase_1', {
+          'event_callback': callback,
+          'event_timeout': 2000,
+          // <event_parameters>
+        });
+        return false;
+      }
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Lazzat | Grill Restaurant in Brampton</title>
@@ -47,13 +99,13 @@
         "image": "https://lazzat.ca/Lazzat%20logo%2002.png",
         "@id": "https://lazzat.ca",
         "url": "https://lazzat.ca",
-        "telephone": "+1-XXX-XXX-XXXX",
+        "telephone": "+1 289-401-0002",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Your Street Address",
-          "addressLocality": "Your City",
-          "addressRegion": "Your Province",
-          "postalCode": "Your Postal Code",
+          "streetAddress": "11685 McVean Dr ",
+          "addressLocality": "Brampton",
+          "addressRegion": "Ontario",
+          "postalCode": "L6P 4N5",
           "addressCountry": "CA"
         },
         "servesCuisine": ["BBQ", "Tikka", "Kabab", "Biryani", "Sajji", "Halal"],
@@ -67,6 +119,10 @@
   </head>
 
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPR2HGW7"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

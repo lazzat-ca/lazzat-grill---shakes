@@ -1,4 +1,3 @@
-// src/pages/admin/AdminMenu.tsx
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/lib/supabase";
 import { toast } from "@/components/ui/use-toast";
@@ -9,17 +8,22 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ImageUpload } from "@/components/admin/ImageUpload";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Plus, Pencil, Trash2, X, Flame } from "lucide-react";
-// Allergen options (same as AdminSauces)
+import type { DbMenuItem } from "@/lib/supabase";
+
 const ALLERGEN_OPTIONS = [
   "milk", "eggs", "gluten", "soy", "sesame", "peanuts", "tree-nuts", "shellfish", "fish", "mustard"
 ];
-import type { DbMenuItem } from "@/lib/supabase";
 
 const CATEGORIES = [
-  "Grills & Skewers", "Döner", "Wraps", "Biryani", "Sajji",
-  "Desserts", "Shakes & Juices", "Sides",
+  "Protein Cube Skewer Platter",
+  "Family Platters",
+  "Combos",
+  "Kids Menu",
+  "Desserts",
+  "Shakes & Juices",
+  "Salads"
 ];
 
 const emptyItem = (): Omit<DbMenuItem, "id" | "created_at" | "updated_at"> => ({
@@ -30,6 +34,7 @@ const emptyItem = (): Omit<DbMenuItem, "id" | "created_at" | "updated_at"> => ({
   allergens: [], dietary: [], flavors: [], textures: [], side_type: null,
 });
 
+
 const AdminMenu = () => {
   const { request } = useAdminApi();
   const [items, setItems] = useState<DbMenuItem[]>([]);
@@ -38,31 +43,26 @@ const AdminMenu = () => {
   const [editing, setEditing] = useState<Partial<DbMenuItem> | null>(null);
   const [saving, setSaving] = useState(false);
   const [search, setSearch] = useState("");
-  const [filterCat, setFilterCat] = useState(CATEGORIES[0]);
+  const [filterCat, setFilterCat] = useState<string>(CATEGORIES[0]);
 
+  // Load menu items
   const load = useCallback(async () => {
     setLoading(true);
-    const { data, error: err } = await request<DbMenuItem[]>("/api/admin/menu");
+    const res = await request<DbMenuItem[]>("/api/admin/menu");
     setLoading(false);
-    if (err) { setError(err); return; }
-    setItems(data ?? []);
+    if (res.error) { setError(res.error); return; }
+    setItems(res.data ?? []);
   }, [request]);
 
-
-  // Initial load
   useEffect(() => { void load(); }, [load]);
 
-  // Supabase Realtime subscription for menu_items
   useEffect(() => {
-    const channel = supabase
+    const menuChannel = supabase
       .channel('public:menu_items')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'menu_items' }, payload => {
-        // Refetch menu items on any change
-        void load();
-      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'menu_items' }, () => { void load(); })
       .subscribe();
     return () => {
-      supabase.removeChannel(channel);
+      supabase.removeChannel(menuChannel);
     };
   }, [load]);
 
@@ -95,7 +95,7 @@ const AdminMenu = () => {
   };
 
   const filtered = items.filter((it) => {
-    const matchCat = filterCat === "All" || it.category === filterCat;
+    const matchCat = it.category === filterCat;
     const matchSearch = !search || it.name.toLowerCase().includes(search.toLowerCase());
     return matchCat && matchSearch;
   });
@@ -106,14 +106,13 @@ const AdminMenu = () => {
 
   return (
     <AdminLayout>
+      {/* Add Item Button */}
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-serif text-2xl text-foreground">Menu Items</h1>
         <Button onClick={() => setEditing(emptyItem())} size="sm">
           <Plus size={16} className="mr-1" /> Add Item
         </Button>
       </div>
-
-      {error && <p className="text-red-400 mb-4 text-sm">{error}</p>}
 
       {/* Category Tabs */}
       <Tabs value={filterCat} onValueChange={setFilterCat} className="mb-4">
@@ -150,6 +149,8 @@ const AdminMenu = () => {
                 <th className="px-3 py-2">Category</th>
                 <th className="px-3 py-2">Heat</th>
                 <th className="px-3 py-2">Price</th>
+                <th className="px-3 py-2">Std Price</th>
+                <th className="px-3 py-2">Combo Price</th>
                 <th className="px-3 py-2">Actions</th>
               </tr>
             </thead>
@@ -184,6 +185,12 @@ const AdminMenu = () => {
                   <td className="px-3 py-2 text-muted-foreground">
                     {item.price != null ? `$${item.price}` : "—"}
                   </td>
+                  <td className="px-3 py-2 text-gold-400 font-semibold">
+                    {item.category === "Shakes & Juices" && (item as any).priceStandard != null ? `$${(item as any).priceStandard}` : "—"}
+                  </td>
+                  <td className="px-3 py-2 text-gold-400 font-semibold">
+                    {item.category === "Shakes & Juices" && (item as any).priceCombo != null ? `$${(item as any).priceCombo}` : "—"}
+                  </td>
                   <td className="px-3 py-2">
                     <div className="flex gap-1">
                       <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => setEditing(item)}>
@@ -197,7 +204,7 @@ const AdminMenu = () => {
                 </tr>
               ))}
               {filtered.length === 0 && (
-                <tr><td colSpan={6} className="px-3 py-8 text-center text-muted-foreground">No items found</td></tr>
+                <tr><td colSpan={8} className="px-3 py-8 text-center text-muted-foreground">No items found</td></tr>
               )}
             </tbody>
           </table>
@@ -232,7 +239,6 @@ const AdminMenu = () => {
                 <Label>Description</Label>
                 <Textarea value={editing.description ?? ""} onChange={(e) => setField("description", e.target.value)} rows={2} />
               </div>
-
               {/* Allergens */}
               <div className="space-y-1 col-span-2">
                 <Label>Allergens</Label>
@@ -261,6 +267,14 @@ const AdminMenu = () => {
               <div className="space-y-1">
                 <Label>Price ($)</Label>
                 <Input type="number" step="0.01" value={editing.price ?? ""} onChange={(e) => setField("price", e.target.value ? parseFloat(e.target.value) : null)} />
+              </div>
+              <div className="space-y-1">
+                <Label>Standard Price ($)</Label>
+                <Input type="number" step="0.01" value={editing.priceStandard ?? ""} onChange={(e) => setField("priceStandard", e.target.value ? parseFloat(e.target.value) : null)} />
+              </div>
+              <div className="space-y-1">
+                <Label>Combo Price ($)</Label>
+                <Input type="number" step="0.01" value={editing.priceCombo ?? ""} onChange={(e) => setField("priceCombo", e.target.value ? parseFloat(e.target.value) : null)} />
               </div>
               <div className="space-y-1">
                 <Label>Heat Level (0–10)</Label>
@@ -305,6 +319,6 @@ const AdminMenu = () => {
       )}
     </AdminLayout>
   );
-};
+}
 
 export default AdminMenu;
