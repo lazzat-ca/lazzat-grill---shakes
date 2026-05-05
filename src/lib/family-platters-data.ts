@@ -1,7 +1,7 @@
-import { MenuItem } from "./menu-types";
-import imgWholeChicken from "@/assets/whole-chicken.jpeg";
-import imgCutChicken from "@/assets/cut-chicken.jpeg";
-import imgWholeSalmon from "@/assets/whole-salmon.jpeg";
+import { MenuItem } from "./menu-types.js";
+import imgWholeChicken from "/assets/whole-chicken.jpeg";
+import imgCutChicken from "/assets/cut-chicken.jpeg";
+import imgWholeSalmon from "/assets/whole-salmon.jpeg";
 
 export const familyPlatters: MenuItem[] = [
   {

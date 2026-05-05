@@ -1,8 +1,8 @@
-import { MenuItem } from "./menu-types";
+import { MenuItem } from "./menu-types.js";
 
-import imgBBQSteakWrap from "@/assets/bbq-steak-wrap.531.jpeg";
-import imgBBQVeggieWrap from "@/assets/bbq-veggie-wrap.370.jpeg";
-import imgSmokedChickenWrap from "@/assets/smoked-chicken-wrap.742.jpeg";
+import imgBBQSteakWrap from "/assets/bbq-steak-wrap.531.jpeg";
+import imgBBQVeggieWrap from "/assets/bbq-veggie-wrap.370.jpeg";
+import imgSmokedChickenWrap from "/assets/smoked-chicken-wrap.742.jpeg";
 
 export const wrapsItems: Record<string, MenuItem[]> = {
   Classic: [

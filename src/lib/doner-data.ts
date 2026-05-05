@@ -1,8 +1,8 @@
-import { MenuItem } from "./menu-types";
+import { MenuItem } from "./menu-types.js";
 
-import imgClassicDoner from "@/assets/classic-doner-supereme.jpg";
-import imgUltimateDoner from "@/assets/ultimate-flavor-doner.jpg";
-import imgLoadedDoner from "@/assets/loaded-delight-doner.jpg";
+import imgClassicDoner from "/assets/classic-doner-supereme.jpg";
+import imgUltimateDoner from "/assets/ultimate-flavor-doner.jpg";
+import imgLoadedDoner from "/assets/loaded-delight-doner.jpg";
 
 export const donerItems: Record<string, MenuItem[]> = {
   "Döner": [

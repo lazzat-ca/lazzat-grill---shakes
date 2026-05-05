@@ -1,14 +1,14 @@
-import imgRoastedPotato from "@/assets/roasted-potato.jpg";
+import imgRoastedPotato from "/assets/roasted-potato.jpg";
 // src/lib/sides-data.ts
-import { MenuItem } from "./menu-types";
+import { MenuItem } from "./menu-types.js";
 
 /* IMAGE IMPORTS */
-import imgCucumberTomato from "@/assets/cucumber-tomato.jpeg";
+import imgCucumberTomato from "/assets/cucumber-tomato.jpeg";
 
-import imgPickledOnion from "@/assets/pickled-onion.jpeg";
-import imgSweetCorn from "@/assets/sweet-corn.jpeg";
-import imgLazzatBeanSalad from "@/assets/lazzat-bean-salad.jpeg";
-import imgSpicedChickPea from "@/assets/spiced-chickpea.jpeg";
+import imgPickledOnion from "/assets/pickled-onion.jpeg";
+import imgSweetCorn from "/assets/sweet-corn.jpeg";
+import imgLazzatBeanSalad from "/assets/lazzat-bean-salad.jpeg";
+import imgSpicedChickPea from "/assets/spiced-chickpea.jpeg";
 
 export const sidesItems: Record<string, MenuItem[]> = {
   Salads: [

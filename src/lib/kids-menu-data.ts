@@ -1,8 +1,8 @@
-import { MenuItem } from "./menu-types";
-import imgKidsDrink from "@/assets/kids-drink.jpeg";
-import imgKidsBowlPaneer from "@/assets/kids-bowl-paneer.jpeg";
-import imgKidsBowlChicken from "@/assets/kids-bowl-chicken.jpeg";
-import imgKidsCombo from "@/assets/kids-combo.jpeg";
+import { MenuItem } from "./menu-types.js";
+import imgKidsDrink from "/assets/kids-drink.jpeg";
+import imgKidsBowlPaneer from "/assets/kids-bowl-paneer.jpeg";
+import imgKidsBowlChicken from "/assets/kids-bowl-chicken.jpeg";
+import imgKidsCombo from "/assets/kids-combo.jpeg";
 
 export const kidsMenu: MenuItem[] = [
   {

@@ -1,9 +1,9 @@
 // src/lib/menu-data.ts
 import { MenuItem } from "./menu-types";
 
-import { proteinCubeSkewerPlatters } from "./protein-cube-skewer-platter-data.ts";
+import { proteinCubeSkewerPlatters } from "./protein-cube-skewer-platter-data.js";
 import { familyPlatters } from "./family-platters-data";
-import { biryaniItems } from "./biryani-data";
+import { biryaniItems } from "./biryani-data.js";
 import { sajjiItems } from "./sajji-data";
 import { desserts } from "./desserts-data";
 import { shakesAndJuices } from "./shakes-juices-data";

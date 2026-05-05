@@ -1,12 +1,12 @@
-import { MenuItem } from "./menu-types";
+import { MenuItem } from "./menu-types.js";
 
 // Only import images for the six required desserts
-import imgCheesecakeOreo from "@/assets/dessert-cheesecake-oreo.jpeg";
-import imgCheesecakeMango from "@/assets/dessert-cheesecake-mango.jpeg";
-import imgPistachioCheesecake from "@/assets/pistachio-cheesecake.jpeg";
-import imgTiramisuMango from "@/assets/dessert-tiramisu-mango.jpeg";
-import imgBrowniePistachio from "@/assets/dessert-brownie-pistachio.jpeg";
-import imgBiscoffTiramisu from "@/assets/biscoff-tiramisu.jpeg";
+import imgCheesecakeOreo from "/assets/dessert-cheesecake-oreo.jpeg";
+import imgCheesecakeMango from "/assets/dessert-cheesecake-mango.jpeg";
+import imgPistachioCheesecake from "/assets/pistachio-cheesecake.jpeg";
+import imgTiramisuMango from "/assets/dessert-tiramisu-mango.jpeg";
+import imgBrowniePistachio from "/assets/dessert-brownie-pistachio.jpeg";
+import imgBiscoffTiramisu from "/assets/biscoff-tiramisu.jpeg";
 
 export const desserts: Record<string, MenuItem[]> = {
   Cheesecakes: [
