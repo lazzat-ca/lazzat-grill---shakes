@@ -1,16 +1,12 @@
 import { MenuItem } from "./menu-types.js";
-import imgChicken from "../assets/chicken.jpeg";
-import imgLamb from "../assets/lamb.jpeg";
-import imgPaneer from "../assets/paneer.jpeg";
-import imgGoat from "../assets/goat-cubes.jpeg";
-import imgSoya from "../assets/soya-chaap.jpeg";
+
 
 export const proteinCubeSkewerPlatters: MenuItem[] = [
   {
     id: 1,
     name: "Chicken Breast Cubes",
     description: "Variation: 100G|200G|300G Protein. Served with Seasoned Rice and Salad. 1-Skewer 11.99 / 2-Skewers 15.99 / 3 Skewers 17.99",
-    image: imgChicken,
+    image: "/assets/chicken.jpeg",
     category: "Protein Cube Skewer Platter",
     heatLevel: 2,
     isPopular: true,
@@ -26,7 +22,7 @@ export const proteinCubeSkewerPlatters: MenuItem[] = [
     id: 2,
     name: "Lamb Cubes",
     description: "Variation: 100G|200G|300G Protein. Served with Seasoned Rice and Salad. 1-Skewer 13.99 / 2-Skewers 17.99 / 3 Skewers 25.99",
-    image: imgLamb,
+    image: "/assets/lamb.jpeg",
     category: "Protein Cube Skewer Platter",
     heatLevel: 3,
     isPopular: true,
@@ -42,7 +38,7 @@ export const proteinCubeSkewerPlatters: MenuItem[] = [
     id: 3,
     name: "Goat Cubes",
     description: "Variation: 100G|200G|300G Protein. Served with Seasoned Rice and Salad. 1-Skewer 13.99 / 2-Skewers 17.99 / 3 Skewers 23.99",
-    image: imgGoat,
+    image: "/assets/goat-cubes.jpeg",
     category: "Protein Cube Skewer Platter",
     heatLevel: 3,
     isPopular: true,
@@ -58,7 +54,7 @@ export const proteinCubeSkewerPlatters: MenuItem[] = [
     id: 4,
     name: "Paneer Cubes",
     description: "Indian Cheese Cubes. Variation: 100G|200G|300G Protein. Served with Seasoned Rice and Salad. 1-Skewer 9.99 / 2-Skewers 13.99 / 3 Skewers 17.99",
-    image: imgPaneer,
+    image: "/assets/paneer.jpeg",
     category: "Protein Cube Skewer Platter",
     heatLevel: 1,
     isPopular: false,
@@ -74,7 +70,7 @@ export const proteinCubeSkewerPlatters: MenuItem[] = [
     id: 5,
     name: "Soya Cubes",
     description: "Plant-Based Cubes. Variation: 100G|200G|300G Protein. Served with Seasoned Rice and Salad. 1-Skewer 9.99 / 2-Skewers 13.99 / 3 Skewers 17.99",
-    image: imgSoya,
+    image: "/assets/soya-chaap.jpeg",
     category: "Protein Cube Skewer Platter",
     heatLevel: 2,
     isPopular: false,

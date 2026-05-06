@@ -1,8 +1,5 @@
 import { MenuItem } from "./menu-types.js";
-import imgKidsDrink from "../assets/kids-drink.jpeg";
-import imgKidsBowlPaneer from "../assets/kids-bowl-paneer.jpeg";
-import imgKidsBowlChicken from "../assets/kids-bowl-chicken.jpeg";
-import imgKidsCombo from "../assets/kids-combo.jpeg";
+
 
 export const kidsMenu: MenuItem[] = [
   {
@@ -10,7 +7,7 @@ export const kidsMenu: MenuItem[] = [
     name: "Kids Drink (10 Oz)",
     description: "Real-Fruit Shake. Real Fruit Blend / Fresh Orange Juice.",
     price: 3.49,
-    image: imgKidsDrink,
+    image: "/assets/kids-drink.jpeg",
     category: "Kids Menu",
     heatLevel: 0,
     isPopular: false,
@@ -25,7 +22,7 @@ export const kidsMenu: MenuItem[] = [
     name: "Kids Bowl Paneer",
     description: "80G Paneer Cubes (Tikka)+ Base+1 Sauce",
     price: 5.99,
-    image: imgKidsBowlPaneer,
+    image: "/assets/kids-bowl-paneer.jpeg",
     category: "Kids Menu",
     heatLevel: 0,
     isPopular: false,
@@ -40,7 +37,7 @@ export const kidsMenu: MenuItem[] = [
     name: "Kids Bowl Chicken",
     description: "80G Chicken Breast Cubes(Tikka)+1 Base +1 Sauce",
     price: 6.99,
-    image: imgKidsBowlChicken,
+    image: "/assets/kids-bowl-chicken.jpeg",
     category: "Kids Menu",
     heatLevel: 0,
     isPopular: false,
@@ -55,7 +52,7 @@ export const kidsMenu: MenuItem[] = [
     name: "Kids Combo",
     description: "Kids Bowl (Chicken or Paneer Tikka)+10 Oz Drink (Any Flavor/ Shake/ Blend /Og)",
     price: 9.99,
-    image: imgKidsCombo,
+    image: "/assets/kids-combo.jpeg",
     category: "Kids Menu",
     heatLevel: 0,
     isPopular: false,

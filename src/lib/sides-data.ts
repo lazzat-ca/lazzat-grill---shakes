@@ -1,11 +1,5 @@
-import imgRoastedPotato from "../assets/roasted-potato.jpg";
 import { MenuItem } from "./menu-types.js";
 
-import imgCucumberTomato from "../assets/cucumber-tomato.jpeg";
-import imgPickledOnion from "../assets/pickled-onion.jpeg";
-import imgSweetCorn from "../assets/sweet-corn.jpeg";
-import imgLazzatBeanSalad from "../assets/lazzat-bean-salad.jpeg";
-import imgSpicedChickPea from "../assets/spiced-chickpea.jpeg";
 
 export const sidesItems: Record<string, MenuItem[]> = {
   Salads: [
@@ -13,7 +7,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       id: 301,
       name: "Cucumber Tomato",
       description: "Fresh Cucumber, Ripe Tomato, Lime, Olive Oil\n70G per Scoop Price: 5.99",
-      image: imgCucumberTomato,
+      image: "/assets/cucumber-tomato.jpeg",
       category: "Salads",
       subCategory: "Salads",
       heatLevel: 0,
@@ -27,7 +21,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       id: 303,
       name: "Pickled Onion",
       description: "Quick-Pickled Red Onion, Mustard Seed\n70G per Scoop Price: 5.99",
-      image: imgPickledOnion,
+      image: "/assets/pickled-onion.jpeg",
       category: "Salads",
       subCategory: "Salads",
       heatLevel: 0,
@@ -41,7 +35,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       id: 304,
       name: "Sweet Corn & Pepper",
       description: "Sweet Corn, Bell Pepper, Tamarind-Hint\n70G per Scoop Price: 5.99",
-      image: imgSweetCorn,
+      image: "/assets/sweet-corn.jpeg",
       category: "Salads",
       subCategory: "Salads",
       heatLevel: 0,
@@ -56,7 +50,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       id: 306,
       name: "Lazzat Bean Salad",
       description: "Kidney Bean, Raisin, Mild Spice\n70G per Scoop Price: 5.99",
-      image: imgLazzatBeanSalad,
+      image: "/assets/lazzat-bean-salad.jpeg",
       category: "Salads",
       subCategory: "Salads",
       heatLevel: 0,
@@ -71,7 +65,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       id: 307,
       name: "Spiced ChickPea",
       description: "Chickpea, Lemon, Mild Spice\nHoney Based Dressing\n70G per Scoop Price: 5.99",
-      image: imgSpicedChickPea,
+      image: "/assets/spiced-chickpea.jpeg",
       category: "Salads",
       subCategory: "Salads",
       heatLevel: 2,
@@ -85,7 +79,7 @@ export const sidesItems: Record<string, MenuItem[]> = {
       id: 308,
       name: "Roasted Sweet Potato",
       description: "Roasted Cubed Sweet Potato, Herbs\n70G per Scoop Price:5.99",
-      image: imgRoastedPotato,
+      image: "/assets/roasted-potato.jpg",
       category: "Salads",
       subCategory: "Salads",
       heatLevel: 0,

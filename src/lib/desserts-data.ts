@@ -1,11 +1,6 @@
 import { MenuItem } from "./menu-types.js";
 
-import imgCheesecakeOreo from "../assets/dessert-cheesecake-oreo.jpeg";
-import imgCheesecakeMango from "../assets/dessert-cheesecake-mango.jpeg";
-import imgPistachioCheesecake from "../assets/pistachio-cheesecake.jpeg";
-import imgTiramisuMango from "../assets/dessert-tiramisu-mango.jpeg";
-import imgBrowniePistachio from "../assets/dessert-brownie-pistachio.jpeg";
-import imgBiscoffTiramisu from "../assets/biscoff-tiramisu.jpeg";
+
 
 export const desserts: Record<string, MenuItem[]> = {
   Cheesecakes: [
@@ -15,7 +10,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Creamy cheesecake mixed with Oreo crumbs on a chocolate crust.",
       price: 5.99,
-      image: imgCheesecakeOreo,
+      image: "/assets/dessert-cheesecake-oreo.jpeg",
       category: "Desserts",
       subCategory: "Cheesecakes",
       heatLevel: 0,
@@ -30,7 +25,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Smooth cheesecake layered with luscious mango purée.",
       price: 5.99,
-      image: imgCheesecakeMango,
+      image: "/assets/dessert-cheesecake-mango.jpeg",
       category: "Desserts",
       subCategory: "Cheesecakes",
       heatLevel: 0,
@@ -45,7 +40,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Rich cheesecake with pistachio flavor and a nutty crust.",
       price: 5.99,
-      image: imgPistachioCheesecake,
+      image: "/assets/pistachio-cheesecake.jpeg",
       category: "Desserts",
       subCategory: "Cheesecakes",
       heatLevel: 0,
@@ -61,7 +56,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Mango Tiramisu",
       description: "Mascarpone layered with mango-soaked ladyfingers.",
       price: 9.99,
-      image: imgTiramisuMango,
+      image: "/assets/dessert-tiramisu-mango.jpeg",
       category: "Desserts",
       subCategory: "Tiramisu",
       heatLevel: 0,
@@ -76,7 +71,7 @@ export const desserts: Record<string, MenuItem[]> = {
       description:
         "Decadent dark chocolate brownie layered with pistachio.",
       price: 9.99,
-      image: imgBrowniePistachio,
+      image: "/assets/dessert-brownie-pistachio.jpeg",
       category: "Desserts",
       subCategory: "Tiramisu",
       heatLevel: 0,
@@ -90,7 +85,7 @@ export const desserts: Record<string, MenuItem[]> = {
       name: "Biscoff Tiramisu",
       description: "Classic tiramisu with a Biscoff twist.",
       price: 9.99,
-      image: imgBiscoffTiramisu,
+      image: "/assets/biscoff-tiramisu.jpeg",
       category: "Desserts",
       subCategory: "Tiramisu",
       heatLevel: 0,

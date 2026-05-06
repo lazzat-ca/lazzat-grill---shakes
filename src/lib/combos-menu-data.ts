@@ -1,8 +1,5 @@
-import imgVegCombo from "../assets/Veg-Combo.jpeg";
 import { MenuItem } from "./menu-types.js";
-import imgChickenCombo from "../assets/chicken-combo.jpeg";
-import imgPremiumCombo from "../assets/premium-combo.jpeg";
-import imgKidsCombo from "../assets/kids-combo.jpeg";
+
 
 export const combosMenu: MenuItem[] = [
   {
@@ -10,7 +7,7 @@ export const combosMenu: MenuItem[] = [
     name: "Chicken Combo",
     description: "Chicken Breast 2-Skewer Bowl + Side Fries (200g) + 500ml drink",
     price: 23.99,
-    image: imgChickenCombo,
+    image: "/assets/chicken-combo.jpeg",
     category: "Combos",
     heatLevel: 0,
     isPopular: false,
@@ -25,7 +22,7 @@ export const combosMenu: MenuItem[] = [
     name: "Premium Combo",
     description: "Lamb / Goat / Salmon 2-Skewer Bowl + Side Fries (200g) + 500ml drink",
     price: 26.99,
-    image: imgPremiumCombo,
+    image: "/assets/premium-combo.jpeg",
     category: "Combos",
     heatLevel: 0,
     isPopular: false,
@@ -40,7 +37,7 @@ export const combosMenu: MenuItem[] = [
     name: "Kids Combo",
     description: "Kids Bowl (Chicken or Paneer Tikka)+10 Oz Drink (Any Flavor/ Shake/ Blend /Og)",
     price: 9.99,
-    image: imgKidsCombo,
+    image: "/assets/kids-combo.jpeg",
     category: "Combos",
     heatLevel: 0,
     isPopular: false,
@@ -55,7 +52,7 @@ export const combosMenu: MenuItem[] = [
     name: "Veg Combo",
     description: "Paneer or Soya 2-Skewer Bowl + Fries (200g) + 500ml drink",
     price: 19.49,
-    image: imgVegCombo,
+    image: "/assets/Veg-Combo.jpeg",
     category: "Combos",
     heatLevel: 0,
     isPopular: false,

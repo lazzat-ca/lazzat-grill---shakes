@@ -1,7 +1,5 @@
 import { MenuItem } from "./menu-types.js";
-import imgWholeChicken from "../assets/whole-chicken.jpeg";
-import imgCutChicken from "../assets/cut-chicken.jpeg";
-import imgWholeSalmon from "../assets/whole-salmon.jpeg";
+
 
 export const familyPlatters: MenuItem[] = [
   {
@@ -9,7 +7,7 @@ export const familyPlatters: MenuItem[] = [
     name: "Whole Chicken",
     description: "Full Chicken Tray served with seasoned rice. Serves 3-4 people.",
     price: 34.99,
-    image: imgWholeChicken,
+    image: "/assets/whole-chicken.jpeg",
     category: "Family Platters",
     heatLevel: 1,
     isPopular: false,
@@ -33,7 +31,7 @@ export const familyPlatters: MenuItem[] = [
     name: "Cut Chicken",
     description: "Whole Cut Chicken Tray served with seasoned rice. Serves 3-4 people.",
     price: 34.99,
-    image: imgCutChicken,
+    image: "/assets/cut-chicken.jpeg",
     category: "Family Platters",
     heatLevel: 1,
     isPopular: false,
@@ -57,7 +55,7 @@ export const familyPlatters: MenuItem[] = [
     name: "Salmon Fish",
     description: "Whole Fish Tray served with seasoned rice. Serves 3-4 people.",
     price: 29.99,
-    image: imgWholeSalmon,
+    image: "/assets/whole-salmon.jpeg",
     category: "Family Platters",
     heatLevel: 0,
     isPopular: false,
