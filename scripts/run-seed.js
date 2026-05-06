@@ -26,7 +26,7 @@ const readEnvFileValue = (key) => {
   return line.slice(line.indexOf("=") + 1).trim();
 };
 
-const seedUrl = process.env.SEED_URL || "http://localhost:8080/api/admin/seed";
+const seedUrl = process.env.SEED_URL || "http://localhost:8080/api/admin?resource=seed";
 const seedKey = process.env.SUPABASE_SERVICE_ROLE_KEY || readEnvFileValue("SUPABASE_SERVICE_ROLE_KEY");
 
 if (!seedKey) {

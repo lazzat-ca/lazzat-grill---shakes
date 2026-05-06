@@ -46,9 +46,9 @@ export interface MenuItem {
   description: string;
   price?: number;
   /** For Shakes & Juices: Standard Price */
-  priceStandard?: number;
+  pricestandard?: number;
   /** For Shakes & Juices: Combo Price */
-  priceCombo?: number;
+  pricecombo?: number;
   image: string;
 
   /** High-level grouping */

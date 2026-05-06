@@ -55,8 +55,8 @@ CREATE TABLE IF NOT EXISTS public.menu_items (
   name            TEXT NOT NULL,
   description     TEXT NOT NULL DEFAULT '',
   price           NUMERIC(10,2),
-  price_standard  NUMERIC(10,2),
-  price_combo     NUMERIC(10,2),
+  pricestandard  NUMERIC(10,2),
+  pricecombo     NUMERIC(10,2),
   image           TEXT NOT NULL DEFAULT '',
   image_alt       TEXT NOT NULL DEFAULT '',
   category        TEXT NOT NULL, -- Reverted to only use category as TEXT

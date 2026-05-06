@@ -643,11 +643,11 @@ export default function MenuPage() {
         <div className="p-6">
           <div className="flex items-start justify-between gap-2">
             <h3 className="font-serif text-xl group-hover:text-primary transition-colors">{item.name}</h3>
-            {item.category === "Shakes & Juices" && (item.priceStandard || item.priceCombo) ? (
+            {item.category === "Shakes & Juices" && (item.pricestandard || item.pricecombo) ? (
               <span className="ml-2 text-lg font-semibold text-gold-400">
-                {item.priceStandard ? `Simple Price: $${item.priceStandard.toFixed(2)}` : ""}
-                {item.priceStandard && item.priceCombo ? " | " : ""}
-                {item.priceCombo ? `Combo 500ml Price: $${item.priceCombo.toFixed(2)}` : ""}
+                {item.pricestandard ? `Simple Price: $${item.pricestandard.toFixed(2)}` : ""}
+                {item.pricestandard && item.pricecombo ? " | " : ""}
+                {item.pricecombo ? `Combo 500ml Price: $${item.pricecombo.toFixed(2)}` : ""}
               </span>
             ) : (
               typeof item.price === 'number' && (
@@ -744,11 +744,11 @@ export default function MenuPage() {
                                     return match ? match[1] : null;
                                   })()}
                                 </div>
-                              ) : ((item.category === "Shakes & Juices" && (item.priceStandard || item.priceCombo)) ? (
+                              ) : ((item.category === "Shakes & Juices" && (item.pricestandard || item.pricecombo)) ? (
                                 <div className="font-semibold text-gold-400 text-left text-xs mt-1 whitespace-pre-line">
-                                  {item.priceStandard ? `Simple Price: $${item.priceStandard.toFixed(2)}` : ""}
-                                  {item.priceStandard && item.priceCombo ? " | " : ""}
-                                  {item.priceCombo ? `Combo 500ml Price: $${item.priceCombo.toFixed(2)}` : ""}
+                                  {item.pricestandard ? `Simple Price: $${item.pricestandard.toFixed(2)}` : ""}
+                                  {item.pricestandard && item.pricecombo ? " | " : ""}
+                                  {item.pricecombo ? `Combo 500ml Price: $${item.pricecombo.toFixed(2)}` : ""}
                                 </div>
                               ) : (
                                 typeof item.price === 'number' && (

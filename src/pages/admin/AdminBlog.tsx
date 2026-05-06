@@ -17,7 +17,7 @@ const AdminBlog = () => {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const { data, error: err } = await request<DbBlogPost[]>("/api/admin/blog");
+    const { data, error: err } = await request<DbBlogPost[]>("/api/admin?resource=blog");
     setLoading(false);
     if (err) { setError(err); return; }
     setPosts(data ?? []);
@@ -43,7 +43,7 @@ const AdminBlog = () => {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this blog post?")) return;
-    const { error: err } = await request(`/api/admin/blog?id=${id}`, { method: "DELETE" });
+    const { error: err } = await request(`/api/admin?resource=blog&id=${id}`, { method: "DELETE" });
     if (err) {
       toast({ title: "Delete failed", description: err, variant: "destructive" });
       return;
@@ -55,7 +55,7 @@ const AdminBlog = () => {
   // Show notification when a blog post is added (after save)
   const handleSave = async (post: Partial<DbBlogPost>, isNew: boolean) => {
     const { error: err } = await request(
-      isNew ? "/api/admin/blog" : `/api/admin/blog?id=${post.id}`,
+      isNew ? "/api/admin?resource=blog" : `/api/admin?resource=blog&id=${post.id}`,
       { method: isNew ? "POST" : "PUT", body: JSON.stringify(post) }
     );
     if (err) { alert(`Save failed: ${err}`); return; }
@@ -66,7 +66,7 @@ const AdminBlog = () => {
   };
 
   const togglePublish = async (post: DbBlogPost) => {
-    const { error: err } = await request(`/api/admin/blog?id=${post.id}`, {
+    const { error: err } = await request(`/api/admin?resource=blog&id=${post.id}`, {
       method: "PUT",
       body: JSON.stringify({ published: !post.published }),
     });

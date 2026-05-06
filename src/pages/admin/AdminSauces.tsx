@@ -28,7 +28,7 @@ const AdminSauces = () => {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const { data, error: err } = await request<DbSauce[]>("/api/admin/sauces");
+    const { data, error: err } = await request<DbSauce[]>("/api/admin?resource=sauces");
     setLoading(false);
     if (err) { setError(err); return; }
     setItems(data ?? []);
@@ -57,7 +57,7 @@ const AdminSauces = () => {
     setSaving(true);
     const isNew = !editing.id;
     const { error: err } = await request(
-      isNew ? "/api/admin/sauces" : `/api/admin/sauces?id=${editing.id}`,
+      isNew ? "/api/admin?resource=sauces" : `/api/admin?resource=sauces&id=${editing.id}`,
       { method: isNew ? "POST" : "PUT", body: JSON.stringify(editing) }
     );
     setSaving(false);
@@ -71,7 +71,7 @@ const AdminSauces = () => {
 
   const handleDelete = async (id: number) => {
     if (!confirm("Delete this sauce?")) return;
-    const { error: err } = await request(`/api/admin/sauces?id=${id}`, { method: "DELETE" });
+    const { error: err } = await request(`/api/admin?resource=sauces&id=${id}`, { method: "DELETE" });
     if (err) {
       toast({ title: "Delete failed", description: err, variant: "destructive" });
       return;

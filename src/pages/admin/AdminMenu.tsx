@@ -48,7 +48,7 @@ const AdminMenu = () => {
   // Load menu items
   const load = useCallback(async () => {
     setLoading(true);
-    const res = await request<DbMenuItem[]>("/api/admin/menu");
+    const res = await request<DbMenuItem[]>("/api/admin?resource=menu");
     setLoading(false);
     if (res.error) { setError(res.error); return; }
     setItems(res.data ?? []);
@@ -71,7 +71,7 @@ const AdminMenu = () => {
     setSaving(true);
     const isNew = !editing.id;
     const { error: err } = await request(
-      isNew ? "/api/admin/menu" : `/api/admin/menu?id=${editing.id}`,
+      isNew ? "/api/admin?resource=menu" : `/api/admin?resource=menu&id=${editing.id}`,
       { method: isNew ? "POST" : "PUT", body: JSON.stringify(editing) }
     );
     setSaving(false);
@@ -85,7 +85,7 @@ const AdminMenu = () => {
 
   const handleDelete = async (id: number) => {
     if (!confirm("Delete this menu item?")) return;
-    const { error: err } = await request(`/api/admin/menu?id=${id}`, { method: "DELETE" });
+    const { error: err } = await request(`/api/admin?resource=menu&id=${id}`, { method: "DELETE" });
     if (err) {
       toast({ title: "Delete failed", description: err, variant: "destructive" });
       return;
@@ -186,10 +186,10 @@ const AdminMenu = () => {
                     {item.price != null ? `$${item.price}` : "—"}
                   </td>
                   <td className="px-3 py-2 text-gold-400 font-semibold">
-                    {item.category === "Shakes & Juices" && (item as any).priceStandard != null ? `$${(item as any).priceStandard}` : "—"}
+                    {item.category === "Shakes & Juices" && (item as any).pricestandard != null ? `$${(item as any).pricestandard}` : "—"}
                   </td>
                   <td className="px-3 py-2 text-gold-400 font-semibold">
-                    {item.category === "Shakes & Juices" && (item as any).priceCombo != null ? `$${(item as any).priceCombo}` : "—"}
+                    {item.category === "Shakes & Juices" && (item as any).pricecombo != null ? `$${(item as any).pricecombo}` : "—"}
                   </td>
                   <td className="px-3 py-2">
                     <div className="flex gap-1">
@@ -270,11 +270,11 @@ const AdminMenu = () => {
               </div>
               <div className="space-y-1">
                 <Label>Standard Price ($)</Label>
-                <Input type="number" step="0.01" value={editing.priceStandard ?? ""} onChange={(e) => setField("priceStandard", e.target.value ? parseFloat(e.target.value) : null)} />
+                <Input type="number" step="0.01" value={editing.pricestandard ?? ""} onChange={(e) => setField("pricestandard", e.target.value ? parseFloat(e.target.value) : null)} />
               </div>
               <div className="space-y-1">
                 <Label>Combo Price ($)</Label>
-                <Input type="number" step="0.01" value={editing.priceCombo ?? ""} onChange={(e) => setField("priceCombo", e.target.value ? parseFloat(e.target.value) : null)} />
+                <Input type="number" step="0.01" value={editing.pricecombo ?? ""} onChange={(e) => setField("pricecombo", e.target.value ? parseFloat(e.target.value) : null)} />
               </div>
               <div className="space-y-1">
                 <Label>Heat Level (0–10)</Label>

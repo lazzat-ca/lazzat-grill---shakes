@@ -42,13 +42,13 @@ export const useAdminApi = () => {
 
   // Admin API helpers
   const getUsers = useCallback(async () => {
-    const { data, error } = await request<any[]>("/api/admin/users");
+    const { data, error } = await request<any[]>("/api/admin?resource=users");
     if (error) throw new Error(error);
     return data || [];
   }, [request]);
 
   const updateUserRole = useCallback(async (userId: string, newRole: "admin" | "seo_editor") => {
-    const { error } = await request(`/api/admin/users?id=${userId}`, {
+    const { error } = await request(`/api/admin?resource=users&id=${userId}`, {
       method: "PUT",
       body: JSON.stringify({ role: newRole }),
     });
@@ -56,7 +56,7 @@ export const useAdminApi = () => {
   }, [request]);
 
   const deleteUser = useCallback(async (userId: string) => {
-    const { error } = await request(`/api/admin/users?id=${userId}`, {
+    const { error } = await request(`/api/admin?resource=users&id=${userId}`, {
       method: "DELETE",
     });
     if (error) throw new Error(error);

@@ -26,9 +26,9 @@ export interface DbMenuItem {
   description: string;
   price: number | null;
   /** For Shakes & Juices: Standard Price */
-  priceStandard?: number;
+  pricestandard?: number;
   /** For Shakes & Juices: Combo Price */
-  priceCombo?: number;
+  pricecombo?: number;
   image: string;
   image_alt: string;
   category: string;

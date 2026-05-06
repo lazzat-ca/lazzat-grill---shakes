@@ -28,7 +28,7 @@ const AdminSeasonings = () => {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const { data, error: err } = await request<DbSeasoning[]>("/api/admin/seasonings");
+    const { data, error: err } = await request<DbSeasoning[]>("/api/admin?resource=seasonings");
     setLoading(false);
     if (err) { setError(err); return; }
     setItems(data ?? []);
@@ -57,7 +57,7 @@ const AdminSeasonings = () => {
     setSaving(true);
     const isNew = !editing.id;
     const { error: err } = await request(
-      isNew ? "/api/admin/seasonings" : `/api/admin/seasonings?id=${editing.id}`,
+      isNew ? "/api/admin?resource=seasonings" : `/api/admin?resource=seasonings&id=${editing.id}`,
       { method: isNew ? "POST" : "PUT", body: JSON.stringify(editing) }
     );
     setSaving(false);
@@ -71,7 +71,7 @@ const AdminSeasonings = () => {
 
   const handleDelete = async (id: number) => {
     if (!confirm("Delete this seasoning?")) return;
-    const { error: err } = await request(`/api/admin/seasonings?id=${id}`, { method: "DELETE" });
+    const { error: err } = await request(`/api/admin?resource=seasonings&id=${id}`, { method: "DELETE" });
     if (err) {
       toast({ title: "Delete failed", description: err, variant: "destructive" });
       return;

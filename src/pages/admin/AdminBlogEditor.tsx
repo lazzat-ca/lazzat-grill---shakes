@@ -188,7 +188,7 @@ const AdminBlogEditor = () => {
   const load = useCallback(async () => {
     if (isNew) return;
     setLoading(true);
-    const { data, error } = await request<DbBlogPost>(`/api/admin/blog?id=${id}`);
+    const { data, error } = await request<DbBlogPost>(`/api/admin?resource=blog&id=${id}`);
     setLoading(false);
     if (error || !data) { alert(`Failed to load post: ${error}`); navigate("/admin/blog"); return; }
     setPost(data);
@@ -233,7 +233,7 @@ const AdminBlogEditor = () => {
     setSaving(true);
     const payload = { ...post, content: JSON.stringify(blocks) };
     const { error } = await request(
-      isNew ? "/api/admin/blog" : `/api/admin/blog?id=${post.id}`,
+      isNew ? "/api/admin?resource=blog" : `/api/admin?resource=blog&id=${post.id}`,
       { method: isNew ? "POST" : "PUT", body: JSON.stringify(payload) }
     );
     setSaving(false);
