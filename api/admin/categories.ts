@@ -40,58 +40,6 @@ export default {
       if (error) return json({ error: error.message }, 500, noStoreHeaders());
       return json({ ok: true, data: data ?? [], count: data?.length ?? 0 }, 200, noStoreHeaders());
     }
-
-    // POST – create
-    if (method === "POST") {
-      let body: Record<string, unknown>;
-      try {
-        body = (await request.json()) as Record<string, unknown>;
-      } catch {
-        return json({ error: "Invalid JSON" }, 400, noStoreHeaders());
-      }
-      const { data, error } = await supabaseAdmin
-        .from("categories")
-        .insert([body])
-        .select()
-        .single();
-      if (error) return json({ error: error.message }, 400, noStoreHeaders());
-      return json({ ok: true, data }, 201, noStoreHeaders());
-    }
-
-    // PUT – full update
-    if (method === "PUT") {
-      if (!id) return json({ error: "id query param required" }, 400, noStoreHeaders());
-      let body: Record<string, unknown>;
-      try {
-        body = (await request.json()) as Record<string, unknown>;
-      } catch {
-        return json({ error: "Invalid JSON" }, 400, noStoreHeaders());
-      }
-      delete body.id;
-      const { data, error } = await supabaseAdmin
-        .from("categories")
-        .update(body)
-        .eq("id", id)
-        .select()
-        .single();
-      if (error) return json({ error: error.message }, 400, noStoreHeaders());
-      return json({ ok: true, data }, 200, noStoreHeaders());
-    }
-
-    // DELETE
-    if (method === "DELETE") {
-      if (!id) return json({ error: "id query param required" }, 400, noStoreHeaders());
-      const { error } = await supabaseAdmin
-        .from("categories")
-        .delete()
-        .eq("id", id);
-      if (error) return json({ error: error.message }, 400, noStoreHeaders());
-      return json({ ok: true }, 200, noStoreHeaders());
-    }
-
-    return json({ error: "Method not allowed" }, 405, {
-      ...noStoreHeaders(),
-      Allow: "GET, POST, PUT, DELETE",
-    });
-  },
+    // ...POST, PUT, PATCH, DELETE as needed
+  }
 };

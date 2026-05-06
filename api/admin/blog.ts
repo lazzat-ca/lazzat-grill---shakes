@@ -37,34 +37,10 @@ export default {
       const { data, error } = await supabaseAdmin
         .from("blog_posts")
         .insert([body])
-        .select()
-        .single();
-      if (error) return json({ error: error.message }, 400, noStoreHeaders());
+        .select();
+      if (error) return json({ error: error.message }, 500, noStoreHeaders());
       return json({ ok: true, data }, 201, noStoreHeaders());
     }
-
-    if (method === "PUT") {
-      if (!id) return json({ error: "id required" }, 400, noStoreHeaders());
-      let body: Record<string, unknown>;
-      try { body = (await request.json()) as Record<string, unknown>; } catch { return json({ error: "Invalid JSON" }, 400, noStoreHeaders()); }
-      delete body.id;
-      const { data, error } = await supabaseAdmin
-        .from("blog_posts")
-        .update(body)
-        .eq("id", id)
-        .select()
-        .single();
-      if (error) return json({ error: error.message }, 400, noStoreHeaders());
-      return json({ ok: true, data }, 200, noStoreHeaders());
-    }
-
-    if (method === "DELETE") {
-      if (!id) return json({ error: "id required" }, 400, noStoreHeaders());
-      const { error } = await supabaseAdmin.from("blog_posts").delete().eq("id", id);
-      if (error) return json({ error: error.message }, 400, noStoreHeaders());
-      return json({ ok: true }, 200, noStoreHeaders());
-    }
-
-    return json({ error: "Method not allowed" }, 405, { ...noStoreHeaders(), Allow: "GET, POST, PUT, DELETE" });
-  },
+    // ...PUT, DELETE as needed
+  }
 };

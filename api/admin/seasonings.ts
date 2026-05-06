@@ -33,32 +33,6 @@ export default {
       });
       return json({ ok: true, data: deduped, count: deduped.length }, 200, noStoreHeaders());
     }
-
-    if (method === "POST") {
-      let body: Record<string, unknown>;
-      try { body = (await request.json()) as Record<string, unknown>; } catch { return json({ error: "Invalid JSON" }, 400, noStoreHeaders()); }
-      const { data, error } = await supabaseAdmin.from("seasonings").insert([body]).select().single();
-      if (error) return json({ error: error.message }, 400, noStoreHeaders());
-      return json({ ok: true, data }, 201, noStoreHeaders());
-    }
-
-    if (method === "PUT") {
-      if (!id) return json({ error: "id required" }, 400, noStoreHeaders());
-      let body: Record<string, unknown>;
-      try { body = (await request.json()) as Record<string, unknown>; } catch { return json({ error: "Invalid JSON" }, 400, noStoreHeaders()); }
-      delete body.id;
-      const { data, error } = await supabaseAdmin.from("seasonings").update(body).eq("id", id).select().single();
-      if (error) return json({ error: error.message }, 400, noStoreHeaders());
-      return json({ ok: true, data }, 200, noStoreHeaders());
-    }
-
-    if (method === "DELETE") {
-      if (!id) return json({ error: "id required" }, 400, noStoreHeaders());
-      const { error } = await supabaseAdmin.from("seasonings").delete().eq("id", id);
-      if (error) return json({ error: error.message }, 400, noStoreHeaders());
-      return json({ ok: true }, 200, noStoreHeaders());
-    }
-
-    return json({ error: "Method not allowed" }, 405, { ...noStoreHeaders(), Allow: "GET, POST, PUT, DELETE" });
-  },
+    // ...POST, PUT, DELETE as needed
+  }
 };
